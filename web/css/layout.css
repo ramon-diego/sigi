@@ -1,0 +1,75 @@
+@CHARSET "ISO-8859-1";
+
+.ui-menuitem-text {
+	font-size: 0.8em;
+	font-weight: 700;
+	font-family: Arial;
+	padding-top: 10px;
+	color: rgb(0, 61, 80);
+}
+
+.ui-menuitem ui-widget ui-corner-all-ui-state-hover {
+	color: red;
+}
+
+.ui-widget-content {
+	background-color: rgb(237, 243, 246);
+}
+
+.ui-widget-content .ui-icon-triangle-1-s {
+	background-image: none !important;
+}
+
+.ui-icon-triangle-1-e, .ui-icon-contact {
+	background-image: none !important;
+}
+
+.pessoa-icon {
+	background-image: url("../images/pessoa-icon.png") !important;
+	padding: 10px;
+}
+
+.add-pessoa-menu-icon {
+	background-image: url("../images/add-pessoa-menu-icon.png") !important;
+	margin: 9px 5px 0 0;
+}
+
+.usuarios-menu-icon {
+	background-image: url("../images/usuarios-menu-icon.png") !important;
+	margin: 9px 5px 0 0;
+}
+
+.pesquisar-menu-icon {
+	background-image: url("../images/pesquisar-menu-icon.png") !important;
+	margin: 9px 5px 0 0
+}
+
+.financeiro-icon {
+	background-image: url("../images/financeiro-icon.png") !important;
+	padding: 10px;
+}
+
+.imoveis-icon {
+	background-image: url("../images/imoveis-icon.png") !important;
+	padding: 10px;
+}
+
+.add-imovel-menu-icon {
+	background-image: url("../images/add-imovel-menu-icon.png") !important;
+	margin: 9px 5px 0 0;
+}
+
+.pesquisar-imovel-menu-icon {
+	background-image: url("../images/pesquisar-imovel-menu-icon.png") !important;
+	margin: 9px 5px 0 0;
+}
+
+.relatorios-icon {
+	background-image: url("../images/relatorios-icon.png") !important;
+	padding: 10px;
+}
+
+.recibo-menu-icon {
+	background-image: url("../images/recibo-menu-icon.png") !important;
+	margin: 9px 5px 0 0
+}

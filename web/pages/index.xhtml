@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>SIGI - Sistema Imobiliário de Gestão Integrada</title>
+	<link rel="stylesheet" type="text/css" href="css/layout.css" />
+</h:head>
+<h:body>
+	<p:menubar>
+		
+		<p:submenu label="Imóveis" icon="imoveis-icon" style="">
+			<p:menuitem value="Novo" url="#" icon="add-imovel-menu-icon" />
+			<p:separator />
+			<p:menuitem value="Pesquisar" url="#" icon="pesquisar-imovel-menu-icon" />
+			<p:separator />
+			<p:menuitem value="Vistorias" url="#" icon="add-imovel-menu-icon" />
+		</p:submenu>
+
+		<p:submenu label="Financeiro" icon="financeiro-icon">
+			<p:submenu label="Novo">
+			</p:submenu>
+			<p:menuitem value="Open" url="#" />
+			<p:menuitem value="Emitir Recibo" url="#" icon="recibo-menu-icon" />
+		</p:submenu>
+
+		<p:submenu label="Pessoas" icon="pessoa-icon">
+			<p:submenu label="Nova" icon="add-pessoa-menu-icon">
+
+			</p:submenu>
+			<p:separator />
+			<p:submenu label="Pesquisar" icon="pesquisar-menu-icon">
+			</p:submenu>
+			<p:separator />
+			<p:menuitem value="Usuários" icon="usuarios-menu-icon" url="#" />
+			<p:separator />
+			<p:menuitem value="Corretores" url="#" />
+		</p:submenu>
+
+		<p:submenu label="Contratos">
+		</p:submenu>
+
+		<p:submenu label="Relatórios" icon="relatorios-icon">
+			<p:submenu label="Novo">
+				<p:menuitem value="Project" url="#" />
+				<p:menuitem value="Other" url="#" />
+			</p:submenu>
+			<p:menuitem value="Open" url="#" />
+			<p:menuitem value="Quit" url="#" />
+		</p:submenu>
+
+		<p:submenu label="Gerenciador de imóvel">
+		</p:submenu>
+	</p:menubar>
+
+	<div id="corpo"
+		style="width: 100%; position: relative; min-height: 100%">
+		<p>The standard Lorem Ipsum passage, used since the 1500s "Lorem
+			ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+			veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+			ea commodo consequat. Duis aute irure dolor in reprehenderit in</p>
+	</div>
+
+	<div id="footer"
+		style="border: 1px solid silver; border-radius: 4px; margin-bottom: 10px; padding: 15px; bottom: 0px; position: fixed">
+		<span>Todos os direitos são reservados</span>
+	</div>
+
+</h:body>
+</html>
