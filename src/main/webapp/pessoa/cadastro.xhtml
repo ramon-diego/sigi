@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Cadastro de Pessoa</h1>
+				</div>
+			</div>
+			<!-- fimlinha -->
+
+			<div class="row">
+
+				<div class="col-lg-8">
+					<div class="panel panel-default">
+						<div class="panel-heading">Dados Pessoa Física</div>
+						<div class="panel-body">
+							<h:form role="form">
+
+								<div class="col-lg-12">
+
+									<div class="row">
+
+										<div class="checkbox">
+											<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
+										</div>
+
+										<div class="form-group">
+											<label class="checkbox-inline"> 
+													
+													<h:selectManyCheckbox value="Testes" styleClass="checkbox-inline" selectedClass="checkbox-inline">
+																 <f:selectItem itemLabel="Física"/>
+																 
+																 
+																 <f:selectItem itemLabel="Jurídica"/>
+											     	</h:selectManyCheckbox>
+																									
+											</label>
+										</div>
+
+										
+											<div class="col-lg-8">
+												<div class="form-group">
+													<h:outputText value="Nome Completo" id="lb-nome-pessoa" />
+													<h:inputText id="input-nome-pessoa"
+														styleClass="form-control" />
+												</div>
+											</div>
+									
+										
+										<div class="col-lg-4">
+											<div class="form-group">
+												<h:outputText value="CPF" id="lb-cpf-cnpj" />
+												<h:inputText id="input-cpf-cnpj" styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<h:outputText value="RG" id="lb-rg-ie" />
+												<h:inputText id="input-rg-ie" styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-8">
+											<div class="form-group">
+												<h:outputText value="Nome Fantasia" id="lb-nome-fantasia" />
+												<h:inputText id="input-nomefantasia"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-3">
+											<div class="form-group">
+												<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
+												<h:inputText id="input-data-nasc" styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<h:outputText value="Naturalidade" id="lb-naturalidade" />
+												<h:inputText id="input-naturalidade"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="form-group">
+											<h:outputText value="Sexo" styleClass="checkbox-inline" />
+											<label class="checkbox-inline"> <h:selectBooleanCheckbox
+													value="M" styleClass="checkbox" />Masculino
+											</label> <label class="checkbox-inline"> <h:selectBooleanCheckbox
+													value="F width:520px;" />Feminino
+											</label>
+										</div>
+									</div>
+									<!-- final row -->
+								</div>
+								<!-- final col-lg-6 -->
+
+								<div class="col-lg-12" style="background-color: #F9F7F7; border: 1px solid #C7C7C7; border-radius:5px 5px 0 0; padding-top: 8px">
+
+									<div class="form-group input-group">
+										<h:outputText value="CEP" />
+										<h:inputText class="form-control" id="input-cep" />
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="button"
+												style="margin-bottom: -20px">
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+									</div>
+
+
+									<div class="form-group">
+										<h:outputText value="Rua" />
+										<h:inputText id="input-rua" styleClass="form-control" />
+									</div>
+
+									<div class="form-group">
+										<h:outputText value="Número" />
+										<h:inputText id="input-numero" styleClass="form-control" />
+									</div>
+
+									<div class="form-group">
+										<h:outputText value="Complemento" />
+										<h:inputText id="input-complemento" styleClass="form-control" />
+									</div>
+
+									<div class="form-group">
+										<h:outputText value="E-mail" />
+										<h:inputText id="input-email" styleClass="form-control" />
+
+									</div>
+								</div>
+								<!-- final col-lg-6 -->
+
+								<div class="col-lg-12">
+									<h:commandButton action="#" value="Gravar"
+										styleClass="btn btn-success" />
+									<h:commandButton action="#" value="Cancelar"
+										styleClass="btn btn-warning" />
+								</div>
+								<!-- final col-lg-12-btn -->
+							</h:form>
+							<!-- final PainelBody -->
+						</div>
+					</div>
+					<!-- final PainelDefault -->
+				</div>
+				<!-- fim-col-lg-12 -->
+			</div>
+			<!-- fimlinha -->
+		</div>
+		<!-- page-wrapper -->
+	</ui:composition>
+</h:body>
+</html>
