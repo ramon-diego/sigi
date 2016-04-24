@@ -8,7 +8,7 @@
 
 		<div id="page-wrapper">
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-md-12">
 					<h1 class="page-header">Cadastro de Pessoa</h1>
 				</div>
 			</div>
@@ -16,135 +16,302 @@
 
 			<div class="row">
 
-				<div class="col-lg-8">
+				<div class="col-xs-12 .col-sm-6 .col-lg-8">
 					<div class="panel panel-default">
 						<div class="panel-heading">Dados Pessoa Física</div>
 						<div class="panel-body">
 							<h:form role="form">
 
-								<div class="col-lg-12">
+								<div class="col-lg-8">
 
-									<div class="row">
+									<h:panelGroup id="pg-fisica">
+										<div class="row">
 
-										<div class="checkbox">
-											<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
-										</div>
+											<div class="col-lg-3">
+												<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
+												<h:selectOneMenu styleClass="form-control"
+													value="#{cadastroPessoaManagedBean.pessoa.tipoPessoa}">
+													<f:selectItem itemLabel="Física" itemValue="F"
+														id="item-pessoa-fisica" />
 
-										<div class="form-group">
-											<label class="checkbox-inline"> 
-													
-													<h:selectManyCheckbox value="Testes" styleClass="checkbox-inline" selectedClass="checkbox-inline">
-																 <f:selectItem itemLabel="Física"/>
-																 
-																 
-																 <f:selectItem itemLabel="Jurídica"/>
-											     	</h:selectManyCheckbox>
-																									
-											</label>
-										</div>
+													<f:selectItem itemLabel="Jurídica" itemValue="J"
+														id="item-pessoa-juridica" />
+													<f:ajax render="pg-juridica" event="change" />
+												</h:selectOneMenu>
+											</div>
+											<div class="col-lg-4"></div>
 
-										
+											<div class="col-lg-3">
+												<h:outputText value="Status" id="status-pessoa" />
+												<h:selectOneMenu
+													value="#{cadastroPessoaManagedBean.pessoa.status}"
+													styleClass="form-control">
+													<f:selectItem itemValue="A" itemLabel="Ativo" />
+													<f:selectItem itemValue="I" itemLabel="Inativo" />
+												</h:selectOneMenu>
+											</div>
+
+											<div class="col-lg-2">
+												<h:outputText id="codigo-pessoa" value="Código" />
+												<h:inputText value="#{cadastroPessoaManagedBean.pessoa.id}"
+													styleClass="form-control"
+													style="font-weight:600; border: 1px solid rgba(10, 152, 216,0.48); 
+											    background-color: rgba(0, 188, 212, 0.17);"
+													disabled="true" id="input-codigo" />
+											</div>
+
+
 											<div class="col-lg-8">
 												<div class="form-group">
 													<h:outputText value="Nome Completo" id="lb-nome-pessoa" />
 													<h:inputText id="input-nome-pessoa"
+														value="#{cadastroPessoaManagedBean.pessoa.nomeFantasia}"
+														required="true" styleClass="form-control"
+														requiredMessage="Nome da pessoa é obrigatório" />
+												</div>
+											</div>
+
+
+											<div class="col-lg-4">
+												<div class="form-group">
+													<h:outputText value="CPF" id="lb-cpf-cnpj" />
+													<h:inputText id="input-cpf-cnpj"
+														value="#{cadastroPessoaManagedBean.pessoa.cpfCnpj}"
 														styleClass="form-control" />
 												</div>
 											</div>
-									
-										
-										<div class="col-lg-4">
-											<div class="form-group">
-												<h:outputText value="CPF" id="lb-cpf-cnpj" />
-												<h:inputText id="input-cpf-cnpj" styleClass="form-control" />
+
+											<div class="col-lg-4">
+												<div class="form-group">
+													<h:outputText value="RG" id="lb-rg-ie" />
+													<h:inputText id="input-rg-ie"
+														value="#{cadastroPessoaManagedBean.pessoa.rgIe}"
+														styleClass="form-control" />
+												</div>
+											</div>
+
+											<div class="col-lg-8">
+												<div class="form-group">
+													<h:outputText value="Nome Fantasia" id="lb-nome-fantasia" />
+													<h:inputText id="input-nomefantasia"
+														styleClass="form-control" />
+												</div>
+											</div>
+
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
+
+													<h:inputText id="input-data-nasc"
+														value="#{cadastroPessoaManagedBean.pessoa.dataNascimento}"
+														styleClass="form-control">
+														<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+													</h:inputText>
+												</div>
+											</div>
+
+											<div class="col-lg-4">
+												<div class="form-group">
+													<h:outputText value="Naturalidade" id="lb-naturalidade" />
+													<h:inputText id="input-naturalidade"
+														value="#{cadastroPessoaManagedBean.pessoa.naturalidade}"
+														styleClass="form-control" />
+												</div>
+											</div>
+
+											<div class="col-lg-3">
+												<h:outputText value="Sexo" styleClass="form-group" />
+												<h:selectOneMenu
+													value="#{cadastroPessoaManagedBean.pessoa.sexo}"
+													styleClass="form-control">
+													<f:selectItem itemLabel="Masculino" itemValue="M" />
+													<f:selectItem itemLabel="Feminino" itemValue="F" />
+												</h:selectOneMenu>
+
 											</div>
 										</div>
+										<!-- final row -->
+									</h:panelGroup>
 
-										<div class="col-lg-4">
-											<div class="form-group">
-												<h:outputText value="RG" id="lb-rg-ie" />
-												<h:inputText id="input-rg-ie" styleClass="form-control" />
+
+									<h:panelGroup id="pg-juridica"
+										rendered="#{cadastroPessoaManagedBean.juridica}">
+										<div class="row">
+											<h1>Pessoa jurídica</h1>
+											<h:outputText value="CNPJ" id="ajax-teste" />
+											<h:inputText label="CNPJ" />
+										</div>
+									</h:panelGroup>
+
+
+
+								</div>
+								<!-- final col-lg-6 -->
+
+								<div class="col-lg-8">
+									<ul class="nav nav-tabs">
+										<li><a data-toggle="tab" href="#Teste">Endereço</a></li>
+										<li><a data-toggle="tab" href="#contato">Endereço</a></li>
+
+									</ul>
+								</div>
+								<div class="tab-content">
+									<div class="col-lg-8" id="Teste"
+										style="background-color: #F9F7F7; border: 1px solid #C7C7C7; border-radius: 5px 5px 0 0; padding-top: 8px">
+
+
+
+										<div class="col-md-4">
+											<div class="form-group input-group">
+												<h:outputText value="CEP" />
+												<h:inputText class="form-control"
+													value="#{cadastroPessoaManagedBean.endereco.cep}"
+													id="input-cep" />
+												<span class="input-group-btn">
+													<button class="btn btn-default" type="button"
+														style="margin-bottom: -20px">
+														<i class="fa fa-search"></i>
+													</button>
+												</span>
 											</div>
 										</div>
 
 										<div class="col-lg-8">
 											<div class="form-group">
-												<h:outputText value="Nome Fantasia" id="lb-nome-fantasia" />
-												<h:inputText id="input-nomefantasia"
+												<h:outputText value="Rua" />
+												<h:inputText id="input-rua"
+													value="#{cadastroPessoaManagedBean.endereco.rua}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputText value="Número" />
+												<h:inputText id="input-numero"
+													value="#{cadastroPessoaManagedBean.endereco.numero}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputText value="Complemento" />
+												<h:inputText id="input-complemento"
+													value="#{cadastroPessoaManagedBean.endereco.complemento}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<h:outputText value="Bairro" />
+												<h:inputText id="input-bairro"
+													value="#{cadastroPessoaManagedBean.endereco.bairro}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputText value="Cidade" />
+												<h:inputText id="input-cidade"
+													value="#{cadastroPessoaManagedBean.cidade.nome}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputText value="Estado" id="txtEstado" />
+												<h:selectOneMenu id="input-estado"
+													value="#{cadastroPessoaManagedBean.cidade.estado}"
+													styleClass="form-control">
+													<f:selectItem itemValue="PR" itemLabel="PR" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="form-group">
+												<h:outputText value="País" />
+												<h:inputText id="input-pais" value="#"
+													styleClass="form-control" />
+											</div>
+										</div>
+									</div>
+									<!--fim div endereco-->
+
+									<div class="col-lg-8" id="contato">
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputText value="E-mail" />
+												<h:inputText id="input-email"
+													value="#{cadastroPessoaManagedBean.pessoa.email}"
 													styleClass="form-control" />
 											</div>
 										</div>
 
 										<div class="col-lg-3">
 											<div class="form-group">
-												<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
-												<h:inputText id="input-data-nasc" styleClass="form-control" />
-											</div>
-										</div>
-
-										<div class="col-lg-4">
-											<div class="form-group">
-												<h:outputText value="Naturalidade" id="lb-naturalidade" />
-												<h:inputText id="input-naturalidade"
+												<h:outputText value="Telefone" />
+												<h:inputText id="input-telefone"
+													value="#{cadastroPessoaManagedBean.telefone.numero}"
 													styleClass="form-control" />
 											</div>
 										</div>
 
-										<div class="form-group">
-											<h:outputText value="Sexo" styleClass="checkbox-inline" />
-											<label class="checkbox-inline"> <h:selectBooleanCheckbox
-													value="M" styleClass="checkbox" />Masculino
-											</label> <label class="checkbox-inline"> <h:selectBooleanCheckbox
-													value="F width:520px;" />Feminino
-											</label>
+										<div class="col-lg-3">
+											<div class="form-group">
+												<h:outputText value="Celular" />
+												<h:inputText id="input-celular"
+													value="#{cadastroPessoaManagedBean.telefone.numero}"
+													styleClass="form-control" />
+											</div>
 										</div>
 									</div>
-									<!-- final row -->
+									<!-- final col-contato -->
+
+									<div class="col-lg-8">
+										<div class="col-lg-8">
+											<div class="form-group">
+												<h:outputText value="Observação" id="txtObservacao" />
+												<h:inputTextarea
+													value="#{cadastroPessoaManagedBean.pessoa.observacao}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-4">
+											<div class="checkbox">
+												<h:selectManyCheckbox value="#" id="perfil-pessoa" selectedClass="checkbox">
+													<div class="checkbox">
+													<f:selectItem itemValue="usuario" itemLabel="Usuário" />
+													</div>
+													<div class="checkbox">
+													<f:selectItem itemValue="corretor" itemLabel="Corretor" />
+													</div>
+													<div class="checkbox">
+													<f:selectItem itemValue="prestador" itemLabel="Prestador" />
+													</div>
+												</h:selectManyCheckbox>
+											</div>
+										</div>
+									</div>
+
 								</div>
-								<!-- final col-lg-6 -->
-
-								<div class="col-lg-12" style="background-color: #F9F7F7; border: 1px solid #C7C7C7; border-radius:5px 5px 0 0; padding-top: 8px">
-
-									<div class="form-group input-group">
-										<h:outputText value="CEP" />
-										<h:inputText class="form-control" id="input-cep" />
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="button"
-												style="margin-bottom: -20px">
-												<i class="fa fa-search"></i>
-											</button>
-										</span>
-									</div>
-
-
-									<div class="form-group">
-										<h:outputText value="Rua" />
-										<h:inputText id="input-rua" styleClass="form-control" />
-									</div>
-
-									<div class="form-group">
-										<h:outputText value="Número" />
-										<h:inputText id="input-numero" styleClass="form-control" />
-									</div>
-
-									<div class="form-group">
-										<h:outputText value="Complemento" />
-										<h:inputText id="input-complemento" styleClass="form-control" />
-									</div>
-
-									<div class="form-group">
-										<h:outputText value="E-mail" />
-										<h:inputText id="input-email" styleClass="form-control" />
-
-									</div>
-								</div>
-								<!-- final col-lg-6 -->
-
 								<div class="col-lg-12">
-									<h:commandButton action="#" value="Gravar"
-										styleClass="btn btn-success" />
-									<h:commandButton action="#" value="Cancelar"
-										styleClass="btn btn-warning" />
+									<h:commandButton
+										actionListener="#{cadastroPessoaManagedBean.salvar()}"
+										value="Gravar" styleClass="btn btn-success" />
+									<h:commandButton
+										actionListener="#{cadastroPessoaManagedBean.excluir()}"
+										value="Cancelar" styleClass="btn btn-warning" />
+								</div>
+								<div class="col-lg-12">
+									<h:messages showDetail="false" infoClass="alert alert-info"
+										showSummary="true" errorClass="alert alert-warning" />
 								</div>
 								<!-- final col-lg-12-btn -->
 							</h:form>

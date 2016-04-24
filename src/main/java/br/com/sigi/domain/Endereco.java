@@ -18,6 +18,10 @@ public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public Endereco() {
+	
+	}
+	
 	@Id
 	@Column(name = "id_endereco")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +31,7 @@ public class Endereco implements Serializable {
 	private String rua;
 
 	@Column
-	private Long numero;
+	private String numero;
 
 	@Column(length = 45)
 	private String complemento;
@@ -38,10 +42,21 @@ public class Endereco implements Serializable {
 	@Column(length = 8)
 	private String cep;
 
-	@JoinColumn(nullable = false, name = "fk_end_cidade")
+	@JoinColumn(name = "id_cidade")
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cidade cidade;
 
+	@ManyToOne
+	private Pessoa pessoa;
+	
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+	
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+		
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
@@ -50,6 +65,7 @@ public class Endereco implements Serializable {
 		return cidade;
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -66,11 +82,11 @@ public class Endereco implements Serializable {
 		this.rua = rua;
 	}
 
-	public Long getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Long numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

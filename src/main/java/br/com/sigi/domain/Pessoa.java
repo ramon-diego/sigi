@@ -1,7 +1,11 @@
 package br.com.sigi.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,45 +24,45 @@ public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public Pessoa() {
-
-	}
-
-	public Pessoa(String tipoPessoa, String razaoSocial, String cpfCnpj, String nomeFantasia, String rgIe,
-			Date dataNascimento, String sexo, String naturalidade, String email) {
-		
-		this.razaoSocial = razaoSocial;
-		this.nomeFantasia = nomeFantasia;
-		this.cpfCnpj = cpfCnpj;
-		this.rgIe = rgIe;
-		this.dataNascimento = dataNascimento;
-		this.naturalidade = naturalidade;
-				
-	}
-
 	@Id
 	@Column(name = "id_pessoa")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	public Pessoa() {
+
+	}
+	
+	public Pessoa(Long id) {
+		this.id = id;
+	}
+
 	@Column(name = "nome_fantasia")
 	private String nomeFantasia;
+
+	@Column(name = "data_cadastro")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro;
 
 	@Column(name = "razao_social")
 	private String razaoSocial;
 
-	@Column(length = 14, unique = true, name = "cpf_cnpj")
+	
+	@Column(length = 14, unique = true, name = "cpf_cnpj", nullable = false)
 	private String cpfCnpj;
 
 	@Column(name = "rg_ie")
 	private String rgIe;
-
-	@Column(name = "data_nascimento", columnDefinition = "DATE")
+	
 	@Temporal(TemporalType.DATE)
+	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
 	@Column
 	private String naturalidade;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
+	private List<Telefone> telefones = new ArrayList<>();
 
 	@Column
 	private String email;
@@ -72,17 +76,33 @@ public class Pessoa implements Serializable {
 	private TipoPessoa tipoPessoa;
 
 	@Enumerated(EnumType.STRING)
-	@Column(length = 1, nullable=false)
+	@Column(length = 1, nullable = false)
 	private Status status;
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 1, name = "estado_civil")
 	private EstadoCivil estadoCivil;
-
-	@Column
-	@JoinColumn(nullable = false)
-	private Endereco endereco;
 	
+	@Column
+	private String observacao;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
+	private List<Endereco> enderecos = new ArrayList<>();
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void adicionarEndereco(Endereco endereco) {
+		enderecos.add(endereco);
+		endereco.setPessoa(this);
+	}
+
+	public void removeEndereco(Endereco endereco) {
+		enderecos.remove(endereco);
+		endereco.setPessoa(null);
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -117,6 +137,20 @@ public class Pessoa implements Serializable {
 
 	public String getRgIe() {
 		return rgIe;
+	}
+
+	public void adicionarTelefone(Telefone telefone) {
+		telefones.add(telefone);
+		telefone.setPessoa(this);
+	}
+
+	public void removerTelefone(Telefone telefone) {
+		telefones.remove(telefone);
+		telefone.setPessoa(null);
+	}
+
+	public List<Telefone> getTelefones() {
+		return telefones;
 	}
 
 	public void setRgIe(String rgIe) {
@@ -179,12 +213,20 @@ public class Pessoa implements Serializable {
 		this.estadoCivil = estadoCivil;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public Date getDataCadastro() {
+		return dataCadastro;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package br.com.sigi.dao;
 
+import javax.persistence.TypedQuery;
+
 import br.com.sigi.domain.Pessoa;
 
 public class PessoaDAO extends GenericDAO<Pessoa, Long> {
@@ -9,34 +11,17 @@ public class PessoaDAO extends GenericDAO<Pessoa, Long> {
 		super(Pessoa.class);
 	}
 
-	public Pessoa addPessoa(Pessoa pessoa) {
-		getEntityManager().getTransaction().begin();
-		getEntityManager().persist(pessoa);
-		getEntityManager().getTransaction().commit();
-		getEntityManager().close();
-		return pessoa;
-	}
-
 	public Pessoa getPessoa() {
 
 		return null;
 	}
 
-	public void updatePessoa(Pessoa pessoa) {
-
-	}
-
-	public void excluir(Long id) {
-
-		try {
-			getEntityManager().getTransaction().begin();
-			Pessoa pessoa = getById(id);
-			getEntityManager().remove(pessoa);
-			getTransaction().commit();
-		} finally {
-			getEntityManager().close();
-		}
-
+	
+	public Pessoa buscarPorNome(String nome){
+		TypedQuery<Pessoa> query = getEntityManager().createQuery("FROM Pessoa o WHERE o.nome = :nome", Pessoa.class);
+		query.setParameter("nome", nome);
+		Pessoa pessoa = query.getSingleResult();
+		return pessoa;
 	}
 
 }

@@ -5,10 +5,7 @@
 
 	<persistence-unit name="sigiPU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>br.com.sigi.domain.Pessoa</class>
-		<class>br.com.sigi.domain.Endereco</class>
-		<class>br.com.sigi.domain.Cidade</class>
-
+	
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/sigi" />
 			<property name="javax.persistence.jdbc.user" value="root" />
@@ -19,7 +16,7 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 
 
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 
 		</properties>
 	</persistence-unit>
