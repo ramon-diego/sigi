@@ -15,9 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.sigi.dao.EntidadeBase;
+
 @Entity
 @Table(name = "CIDADE")
-public class Cidade implements Serializable {
+public class Cidade implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,6 +47,7 @@ public class Cidade implements Serializable {
 		this.endereco = endereco;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}

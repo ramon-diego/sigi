@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Pesquisar</h1>
+				</div>
+			</div>
+			<!-- fimlinha -->
+
+			<div class="row">
+				<div class="col-xs-12 .col-sm-12 .col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Dados Pessoa Física</div>
+						<div class="panel-body">
+
+							<h:form role="form" id="form-pesquisar">
+
+								<div class="col-lg-6">
+									<h:inputText value="#{pessoaBean.filtro}"
+										styleClass="pesquisar-pessoa" pt:placeholder="Pesquisar..." />
+								</div>
+								<h:commandButton value="Localizar" id="btn-localizar"
+									styleClass="btn btn-info"
+									actionListener="#{pessoaBean.listarPessoas}" />
+
+								<div class="row">
+									<div class="col-lg-12">
+
+										<h:dataTable value="#{pessoaBean.pessoas}"
+											var="pessoa" styleClass="table table-bordered">
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="CÓDIGO" />
+												</f:facet>
+									#{pessoa.id}
+									</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="NOME" />
+												</f:facet>
+									#{pessoa.nomeFantasia}
+								</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="CPF / CNPJ" />
+												</f:facet>
+									#{pessoa.cpfCnpj}
+								</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Editar" />
+												</f:facet>
+												<h:commandButton value="Editar" action="#{pessoaBean.carregarPessoa(pessoa.id)}">
+<!-- 	 													<f:setPropertyActionListener value="#{pessoas}"  -->
+<!-- 														target="#{pesquisarPessoaBean.pessoa}" /> -->
+												</h:commandButton>
+											</h:column>
+
+										</h:dataTable>
+									</div>
+								</div>
+
+							</h:form>
+							<!--div panel-body-->
+						</div>
+						<!--div panel-default-->
+					</div>
+					<!--col-xs-12 .col-sm-12 .col-lg-12"-->
+				</div>
+				<!-- fimlinha -->
+			</div>
+			<!-- div-wrapper -->
+		</div>
+	</ui:composition>
+</h:body>
+</html>

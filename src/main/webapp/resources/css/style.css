@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+.pesquisar-pessoa{
+	
+	    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('../images/pesquisar-icon.png');
+    background-position: 10px 6px; 
+    background-repeat: no-repeat;
+    padding: 5px 20px 5px 40px;
+}

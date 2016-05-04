@@ -4,25 +4,34 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.sigi.dao.EntidadeBase;
+
 @Entity
+@NamedQuery(name = Pessoa.BUSCAR_POR_VARIOS_ATRIBUTOS, query = "select p from Pessoa p "
+		+ "where p.nomeFantasia like :nome or p.cpfCnpj like :cpfCnpj")
+
 @Table(name = "PESSOA")
-public class Pessoa implements Serializable {
+public class Pessoa implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
+
+	public static final String BUSCAR_POR_VARIOS_ATRIBUTOS = "Pessoa.BuscarPorVariosAtributos";
+	public static final String BuscarPorNome = "Pessoa.BuscarPorVariosAtributos";
 
 	@Id
 	@Column(name = "id_pessoa")
@@ -32,12 +41,12 @@ public class Pessoa implements Serializable {
 	public Pessoa() {
 
 	}
-	
+
 	public Pessoa(Long id) {
 		this.id = id;
 	}
 
-	@Column(name = "nome_fantasia")
+	@Column(name = "nome_fantasia", length = 45)
 	private String nomeFantasia;
 
 	@Column(name = "data_cadastro")
@@ -47,13 +56,12 @@ public class Pessoa implements Serializable {
 	@Column(name = "razao_social")
 	private String razaoSocial;
 
-	
-	@Column(length = 14, unique = true, name = "cpf_cnpj", nullable = false)
+	@Column(length = 14, unique = false, name = "cpf_cnpj", nullable = false)
 	private String cpfCnpj;
 
 	@Column(name = "rg_ie")
 	private String rgIe;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
@@ -61,7 +69,7 @@ public class Pessoa implements Serializable {
 	@Column
 	private String naturalidade;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa", fetch = FetchType.EAGER)
 	private List<Telefone> telefones = new ArrayList<>();
 
 	@Column
@@ -82,11 +90,11 @@ public class Pessoa implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(length = 1, name = "estado_civil")
 	private EstadoCivil estadoCivil;
-	
+
 	@Column
 	private String observacao;
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa", fetch = FetchType.EAGER)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	public List<Endereco> getEnderecos() {
@@ -107,6 +115,7 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}

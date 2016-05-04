@@ -1,9 +1,13 @@
 package br.com.sigi.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 
-public class Email {
+public class Email implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id_email")

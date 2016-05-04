@@ -30,7 +30,7 @@
 											<div class="col-lg-3">
 												<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
 												<h:selectOneMenu styleClass="form-control"
-													value="#{cadastroPessoaManagedBean.pessoa.tipoPessoa}">
+													value="#{pessoaBean.pessoa.tipoPessoa}">
 													<f:selectItem itemLabel="Física" itemValue="F"
 														id="item-pessoa-fisica" />
 
@@ -44,7 +44,7 @@
 											<div class="col-lg-3">
 												<h:outputText value="Status" id="status-pessoa" />
 												<h:selectOneMenu
-													value="#{cadastroPessoaManagedBean.pessoa.status}"
+													value="#{pessoaBean.pessoa.status}"
 													styleClass="form-control">
 													<f:selectItem itemValue="A" itemLabel="Ativo" />
 													<f:selectItem itemValue="I" itemLabel="Inativo" />
@@ -53,11 +53,12 @@
 
 											<div class="col-lg-2">
 												<h:outputText id="codigo-pessoa" value="Código" />
-												<h:inputText value="#{cadastroPessoaManagedBean.pessoa.id}"
+												<h:inputText value="#{pessoaBean.pessoa.id}"
 													styleClass="form-control"
 													style="font-weight:600; border: 1px solid rgba(10, 152, 216,0.48); 
 											    background-color: rgba(0, 188, 212, 0.17);"
 													disabled="true" id="input-codigo" />
+												<h:inputHidden value="#{pessoaBean.pessoa.id}" />
 											</div>
 
 
@@ -65,7 +66,7 @@
 												<div class="form-group">
 													<h:outputText value="Nome Completo" id="lb-nome-pessoa" />
 													<h:inputText id="input-nome-pessoa"
-														value="#{cadastroPessoaManagedBean.pessoa.nomeFantasia}"
+														value="#{pessoaBean.pessoa.nomeFantasia}"
 														required="true" styleClass="form-control"
 														requiredMessage="Nome da pessoa é obrigatório" />
 												</div>
@@ -76,7 +77,7 @@
 												<div class="form-group">
 													<h:outputText value="CPF" id="lb-cpf-cnpj" />
 													<h:inputText id="input-cpf-cnpj"
-														value="#{cadastroPessoaManagedBean.pessoa.cpfCnpj}"
+														value="#{pessoaBean.pessoa.cpfCnpj}"
 														styleClass="form-control" />
 												</div>
 											</div>
@@ -85,7 +86,7 @@
 												<div class="form-group">
 													<h:outputText value="RG" id="lb-rg-ie" />
 													<h:inputText id="input-rg-ie"
-														value="#{cadastroPessoaManagedBean.pessoa.rgIe}"
+														value="#{pessoaBean.pessoa.rgIe}"
 														styleClass="form-control" />
 												</div>
 											</div>
@@ -94,6 +95,7 @@
 												<div class="form-group">
 													<h:outputText value="Nome Fantasia" id="lb-nome-fantasia" />
 													<h:inputText id="input-nomefantasia"
+														value="#{pessoaBean.pessoa.nomeFantasia}"
 														styleClass="form-control" />
 												</div>
 											</div>
@@ -103,7 +105,7 @@
 													<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
 
 													<h:inputText id="input-data-nasc"
-														value="#{cadastroPessoaManagedBean.pessoa.dataNascimento}"
+														value="#{pessoaBean.pessoa.dataNascimento}"
 														styleClass="form-control">
 														<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
 													</h:inputText>
@@ -114,7 +116,7 @@
 												<div class="form-group">
 													<h:outputText value="Naturalidade" id="lb-naturalidade" />
 													<h:inputText id="input-naturalidade"
-														value="#{cadastroPessoaManagedBean.pessoa.naturalidade}"
+														value="#{pessoaBean.pessoa.naturalidade}"
 														styleClass="form-control" />
 												</div>
 											</div>
@@ -122,7 +124,7 @@
 											<div class="col-lg-3">
 												<h:outputText value="Sexo" styleClass="form-group" />
 												<h:selectOneMenu
-													value="#{cadastroPessoaManagedBean.pessoa.sexo}"
+													value="#{pessoaBean.pessoa.sexo}"
 													styleClass="form-control">
 													<f:selectItem itemLabel="Masculino" itemValue="M" />
 													<f:selectItem itemLabel="Feminino" itemValue="F" />
@@ -135,7 +137,7 @@
 
 
 									<h:panelGroup id="pg-juridica"
-										rendered="#{cadastroPessoaManagedBean.juridica}">
+										rendered="#{pessoaBean.juridica}">
 										<div class="row">
 											<h1>Pessoa jurídica</h1>
 											<h:outputText value="CNPJ" id="ajax-teste" />
@@ -165,7 +167,7 @@
 											<div class="form-group input-group">
 												<h:outputText value="CEP" />
 												<h:inputText class="form-control"
-													value="#{cadastroPessoaManagedBean.endereco.cep}"
+													value="#{pessoaBean.endereco.cep}"
 													id="input-cep" />
 												<span class="input-group-btn">
 													<button class="btn btn-default" type="button"
@@ -180,7 +182,7 @@
 											<div class="form-group">
 												<h:outputText value="Rua" />
 												<h:inputText id="input-rua"
-													value="#{cadastroPessoaManagedBean.endereco.rua}"
+													value="#{pessoaBean.endereco.rua}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -189,7 +191,7 @@
 											<div class="form-group">
 												<h:outputText value="Número" />
 												<h:inputText id="input-numero"
-													value="#{cadastroPessoaManagedBean.endereco.numero}"
+													value="#{pessoaBean.endereco.numero}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -198,7 +200,7 @@
 											<div class="form-group">
 												<h:outputText value="Complemento" />
 												<h:inputText id="input-complemento"
-													value="#{cadastroPessoaManagedBean.endereco.complemento}"
+													value="#{pessoaBean.endereco.complemento}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -207,7 +209,7 @@
 											<div class="form-group">
 												<h:outputText value="Bairro" />
 												<h:inputText id="input-bairro"
-													value="#{cadastroPessoaManagedBean.endereco.bairro}"
+													value="#{pessoaBean.endereco.bairro}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -216,7 +218,7 @@
 											<div class="form-group">
 												<h:outputText value="Cidade" />
 												<h:inputText id="input-cidade"
-													value="#{cadastroPessoaManagedBean.cidade.nome}"
+													value="#{pessoaBean.cidade.nome}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -225,7 +227,7 @@
 											<div class="form-group">
 												<h:outputText value="Estado" id="txtEstado" />
 												<h:selectOneMenu id="input-estado"
-													value="#{cadastroPessoaManagedBean.cidade.estado}"
+													value="#{pessoaBean.cidade.estado}"
 													styleClass="form-control">
 													<f:selectItem itemValue="PR" itemLabel="PR" />
 												</h:selectOneMenu>
@@ -248,7 +250,7 @@
 											<div class="form-group">
 												<h:outputText value="E-mail" />
 												<h:inputText id="input-email"
-													value="#{cadastroPessoaManagedBean.pessoa.email}"
+													value="#{pessoaBean.pessoa.email}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -257,7 +259,7 @@
 											<div class="form-group">
 												<h:outputText value="Telefone" />
 												<h:inputText id="input-telefone"
-													value="#{cadastroPessoaManagedBean.telefone.numero}"
+													value="#{pessoaBean.telefone.numero}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -266,7 +268,7 @@
 											<div class="form-group">
 												<h:outputText value="Celular" />
 												<h:inputText id="input-celular"
-													value="#{cadastroPessoaManagedBean.telefone.numero}"
+													value="#{pessoaBean.telefone.numero}"
 													styleClass="form-control" />
 											</div>
 										</div>
@@ -278,22 +280,23 @@
 											<div class="form-group">
 												<h:outputText value="Observação" id="txtObservacao" />
 												<h:inputTextarea
-													value="#{cadastroPessoaManagedBean.pessoa.observacao}"
+													value="#{pessoaBean.pessoa.observacao}"
 													styleClass="form-control" />
 											</div>
 										</div>
 
 										<div class="col-lg-4">
 											<div class="checkbox">
-												<h:selectManyCheckbox value="#" id="perfil-pessoa" selectedClass="checkbox">
+												<h:selectManyCheckbox value="#" id="perfil-pessoa"
+													selectedClass="checkbox">
 													<div class="checkbox">
-													<f:selectItem itemValue="usuario" itemLabel="Usuário" />
+														<f:selectItem itemValue="usuario" itemLabel="Usuário" />
 													</div>
 													<div class="checkbox">
-													<f:selectItem itemValue="corretor" itemLabel="Corretor" />
+														<f:selectItem itemValue="corretor" itemLabel="Corretor" />
 													</div>
 													<div class="checkbox">
-													<f:selectItem itemValue="prestador" itemLabel="Prestador" />
+														<f:selectItem itemValue="prestador" itemLabel="Prestador" />
 													</div>
 												</h:selectManyCheckbox>
 											</div>
@@ -303,10 +306,10 @@
 								</div>
 								<div class="col-lg-12">
 									<h:commandButton
-										actionListener="#{cadastroPessoaManagedBean.salvar()}"
+										actionListener="#{pessoaBean.salvar}"
 										value="Gravar" styleClass="btn btn-success" />
 									<h:commandButton
-										actionListener="#{cadastroPessoaManagedBean.excluir()}"
+										actionListener="#{pessoaBean.excluir}"
 										value="Cancelar" styleClass="btn btn-warning" />
 								</div>
 								<div class="col-lg-12">

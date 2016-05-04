@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,9 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.sigi.dao.EntidadeBase;
+
 @Entity
 @Table(name = "ENDERECO")
-public class Endereco implements Serializable {
+public class Endereco implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +46,7 @@ public class Endereco implements Serializable {
 	private String cep;
 
 	@JoinColumn(name = "id_cidade")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Cidade cidade;
 
 	@ManyToOne
@@ -65,7 +68,7 @@ public class Endereco implements Serializable {
 		return cidade;
 	}
 
-	
+	@Override
 	public Long getId() {
 		return id;
 	}

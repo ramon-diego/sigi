@@ -3,12 +3,11 @@ package br.com.sigi.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import br.com.sigi.utils.ConexaoDB;
 
-public abstract class GenericDAO<T, K> {
+public abstract class GenericDAO<T extends EntidadeBase> {
 
 	private final EntityManager entityManager = ConexaoDB.getEntityManager();
 
@@ -18,29 +17,20 @@ public abstract class GenericDAO<T, K> {
 		this.objeto = objeto;
 	}
 
-	public void close() {
-
-		this.entityManager.close();
-	}
-
 	public EntityManager getEntityManager() {
-
-		return this.entityManager;
-	}
-
-	public EntityTransaction getTransaction() {
-
-		return entityManager.getTransaction();
+		return entityManager;
 	}
 
 	public void update(T objeto) {
 		try {
-			getTransaction().begin();
+			entityManager.getTransaction().begin();
 			entityManager.merge(objeto);
-			getTransaction().commit();
+			entityManager.getTransaction().commit();
+			entityManager.close();
 		} catch (Exception e) {
 			if (entityManager.isOpen()) {
 				entityManager.getTransaction().rollback();
+				e.printStackTrace();
 			}
 		} finally {
 			if (entityManager.isOpen()) {
@@ -52,14 +42,23 @@ public abstract class GenericDAO<T, K> {
 	public void salvar(T objeto) {
 
 		try {
-			getTransaction().begin();
-			entityManager.persist(objeto);
+			entityManager.getTransaction().begin();
+			if (objeto.getId() != null) {
+				if (!entityManager.contains(objeto)) {
+					if (entityManager.find(objeto.getClass(), objeto.getId()) == null) {
+						System.out.println("Vou tratar posteriormente as exceções");
+					}
+				}
+				objeto = entityManager.merge(objeto);
+			} else {
+				entityManager.persist(objeto);
+			}
 			entityManager.getTransaction().commit();
-			getEntityManager().close();
-
+			entityManager.close();
 		} catch (Exception e) {
 			if (entityManager.isOpen()) {
 				entityManager.getTransaction().rollback();
+				e.printStackTrace();
 			}
 		} finally {
 			if (entityManager.isOpen()) {
@@ -84,10 +83,9 @@ public abstract class GenericDAO<T, K> {
 		}
 	}
 
-	public List<T> findAll() {
+	public void excluir(Long id) {
 
-		TypedQuery<T> query = entityManager.createQuery(" FROM " + objeto.getSimpleName(), objeto);
-		return query.getResultList();
+		excluir(getById(id));
 	}
 
 	public T getById(Long id) {
@@ -95,9 +93,17 @@ public abstract class GenericDAO<T, K> {
 		return entityManager.find(objeto, id);
 	}
 
-	public void excluir(Long id) {
+	public List<T> findAll() {
 
-		excluir(getById(id));
+		TypedQuery<T> query = entityManager.createQuery(" FROM " + objeto.getSimpleName(), objeto);
+		return query.getResultList();
 	}
+
+	public void editar(Long id) {
+
+		TypedQuery<T> query = getEntityManager().createQuery(" FROM " + objeto.getName(), objeto);
+		query.getSingleResult();
+	}
+	
 
 }
