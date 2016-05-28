@@ -1,6 +1,5 @@
 package br.com.sigi.bean;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,14 +8,17 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+
+import org.hibernate.service.spi.InjectService;
 
 import br.com.sigi.dao.PessoaDAO;
 import br.com.sigi.domain.Cidade;
 import br.com.sigi.domain.Endereco;
 import br.com.sigi.domain.Pessoa;
 import br.com.sigi.domain.Telefone;
+import br.com.sigi.domain.TipoPessoa;
 
 @ManagedBean(name = "pessoaBean")
 @ViewScoped
@@ -27,41 +29,52 @@ public class PessoaManagedBean implements Serializable {
 	private Pessoa pessoa;
 	private Endereco endereco;
 	private Cidade cidade;
-	private Telefone telefone;
+	Telefone celular;
+	Telefone residencial;
+	Telefone comercial;
 	private PessoaDAO pessoaDAO;
+	@SuppressWarnings("unused")
 	private List<Pessoa> pessoas = new ArrayList<>();
-	private String filtro;
-	private boolean isFisica = true;;
-	private boolean isJuridica = false;
-
-	public boolean isFisica() {
-		return isFisica;
-	}
-
-	public void setFisica(boolean isFisica) {
-		this.isFisica = isFisica;
-		isJuridica = false;
-	}
-
-	public boolean isJuridica() {
-		return isJuridica;
-	}
-
-	public void setJuridica(boolean isJuridica) {
-		this.isJuridica = isJuridica;
-		isFisica = false;
-	}
+	private String buscaNome;
+	private String buscaCpfCnpj;
+	private Long buscaId;
+	private boolean renderFisica = true;
+	private boolean renderJuridica = false;
 
 	@PostConstruct
 	public void init() {
-		if (pessoa != null)
+
 		pessoa = new Pessoa();
 		endereco = new Endereco();
-		telefone = new Telefone();
+		celular = new Telefone();
+		residencial = new Telefone();
+		comercial = new Telefone();
 		cidade = new Cidade();
+		pessoas = null;
+	}
+
+	public void setRenderFisica(boolean renderFisica) {
+		this.renderFisica = renderFisica;
+		renderJuridica = false;
+	}
+
+	public void setRenderJuridica(boolean renderJuridica) {
+		this.renderJuridica = renderJuridica;
+		renderFisica = false;
+	}
+
+	public boolean isRenderFisica() {
+		return renderFisica;
+	}
+
+	public boolean isRenderJuridica() {
+		return renderJuridica;
 	}
 
 	public Pessoa getPessoa() {
+		if (pessoa == null) {
+			pessoa = new Pessoa();
+		}
 		return pessoa;
 	}
 
@@ -70,6 +83,9 @@ public class PessoaManagedBean implements Serializable {
 	}
 
 	public Endereco getEndereco() {
+		if (endereco == null) {
+			endereco = new Endereco();
+		}
 		return endereco;
 	}
 
@@ -77,12 +93,25 @@ public class PessoaManagedBean implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public void setTelefone(Telefone telefone) {
-		this.telefone = telefone;
+	public Telefone getCelular() {
+		if (celular == null) {
+			celular = new Telefone();
+		}
+		return celular;
 	}
 
-	public Telefone getTelefone() {
-		return telefone;
+	public Telefone getComercial() {
+		if (comercial == null) {
+			comercial = new Telefone();
+		}
+		return comercial;
+	}
+
+	public Telefone getResidencial() {
+		if (residencial == null) {
+			residencial = new Telefone();
+		}
+		return residencial;
 	}
 
 	public void setCidade(Cidade cidade) {
@@ -90,25 +119,15 @@ public class PessoaManagedBean implements Serializable {
 	}
 
 	public Cidade getCidade() {
+		if (cidade == null) {
+			cidade = new Cidade();
+		}
 		return cidade;
-	}
-
-	public String getFiltro() {
-		return filtro;
-	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
-	}
-
-	public void setPessoaDAO(PessoaDAO pessoaDAO) {
-		this.pessoaDAO = pessoaDAO;
 	}
 
 	public List<Pessoa> getPessoas() {
 		pessoaDAO = new PessoaDAO();
-		return pessoas = (pessoaDAO.buscarPorVariosAtributos(getFiltro()));
-
+		return pessoas = (pessoaDAO.buscarPorVariosAtributos(getBuscaNome(), getBuscaCpfCnpj()));
 	}
 
 	public void setPessoas(List<Pessoa> pessoas) {
@@ -119,48 +138,73 @@ public class PessoaManagedBean implements Serializable {
 		getPessoas();
 	}
 
+	public void setBuscaCpfCnpj(String buscaCpfCnpj) {
+		this.buscaCpfCnpj = buscaCpfCnpj;
+	}
+
+	public String getBuscaCpfCnpj() {
+		return buscaCpfCnpj;
+	}
+
+	public void setBuscaId(Long buscaId) {
+		this.buscaId = buscaId;
+	}
+
+	public Long getBuscaId() {
+		return buscaId;
+	}
+
+	public void setBuscaNome(String buscaNome) {
+		this.buscaNome = buscaNome;
+	}
+
+	public String getBuscaNome() {
+		return buscaNome;
+	}
+
+	public void verificarTelefones() {
+
+		if (!celular.getNumero().isEmpty()) {
+			pessoa.getTelefones().add(celular);
+			pessoa.adicionarTelefone(celular);
+		}
+
+		if (!residencial.getNumero().isEmpty()) {
+			pessoa.getTelefones().add(residencial);
+			pessoa.adicionarTelefone(residencial);
+		}
+		if (!comercial.getNumero().isEmpty()) {
+			pessoa.getTelefones().add(comercial);
+			pessoa.adicionarTelefone(comercial);
+		}
+	}
+	//
+	// public void preparaObjeto() {
+	//
+	// pessoa.getCpfCnpj().replaceAll("[-.]", "");
+	// celular.getNumero().replaceAll("[() ]", "");
+	// comercial.getNumero().replaceAll("[() ]", "");
+	// residencial.getNumero().replaceAll("[() ]", "");
+	// endereco.getCep().replace("[-]", "");
+	// }
+
 	public void salvar() {
+
 		pessoaDAO = new PessoaDAO();
+
 		try {
 			pessoa.setDataCadastro(new Date());
+			// preparaObjeto();
 			pessoa.getEnderecos().add(endereco);
-			pessoa.getTelefones().add(telefone);
+
+			verificarTelefones();
 			pessoa.adicionarEndereco(endereco);
-			pessoa.adicionarTelefone(telefone);
 			endereco.setCidade(cidade);
 			pessoaDAO.salvar(pessoa);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void carregarPessoa(Long id) throws IOException {
-
-		// HttpServletResponse response = (HttpServletResponse)
-		// FacesContext.getCurrentInstance().getExternalContext()
-		// .getFlash().put("id", pessoa);
-		
-		FacesContext.getCurrentInstance().getExternalContext().redirect("cadastro.xhtml");
-
-		pessoaDAO = new PessoaDAO();
-		pessoa = pessoaDAO.getById(id);
-		System.out.println(pessoa.getId());
-		System.out.println(pessoa.getNomeFantasia());
-
-		// ExternalContext externalContext =
-		// FacesContext.getCurrentInstance().getExternalContext().redirect("cadastro");
-
-	}
-	
-	public String editar()
-    {
-
-        long id = Long.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id"));
-
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("pessoa", id);
-
-        return "/cadastro?faces-redirect=true";
-    }
-	
-	
 }

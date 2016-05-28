@@ -4,16 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,16 +21,11 @@ import javax.persistence.TemporalType;
 import br.com.sigi.dao.EntidadeBase;
 
 @Entity
-@NamedQuery(name = Pessoa.BUSCAR_POR_VARIOS_ATRIBUTOS, query = "select p from Pessoa p "
-		+ "where p.nomeFantasia like :nome or p.cpfCnpj like :cpfCnpj")
 
 @Table(name = "PESSOA")
 public class Pessoa implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
-
-	public static final String BUSCAR_POR_VARIOS_ATRIBUTOS = "Pessoa.BuscarPorVariosAtributos";
-	public static final String BuscarPorNome = "Pessoa.BuscarPorVariosAtributos";
 
 	@Id
 	@Column(name = "id_pessoa")
@@ -69,7 +63,7 @@ public class Pessoa implements Serializable, EntidadeBase {
 	@Column
 	private String naturalidade;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
 	private List<Telefone> telefones = new ArrayList<>();
 
 	@Column
@@ -91,10 +85,16 @@ public class Pessoa implements Serializable, EntidadeBase {
 	@Column(length = 1, name = "estado_civil")
 	private EstadoCivil estadoCivil;
 
+	@Column(length = 11, name = "cpf_conjuge")
+	private String cpfConjuge;
+
+	@Column(length = 11, name = "nome_conjuge")
+	private String nomeConjuge;
+		
 	@Column
 	private String observacao;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	public List<Endereco> getEnderecos() {
@@ -122,6 +122,22 @@ public class Pessoa implements Serializable, EntidadeBase {
 
 	public String getNomeFantasia() {
 		return nomeFantasia;
+	}
+	
+	public String getCpfConjuge() {
+		return cpfConjuge;
+	}
+	
+	public void setCpfConjuge(String cpfConjuge) {
+		this.cpfConjuge = cpfConjuge;
+	}
+	
+	public String getNomeConjuge() {
+		return nomeConjuge;
+	}
+	
+	public void setNomeConjuge(String nomeConjuge) {
+		this.nomeConjuge = nomeConjuge;
 	}
 
 	public void setNomeFantasia(String nomeFantasia) {
@@ -240,10 +256,11 @@ public class Pessoa implements Serializable, EntidadeBase {
 
 	@Override
 	public String toString() {
-		return "Pessoa [id=" + id + ", tipoPessoa=" + tipoPessoa + ",nomeFantasia =" + nomeFantasia + ", razaoSocial="
-				+ razaoSocial + ", cpfCpj=" + cpfCnpj + ", rgIe=" + rgIe + ", dataNascimento=" + dataNascimento
-				+ ", sexo =" + sexo + ", estadoCivil = " + estadoCivil + ",email=" + email + "]";
 
+		return "Pessoa [id=" + id + ", tipoPessoa=" + tipoPessoa + ", nomeFantasia=" + nomeFantasia + ", razaoSocial="
+				+ razaoSocial + ", cpfCpj=" + cpfCnpj + ", rgIe=" + rgIe + ", dataNascimento=" + dataNascimento
+				+ ",naturalidade=" + naturalidade + ",observacao =" + observacao + ", sexo =" + sexo
+				+ ", estadoCivil =" + estadoCivil + ",email=" + email + ",nomeConjuge =" + nomeConjuge + ",cpfConjuge=" + cpfConjuge + "]";
 	}
 
 }

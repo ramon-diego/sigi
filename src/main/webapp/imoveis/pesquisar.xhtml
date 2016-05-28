@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Pesquisar imóveis</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 .col-sm-12 .col-lg-12">
+					<div class="panel-body">
+						<h:form role="form" id="form-cadastro">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-info">
+										<div class="panel-heading">Dados do imóvel</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="row">
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Finalidade" />
+																<h:selectOneMenu value="Teste" styleClass="form-control">
+																	<f:selectItem itemValue="Todos" itemLabel="Todos" />
+																	<f:selectItem itemValue="venda" itemLabel="Venda" />
+																	<f:selectItem itemValue="alugar" itemLabel="Alugar" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Tipo" />
+																<h:selectOneMenu value="Teste" styleClass="form-control">
+																	<f:selectItem itemValue="Todos" itemLabel="Todos" />
+																	<f:selectItem itemValue="apartamento"
+																		itemLabel="Apartamento" />
+																	<f:selectItem itemValue="apartamento" itemLabel="Casa" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Status" />
+																<h:selectOneMenu value="Teste" styleClass="form-control">
+																	<f:selectItem itemValue="inativo" itemLabel="Ativo" />
+																	<f:selectItem itemValue="inativo" itemLabel="Inativo" />
+																	<f:selectItem itemValue="todos" itemLabel="Todos" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Código" />
+																<h:inputText id="input-codigo" styleClass="form-control" />
+															</div>
+														</div>
+													</div>
+													<div class="conteudo hide">
+														<div class="row">
+															<div class="col-lg-6">
+																<div class="form-group">
+																	<h:outputText value="Rua" />
+																	<h:inputText id="input-rua" styleClass="form-control" />
+																</div>
+															</div>
+															<div class="col-lg-3">
+																<div class="form-group">
+																	<h:outputText value="Bairro" />
+																	<h:inputText id="input-bairro"
+																		styleClass="form-control" />
+																</div>
+															</div>
+															<div class="col-lg-3">
+																<div class="form-group">
+																	<h:outputText value="Cidade" />
+																	<h:inputText id="input-cidade"
+																		styleClass="form-control" />
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Quartos" />
+																	<h:selectOneMenu value="Teste"
+																		styleClass="form-control">
+																		<f:selectItem itemValue="todos" itemLabel="Todos" />
+																		<f:selectItem itemValue="1" itemLabel="1" />
+																		<f:selectItem itemValue="2" itemLabel="2" />
+																		<f:selectItem itemValue="3" itemLabel="3" />
+																		<f:selectItem itemValue="4" itemLabel="4" />
+																		<f:selectItem itemValue="mais" itemLabel="5 ou mais" />
+																	</h:selectOneMenu>
+																</div>
+															</div>
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Suítes" />
+																	<h:selectOneMenu value="Teste"
+																		styleClass="form-control">
+																		<f:selectItem itemValue="todos" itemLabel="Todos" />
+																		<f:selectItem itemValue="1" itemLabel="1" />
+																		<f:selectItem itemValue="2" itemLabel="2" />
+																		<f:selectItem itemValue="mais" itemLabel="3 ou mais" />
+																	</h:selectOneMenu>
+																</div>
+															</div>
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Valor Mínimo" />
+																	<h:inputText id="input-valor-minimo"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Valor Máximo" />
+																	<h:inputText id="input-valor-maximo"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Área Mínima" />
+																	<h:inputText id="input-area-minima"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Máxima" />
+																	<h:inputText id="input-area-maxima"
+																		styleClass="form-control" />
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<script type="text/javascript">
+											$(document).ready(function(){
+												$(".btn-toggle").click(function(){
+											  	if($(".conteudo").hasClass('hide')){
+											    	$(".conteudo").removeClass('hide');
+											    	$("#exibe-filtros").removeClass('fa-flip-vertical');
+											    	
+											    }else{
+											    	$(".conteudo").addClass('hide');
+											     	$("#exibe-filtros").addClass('fa-flip-vertical');								 	
+											    }
+											  })
+											});
+											</script>
+
+											<div class="row">
+												<div class="col-lg-8">
+													<a href="#" class="btn btn-primary btn-primary">Pesquisar<i
+														class="fa fa-search fa-fw" aria-hidden="true"></i></a>
+															<a href="#" class="btn btn-info btn-toggle"  style="te"><i
+														class="fa fa-caret-square-o-up fa-fw fa-flip-vertical" id="exibe-filtros" aria-hidden="true"></i></a>
+												</div>
+												<div class="col-lg-2" style="text-align:right">
+												
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<h:dataTable value="#{pessoaBean.pessoas}" var="imovel" rendered="#{not empty pessoaBean.pessoas}"
+									id="data-table-imoveis" styleClass="table table-bordered">
+									<h:column headerClass="default">
+										<f:facet name="header">
+											<h:outputText value="Código" />
+										</f:facet>
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Finalidade" />
+										</f:facet>
+
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Endereço" />
+										</f:facet>
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Valor" />
+										</f:facet>
+									</h:column>
+
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Status" />
+										</f:facet>
+									</h:column>
+
+								</h:dataTable>
+							</div>
+
+						</h:form>
+						<!--div panel-body-->
+					</div>
+					<!--col-xs-12 .col-sm-12 .col-lg-12"-->
+				</div>
+				<!-- fimlinha -->
+			</div>
+			<!-- div-wrapper -->
+		</div>
+	</ui:composition>
+</h:body>
+</html>

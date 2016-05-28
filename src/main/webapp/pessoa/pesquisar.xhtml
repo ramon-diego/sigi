@@ -17,56 +17,75 @@
 
 			<div class="row">
 				<div class="col-xs-12 .col-sm-12 .col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">Dados Pessoa Física</div>
+					<div class="panel panel-info">
+						<div class="panel-heading">Pesquisar por</div>
 						<div class="panel-body">
 
-							<h:form role="form" id="form-pesquisar">
+							<h:form role="form" id="form-pesquisar" styleClass="form-inline">
 
 								<div class="col-lg-6">
-									<h:inputText value="#{pessoaBean.filtro}"
-										styleClass="pesquisar-pessoa" pt:placeholder="Pesquisar..." />
+									<h:outputText value="Nome" />
+									<h:inputText value="#{pessoaBean.buscaNome}"
+										styleClass="pesquisar-pessoa" pt:placeholder="Nome" />
 								</div>
-								<h:commandButton value="Localizar" id="btn-localizar"
-									styleClass="btn btn-info"
-									actionListener="#{pessoaBean.listarPessoas}" />
+
+								<div class="col-lg-4">
+									<h:outputText value="CPF / CNPJ" />
+									<h:inputText value="#{pessoaBean.buscaCpfCnpj}"
+										styleClass="pesquisar-pessoa" pt:placeholder="CPF ou CNPJ" />
+								</div>
+
+								<div class="col-lg-2">
+									<h:outputText value="ID" />
+									<h:inputText value="#{pessoaBean.buscaId}"
+										styleClass="pesquisar-pessoa" pt:placeholder="Código" />
+								</div>
+
+								<div class="col-lg-2">
+									<h:commandButton value="Localizar" id="btn-localizar"
+										styleClass="btn btn-info" rendered="true"
+										actionListener="#{pessoaBean.listarPessoas}">
+									</h:commandButton>
+								</div>
 
 								<div class="row">
 									<div class="col-lg-12">
+										<h:dataTable value="#{pessoaBean.pessoas}" var="pessoas"
+											id="data-table-pessoas" styleClass="table table-bordered"
+											rendered="#{not empty pessoaBean.pessoas}">
 
-										<h:dataTable value="#{pessoaBean.pessoas}"
-											var="pessoa" styleClass="table table-bordered">
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="CÓDIGO" />
 												</f:facet>
-									#{pessoa.id}
+									#{pessoas.id}
 									</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="NOME" />
 												</f:facet>
-									#{pessoa.nomeFantasia}
+									#{pessoas.nomeFantasia}
 								</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="CPF / CNPJ" />
 												</f:facet>
-									#{pessoa.cpfCnpj}
+									#{pessoas.cpfCnpj}
 								</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Editar" />
 												</f:facet>
-												<h:commandButton value="Editar" action="#{pessoaBean.carregarPessoa(pessoa.id)}">
-<!-- 	 													<f:setPropertyActionListener value="#{pessoas}"  -->
-<!-- 														target="#{pesquisarPessoaBean.pessoa}" /> -->
+
+												<h:commandButton value="Editar"
+													action="cadastro?faces-redirect=true&amp;includeViewParams=true">
+													<f:setPropertyActionListener value="#{pessoas}"
+														target="#{pessoaBean.pessoa}" />
 												</h:commandButton>
 											</h:column>
-
 										</h:dataTable>
 									</div>
 								</div>

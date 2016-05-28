@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,15 +21,15 @@ public class Endereco implements Serializable, EntidadeBase {
 	private static final long serialVersionUID = 1L;
 
 	public Endereco() {
-	
+
 	}
-	
+
 	@Id
 	@Column(name = "id_endereco")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 60, nullable = false)
+	@Column(length = 60)
 	private String rua;
 
 	@Column
@@ -45,21 +44,20 @@ public class Endereco implements Serializable, EntidadeBase {
 	@Column(length = 8)
 	private String cep;
 
-	@JoinColumn(name = "id_cidade")
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Cidade cidade;
 
 	@ManyToOne
 	private Pessoa pessoa;
-	
+
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
-	
+
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-		
+
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}

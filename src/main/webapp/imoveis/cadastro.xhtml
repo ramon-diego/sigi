@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Cadastro de imóveis</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 .col-sm-12 .col-lg-12">
+					<div class="panel-body">
+						<h:form role="form" id="form-cadastro">
+							<div class="panel-body">
+								<div class="col-lg-8" />
+								<div class="col-lg-2">
+									<div class="form-group">
+										<h:outputText value="Status" />
+										<h:selectOneMenu value="#{pessoaBean.pessoa.status}"
+											styleClass="form-control">
+											<f:selectItem itemValue="A" itemLabel="Ativo" />
+											<f:selectItem itemValue="I" itemLabel="Inativo" />
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="col-lg-2">
+									<h:outputText value="Código" />
+									<h:inputText id="input-id" disabled="true"
+										styleClass="form-control" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-7">
+									<div class="panel panel-info">
+										<div class="panel-heading">Dados do imóvel</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="form-group">
+														<h:outputText value="Finalidade" />
+														<h:selectOneMenu value="Teste" styleClass="form-control">
+															<f:selectItem itemValue="vender" itemLabel="Vender" />
+															<f:selectItem itemValue="alugar" itemLabel="Alugar" />
+														</h:selectOneMenu>
+													</div>
+													<div class="form-group">
+														<h:outputText value="Tipo" />
+														<h:selectOneMenu value="#" styleClass="form-control"
+															id="tipo-imoveis">
+															<f:selectItem itemValue="apartamento"
+																itemLabel="Apartamento" />
+															<f:selectItem itemValue="casa" itemLabel="Casa" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Valor" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Condomínio" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="IPTU" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-lg-5">
+									<!-- 									<div class="panel panel-info"> -->
+									<div class="panel-body">
+										<div class="row">
+											<div class="embed-responsive embed-responsive-16by9">
+												<img src="../images/apartamento-alto-padrao.jpg"
+													class="img-responsive img-thumbnail" />
+											</div>
+										</div>
+									</div>
+									<!-- 									</div> -->
+								</div>
+							</div>
+
+							<div class="panel with-nav-tabs panel-info">
+								<div class="panel-heading">
+									<ul class="nav nav-tabs remove-border-tabs">
+										<li class="active"><a data-toggle="tab"
+											href="#dependencias">Dependências</a></li>
+										<li><a data-toggle="tab" href="#areas">Áreas</a></li>
+										<li><a data-toggle="tab" href="#outros">Outros</a></li>
+									</ul>
+								</div>
+								<div class="panel-body">
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="dependencias">
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Dormítório(s)" />
+														<h:inputText value=""
+															styleClass="form-control input-despendencias" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Sala(s)" />
+														<h:inputText value=""
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Cozinha(s)" />
+														<h:inputText value=""
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Suíte Master" />
+														<h:inputText value=""
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Suíte Simples" />
+														<h:inputText value=""
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="BWC Social" />
+														<h:inputText value=""
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="BWC Suíte" />
+														<h:inputText value="" id="bwc-suite"
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Área de Serviço" />
+														<h:inputText value="" id="area-servico"
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Vaga(s) Garagem" />
+														<h:inputText value="" id="vagas-garagem"
+															styleClass="form-control input-dependencias" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="areas">
+											<div class="row">
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Total (m²)" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Útil (m²)" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Privativa (m²)" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Construída (m²)" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Terreno (m²)" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="outros">
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Elevador(es)" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Monitoramento 24h
+														</label>
+													</div>
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Portaria 24h
+														</label>
+													</div>
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Portão Eletrônico
+														</label>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Churrasqueira
+														</label>
+													</div>
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Espaço Gourmet
+														</label>
+													</div>
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Piscina Adulto
+														</label>
+													</div>
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Piscina Infantil
+														</label>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Playground
+														</label>
+													</div>
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Quadra Poliesportiva
+														</label>
+													</div>
+													<div class="checkbox">
+														<label> <input type="checkbox"
+															value="#{imoveisBean.numero}" />Salão de Festas
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="panel panel-info">
+										<div class="panel-heading">Endereço</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-lg-4">
+													<div class="form-group input-group">
+														<h:outputText value="CEP" />
+														<h:inputText class="form-control"
+															value="#{pessoaBean.endereco.cep}" id="input-cep" />
+														<span class="input-group-btn">
+															<button class="btn btn-default" type="button"
+																style="margin-bottom: -20px">
+																<i class="fa fa-search"></i>
+															</button>
+														</span>
+													</div>
+												</div>
+												<div class="col-lg-8">
+													<div class="form-group">
+														<h:outputText value="Rua" />
+														<h:inputText id="input-rua"
+															value="#{pessoaBean.endereco.rua}"
+															styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-2">
+													<div class="form-group">
+														<h:outputText value="Número" />
+														<h:inputText id="input-numero"
+															value="#{pessoaBean.endereco.numero}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-6">
+													<div class="form-group">
+														<h:outputText value="Complemento" />
+														<h:inputText id="input-complemento"
+															value="#{pessoaBean.endereco.complemento}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Bairro" />
+														<h:inputText id="input-bairro"
+															value="#{pessoaBean.endereco.bairro}"
+															styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6">
+													<div class="form-group">
+														<h:outputText value="Cidade" />
+														<h:inputText id="input-cidade"
+															value="#{pessoaBean.cidade.nome}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-2">
+													<div class="form-group">
+														<h:outputText value="Estado" id="txtEstado" />
+														<h:selectOneMenu id="input-estado"
+															value="#{pessoaBean.cidade.estado}"
+															styleClass="form-control">
+															<f:selectItem itemValue="PR" itemLabel="PR" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="País" />
+														<h:inputText id="input-pais" value="#"
+															styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="panel panel-info">
+										<img src="../images/google-maps.png" alt="google-maps-img" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<h:outputText value="Observações" />
+										<h:inputTextarea value="" styleClass="form-control" />
+									</div>
+								</div>
+								<div class="col-lg-6">
+
+									<div class="panel with-nav-tabs panel-info">
+										<div class="panel-heading">
+											<ul class="nav nav-tabs remove-border-tabs">
+												<li><a data-toggle="tab" href="#proprietario">Proprietário</a></li>
+												<li><a data-toggle="tab" href="#angariador">Angariador</a></li>
+												<li><a data-toggle="tab" href="#opcao">Opção</a></li>
+											</ul>
+										</div>
+										<div class="panel-body">
+											<div class="tab-content">
+												<div class="tab-pane fade in active" id="proprietario">
+													<div class="row">
+														<div class="col-lg-12">
+															<div class="input-group">
+																<h:outputText value="Nome" />
+																<h:inputText id="input-email"
+																	value="#{pessoaBean.pessoa.email}"
+																	styleClass="form-control" />
+																<span class="input-group-btn">
+																	<button class="btn btn-primary" type="button"
+																		style="margin-bottom: -20px">
+																		<i class="fa fa-search"></i>
+																	</button>
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="tab-pane" id="angariador">
+													<h:outputText value="O Senhor é meu Pastor nada me Faltará" />
+												</div>
+
+												<div class="tab-pane" id="opcao">
+													<div class="col-lg-4">
+														<h:outputText value="Início" />
+														<h:inputText value="" styleClass="form-control data">
+															<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+														</h:inputText>
+													</div>
+													<div class="col-lg-4">
+														<h:outputText value="Encerramento" />
+														<h:inputText value="" styleClass="form-control data">
+															<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+														</h:inputText>
+													</div>
+													<div class="col-lg-4">
+														<h:outputText value="Dias" />
+														<h:inputText value="" styleClass="form-control" />
+													</div>
+												</div>
+
+											</div>
+											<!-- final tab-content -->
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-lg-12">
+									<h:commandButton action="#" value="Gravar"
+										styleClass="btn btn-success" />
+
+									<h:commandButton action="#" value="Cancelar"
+										styleClass="btn btn-warning" />
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

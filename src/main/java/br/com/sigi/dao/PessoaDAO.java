@@ -6,32 +6,26 @@ import java.io.Serializable;
 import java.util.List;
 import br.com.sigi.domain.Pessoa;
 
-public class PessoaDAO extends GenericDAO<Pessoa> implements Serializable{
+public class PessoaDAO extends GenericDAO<Pessoa> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 
 	public PessoaDAO() {
 
 		super(Pessoa.class);
 	}
 
-	public Pessoa getPessoa() {
-
-		return null;
-	}
-
-	public List<Pessoa> buscarPorVariosAtributos(String filtro) {
+	public Pessoa buscarPorId(Long id) {
 
 		try {
 			getEntityManager();
 			getEntityManager().getTransaction().begin();
-			TypedQuery<Pessoa> query = getEntityManager().createNamedQuery(Pessoa.BUSCAR_POR_VARIOS_ATRIBUTOS,
+			TypedQuery<Pessoa> query = getEntityManager().createNamedQuery("select Pessoa p where p.id = :id",
 					Pessoa.class);
-			query.setParameter("nome", "%" + filtro + "%").setParameter("cpfCnpj", "%" + filtro + "%");
-			List<Pessoa> pessoas = query.getResultList();
+			query.setParameter("id", id);
+			Pessoa pessoa = query.getSingleResult();
 			getEntityManager().getTransaction().commit();
-			return pessoas;
+			return pessoa;
 		} catch (Exception e) {
 			getEntityManager().getTransaction().rollback();
 			getEntityManager().close();
@@ -39,24 +33,32 @@ public class PessoaDAO extends GenericDAO<Pessoa> implements Serializable{
 		return null;
 	}
 
-	public Pessoa pesquisar(Long id) {
-		getEntityManager();
-		getEntityManager().getTransaction().begin();
-		TypedQuery<Pessoa> query = getEntityManager().createQuery("select p from Pessoa p where p.id = :id", Pessoa.class);
-		query.setParameter("id", id);
-		getEntityManager().getTransaction().commit();
-		Pessoa pessoa = query.getSingleResult();
-		return pessoa;
-	}
-	
-	
-	public Pessoa buscarPorId(Long id) {
-		getEntityManager().getTransaction().begin();
-		Pessoa pessoa = getEntityManager().find(Pessoa.class, id);
-		getEntityManager().getTransaction().commit();
-		getEntityManager().close();
-		return pessoa;
+	public List<Pessoa> buscarPorVariosAtributos(String nome, String cpfCnpj) {
+
+		try {
+			getEntityManager().getTransaction().begin();
+			TypedQuery<Pessoa> query = getEntityManager().createQuery(
+					"select p from Pessoa p where p.nomeFantasia like :nome and p.cpfCnpj like :cpfCnpj", Pessoa.class);
+			// if (id != null) {
+			// query.setParameter("id", id);
+			// }
+
+			if (nome != null) {
+				query.setParameter("nome", "%" + nome + "%");
+			}
+
+			if (cpfCnpj != null) {
+				query.setParameter("cpfCnpj", "%" + cpfCnpj + "%");
+			}
+			List<Pessoa> pessoas = query.getResultList();
+			getEntityManager().getTransaction().commit();
+			return pessoas;
+
+		} catch (Exception e) {
+			getEntityManager().getTransaction().rollback();
+			getEntityManager().close();
+		}
+		return null;
 	}
 
-	
 }

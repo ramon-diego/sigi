@@ -1,5 +1,6 @@
 package br.com.sigi.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,7 +8,9 @@ import javax.persistence.TypedQuery;
 
 import br.com.sigi.utils.ConexaoDB;
 
-public abstract class GenericDAO<T extends EntidadeBase> {
+public abstract class GenericDAO<T extends EntidadeBase> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private final EntityManager entityManager = ConexaoDB.getEntityManager();
 
@@ -42,6 +45,7 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 	public void salvar(T objeto) {
 
 		try {
+			
 			entityManager.getTransaction().begin();
 			if (objeto.getId() != null) {
 				if (!entityManager.contains(objeto)) {
@@ -62,8 +66,10 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 			}
 		} finally {
 			if (entityManager.isOpen()) {
+				getEntityManager().getTransaction().commit();
 				entityManager.close();
 			}
+			
 		}
 	}
 
@@ -102,7 +108,7 @@ public abstract class GenericDAO<T extends EntidadeBase> {
 	public void editar(Long id) {
 
 		TypedQuery<T> query = getEntityManager().createQuery(" FROM " + objeto.getName(), objeto);
-		query.getSingleResult();
+		query.getResultList();
 	}
 	
 

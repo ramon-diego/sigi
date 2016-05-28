@@ -1,15 +1,56 @@
 @CHARSET "ISO-8859-1";
 
-.pesquisar-pessoa{
-	
-	    width: 100%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: white;
-    background-image: url('../images/pesquisar-icon.png');
-    background-position: 10px 6px; 
-    background-repeat: no-repeat;
-    padding: 5px 20px 5px 40px;
+.pesquisar-pessoa {
+	width: 100%;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	background-color: white;
+	background-image: url('../images/pesquisar-icon.png');
+	background-position: 10px 6px;
+	background-repeat: no-repeat;
+	padding: 5px 20px 5px 40px;
 }
+
+
+#input-creci{display: none}
+
+#checkbox-corretor:checked ~ #input-creci{
+	display: block;
+}
+.remove-border-tabs{
+	border:none;
+}
+
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+
+.with-nav-tabs.panel-info .nav-tabs > li > a,
+.with-nav-tabs.panel-info .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li > a:focus {
+	color: #31708f;
+}
+.with-nav-tabs.panel-info .nav-tabs > .open > a,
+.with-nav-tabs.panel-info .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-info .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li > a:focus {
+	color: #31708f;
+	background-color: #bce8f1;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-info .nav-tabs > li.active > a,
+.with-nav-tabs.panel-info .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li.active > a:focus {
+	color: #31708f;
+	background-color: #fff;
+	border-color: #bce8f1;
+	border-bottom-color: transparent;
+}
+
+.fotos-imoveis{
+	width:68%;
+}
+.conteudo.hide{display: none;}

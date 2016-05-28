@@ -30,6 +30,9 @@
 	<link rel="stylesheet" type="text/css"
 		href="../tema/font-awesome/css/font-awesome.min.css" />
 
+	<link rel="stylesheet" type="text/css"
+		href="../css/bootstrap-datepicker3.min.css" />
+
 	<script src="../js/jquery-1.12.2.min.js" />
 
 	<script type="text/javascript" src="../js/bootstrap.min.js" />
@@ -42,6 +45,27 @@
 		src="../tema/sb-admin-2/js/sb-admin-2.js" />
 
 	<script src="../tema/raphael/raphael-min.js" />
+	<script src="../js/jquery.mask.min.js" />
+	<script src="../js/bootstrap-datepicker.min.js" />
+	<script src="../locales/bootstrap-datepicker.pt-BR.min.js" />
+	
+	
+	<script>
+			$(document).ready(function(){
+				   $('.data').datepicker({
+	   					language: "pt-BR",
+	   				});
+	   				
+				   $('.data').mask('00/00/0000');
+				   $('#input-cpf, #input-cpf-conjuge').mask('000.000.000-00'); 
+				   $('#input-cnpj').mask('00.000.000/0000-00'); 
+				   $('#input-cep').mask('00000-000'); 
+				   $('.telefone').mask('(00) 0000-0000');
+				   $('.input-dependencias').mask('00');
+			});
+			
+		</script>
+	
 
 </h:head>
 
@@ -138,9 +162,9 @@
 					<li><a href="#"><i class="fa fa-list-alt fa-fw"></i>Imóveis<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">Cadastro</a></li>
+							<li><a href="../imoveis/cadastro.xhtml">Cadastro</a></li>
 
-							<li><a href="#">Pesquisar</a></li>
+							<li><a href="../imoveis/pesquisar.xhtml">Pesquisar</a></li>
 
 							<li><a href="#">Vistorias<span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
