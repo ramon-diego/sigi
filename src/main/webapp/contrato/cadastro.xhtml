@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Contratos</h1>
+				</div>
+			</div>
+			<!-- fimlinha -->
+			<div class="row">
+				<div class="col-xs-12 .col-sm-6 .col-lg-8">
+					<div class="panel-body">
+						<f:view>
+							<f:metadata>
+								<f:viewParam name="id" value="#{pessoaBean.pessoa}" />
+							</f:metadata>
+							<h:form role="form" prependId="false">
+								<h:inputHidden value="#{pessoaBean.pessoa}" immediate="true" />
+								<div class="panel panel-info">
+									<div class="panel-heading">Dados</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
+													<h:selectOneMenu styleClass="form-control"
+														value="#{pessoaBean.pessoa.tipoPessoa}">
+														<f:selectItem itemLabel="Física" itemValue="F"
+															id="item-pessoa-fisica" />
+														<f:selectItem itemLabel="Jurídica" itemValue="J"
+															id="item-pessoa-juridica" />
+														<!-- 														<f:ajax	render="pg-pessoa-juridica" /> -->
+													</h:selectOneMenu>
+												</div>
+											</div>
+											<div class="col-lg-4"></div>
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="Status" id="status-pessoa" />
+													<h:selectOneMenu value="#{pessoaBean.pessoa.status}"
+														styleClass="form-control">
+														<f:selectItem itemValue="A" itemLabel="Ativo" />
+														<f:selectItem itemValue="I" itemLabel="Inativo" />
+													</h:selectOneMenu>
+												</div>
+											</div>
+											<div class="col-lg-2">
+												<div class="form-group">
+													<h:outputText value="Código" id="lb-codigo" />
+													<h:inputText value="#{pessoaBean.pessoa.id}"
+														styleClass="form-control" disabled="true"
+														id="input-codigo" />
+												</div>
+											</div>
+										</div>
+										<h:panelGroup id="pg-pessoa-fisica"
+											rendered="#{pessoaBean.renderFisica}">
+											<div class="row">
+												<div class="col-lg-8">
+													<div class="form-group">
+														<h:outputText value="Nome Completo" id="lb-nome-completo" />
+														<h:inputText id="input-nome-completo"
+															value="#{pessoaBean.pessoa.nomeFantasia}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Sexo" />
+														<h:selectOneMenu value="#{pessoaBean.pessoa.sexo}"
+															styleClass="form-control">
+															<f:selectItem itemLabel="Masculino" itemValue="M" />
+															<f:selectItem itemLabel="Feminino" itemValue="F" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="CPF" id="lb-cpf" />
+														<h:inputText id="input-cpf" converter="formatConverter"
+															value="#{pessoaBean.pessoa.cpfCnpj}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="RG" id="lb-rg" />
+														<h:inputText id="input-rg" converter="formatConverter"
+															value="#{pessoaBean.pessoa.rgIe}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
+														<h:inputText id="data-nascimento"
+															value="#{pessoaBean.pessoa.dataNascimento}"
+															styleClass="form-control data">
+															<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+														</h:inputText>
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Estado Civil" />
+														<h:selectOneMenu value="#{pessoaBean.pessoa.estadoCivil}"
+															styleClass="form-control">
+															<f:selectItem itemLabel="Solteiro" itemValue="S" />
+															<f:selectItem itemLabel="Casado" itemValue="C" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Naturalidade" id="lb-naturalidade" />
+														<h:inputText id="input-naturalidade"
+															value="#{pessoaBean.pessoa.naturalidade}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-5">
+													<div class="form-group">
+														<h:outputText value="Cônjuge" />
+														<h:inputText value="#{pessoaBean.pessoa.nomeConjuge}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="CPF Cônjuge" />
+														<h:inputText id="input-cpf-conjuge"
+															value="#{pessoaBean.pessoa.cpfConjuge}"
+															styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+										</h:panelGroup>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-1">
+										<h:commandButton actionListener="#{pessoaBean.salvar}"
+											value="Gravar" styleClass="btn btn-success">
+										</h:commandButton>
+									</div>
+									<div class="col-lg-8">
+										<h:commandButton actionListener="#" value="Cancelar"
+											styleClass="btn btn-warning" />
+									</div>
+									<div class="col-lg-2"></div>
+
+									<h:messages showDetail="false" infoClass="alert alert-info"
+										showSummary="true" errorClass="alert alert-warning" />
+								</div>
+							</h:form>
+						</f:view>
+						<!-- final PainelBody -->
+					</div>
+					<!-- final PainelDefault -->
+				</div>
+				<!-- fim-col-lg-12 -->
+			</div>
+			<!-- fim row -->
+		</div>
+		<!-- page-wrapper -->
+	</ui:composition>
+</h:body>
+</html>

@@ -15,42 +15,42 @@
 			<div class="row">
 				<div class="col-xs-12 .col-sm-12 .col-lg-12">
 					<div class="panel-body">
-						<h:form role="form" id="form-cadastro">
-							<div class="panel-body">
-								<div class="col-lg-8" />
-								<div class="col-lg-2">
-									<div class="form-group">
-										<h:outputText value="Status" />
-										<h:selectOneMenu value="#{pessoaBean.pessoa.status}"
-											styleClass="form-control">
-											<f:selectItem itemValue="A" itemLabel="Ativo" />
-											<f:selectItem itemValue="I" itemLabel="Inativo" />
-										</h:selectOneMenu>
-									</div>
-								</div>
-								<div class="col-lg-2">
-									<h:outputText value="Código" />
-									<h:inputText id="input-id" disabled="true"
-										styleClass="form-control" />
-								</div>
-							</div>
+						<h:form role="form" id="form-cadastro"
+							enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="panel panel-info">
 										<div class="panel-heading">Dados do imóvel</div>
 										<div class="panel-body">
 											<div class="row">
+												<div class="col-lg-5"></div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Status" />
+														<h:selectOneMenu value=""
+															styleClass="form-control">
+															<f:selectItem itemValue="A" itemLabel="Ativo" />
+															<f:selectItem itemValue="I" itemLabel="Inativo" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+												<div class="col-lg-3">
+													<h:outputText value="Código" />
+													<h:inputText id="input-id" disabled="true"
+														styleClass="form-control" />
+												</div>
+
 												<div class="col-lg-12">
 													<div class="form-group">
 														<h:outputText value="Finalidade" />
-														<h:selectOneMenu value="Teste" styleClass="form-control">
+														<h:selectOneMenu value="" styleClass="form-control">
 															<f:selectItem itemValue="vender" itemLabel="Vender" />
 															<f:selectItem itemValue="alugar" itemLabel="Alugar" />
 														</h:selectOneMenu>
 													</div>
 													<div class="form-group">
 														<h:outputText value="Tipo" />
-														<h:selectOneMenu value="#" styleClass="form-control"
+														<h:selectOneMenu value="" styleClass="form-control"
 															id="tipo-imoveis">
 															<f:selectItem itemValue="apartamento"
 																itemLabel="Apartamento" />
@@ -88,8 +88,8 @@
 									<div class="panel-body">
 										<div class="row">
 											<div class="embed-responsive embed-responsive-16by9">
-												<img src="../images/apartamento-alto-padrao.jpg"
-													class="img-responsive img-thumbnail" />
+												<h:inputFile pt:multiple="multiple" />
+
 											</div>
 										</div>
 									</div>
@@ -228,12 +228,12 @@
 													</div>
 													<div class="checkbox">
 														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Portaria 24h
+															value="" />Portaria 24h
 														</label>
 													</div>
 													<div class="checkbox">
 														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Portão Eletrônico
+															value="" />Portão Eletrônico
 														</label>
 													</div>
 												</div>
@@ -378,7 +378,7 @@
 								<div class="col-lg-6">
 									<div class="form-group">
 										<h:outputText value="Observações" />
-										<h:inputTextarea value="" styleClass="form-control" />
+										<h:inputTextarea value="" rows="5" styleClass="form-control" />
 									</div>
 								</div>
 								<div class="col-lg-6">
@@ -398,11 +398,11 @@
 														<div class="col-lg-12">
 															<div class="input-group">
 																<h:outputText value="Nome" />
-																<h:inputText id="input-email"
-																	value="#{pessoaBean.pessoa.email}"
+																<h:inputText id="input-proprietario"
 																	styleClass="form-control" />
 																<span class="input-group-btn">
 																	<button class="btn btn-primary" type="button"
+																		data-target="#modalProprietario" data-toggle="modal"
 																		style="margin-bottom: -20px">
 																		<i class="fa fa-search"></i>
 																	</button>
@@ -412,25 +412,38 @@
 													</div>
 												</div>
 												<div class="tab-pane" id="angariador">
-													<h:outputText value="O Senhor é meu Pastor nada me Faltará" />
+													<div class="input-group">
+														<h:outputText value="Nome" />
+														<h:inputText id="input-angariador"
+															styleClass="form-control" />
+														<span class="input-group-btn">
+															<button class="btn btn-primary" type="button"
+																data-target="#modalProprietario" data-toggle="modal"
+																style="margin-bottom: -20px">
+																<i class="fa fa-search"></i>
+															</button>
+														</span>
+													</div>
 												</div>
 
 												<div class="tab-pane" id="opcao">
-													<div class="col-lg-4">
-														<h:outputText value="Início" />
-														<h:inputText value="" styleClass="form-control data">
-															<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
-														</h:inputText>
-													</div>
-													<div class="col-lg-4">
-														<h:outputText value="Encerramento" />
-														<h:inputText value="" styleClass="form-control data">
-															<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
-														</h:inputText>
-													</div>
-													<div class="col-lg-4">
-														<h:outputText value="Dias" />
-														<h:inputText value="" styleClass="form-control" />
+													<div class="row">
+														<div class="col-lg-4">
+															<h:outputText value="Início" />
+															<h:inputText value="" styleClass="form-control data">
+																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+															</h:inputText>
+														</div>
+														<div class="col-lg-4">
+															<h:outputText value="Encerramento" />
+															<h:inputText value="" styleClass="form-control data">
+																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+															</h:inputText>
+														</div>
+														<div class="col-lg-4">
+															<h:outputText value="Dias" />
+															<h:inputText value="" styleClass="form-control" />
+														</div>
 													</div>
 												</div>
 
@@ -441,9 +454,32 @@
 								</div>
 							</div>
 
+							<div class="modal fade" id="modalProprietario" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h3>Título modal</h3>
+										</div>
+										<div class="modal-body">
+											
+										</div>
+
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
 							<div class="row">
+
 								<div class="col-lg-12">
-									<h:commandButton action="#" value="Gravar"
+									<h:commandButton action="#" value="Salvar" style="margin-right:15px"
 										styleClass="btn btn-success" />
 
 									<h:commandButton action="#" value="Cancelar"

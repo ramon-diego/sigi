@@ -17,418 +17,384 @@
 			<div class="row">
 				<div class="col-xs-12 .col-sm-6 .col-lg-8">
 					<div class="panel-body">
-						<f:view>
-							<f:metadata>
-								<f:viewParam name="id" value="#{pessoaBean.pessoa}" />
-							</f:metadata>
-							<h:form role="form" prependId="false">
-								<h:inputHidden value="#{pessoaBean.pessoa}" immediate="true" />
-								<div class="panel panel-info">
-									<div class="panel-heading">Dados</div>
-									<div class="panel-body">
+						<!-- 						<f:view> -->
+						<!-- 							<f:metadata> -->
+						<!-- 								<f:viewParam name="id" value="#{pessoaBean.pessoa}" /> -->
+						<!-- 							</f:metadata> -->
+						<h:form role="form" prependId="false">
+							<!-- 								<h:inputHidden value="#{pessoaBean.pessoa}" immediate="true" /> -->
+							<div class="panel panel-info">
+								<div class="panel-heading">Dados</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-lg-3">
+											<div class="form-group">
+												<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
+												<h:selectOneMenu styleClass="form-control"
+													value="#{pessoaBean.pessoa.tipoPessoa}">
+													<f:selectItem itemLabel="Física" itemValue="F"
+														id="item-pessoa-fisica" />
+													<f:selectItem itemLabel="Jurídica" itemValue="J"
+														id="item-pessoa-juridica" />
+													<!-- 														<f:ajax	render="pg-pessoa-juridica" /> -->
+												</h:selectOneMenu>
+											</div>
+										</div>
+										<div class="col-lg-4"></div>
+										<div class="col-lg-3">
+											<div class="form-group">
+												<h:outputText value="Status" id="status-pessoa" />
+												<h:selectOneMenu value="#{pessoaBean.pessoa.status}"
+													styleClass="form-control">
+													<f:selectItem itemValue="A" itemLabel="Ativo" />
+													<f:selectItem itemValue="I" itemLabel="Inativo" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputText value="Código" id="lb-codigo" />
+												<h:inputText value="#{pessoaBean.pessoa.id}"
+													styleClass="form-control" disabled="true" id="input-codigo" />
+											</div>
+										</div>
+									</div>
+									<h:panelGroup id="pg-pessoa-fisica"
+										rendered="#{pessoaBean.renderFisica}">
 										<div class="row">
-											<div class="col-lg-3">
+											<div class="col-lg-8">
 												<div class="form-group">
-													<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
-													<h:selectOneMenu styleClass="form-control"
-														value="#{pessoaBean.pessoa.tipoPessoa}">
-														<f:selectItem itemLabel="Física" itemValue="F"
-															id="item-pessoa-fisica" />
-														<f:selectItem itemLabel="Jurídica" itemValue="J"
-															id="item-pessoa-juridica" />
-														<!-- 														<f:ajax	render="pg-pessoa-juridica" /> -->
-													</h:selectOneMenu>
+													<h:outputText value="Nome Completo" id="lb-nome-completo" />
+													<h:inputText id="input-nome-completo"
+														value="#{pessoaBean.pessoa.nomeFantasia}"
+														styleClass="form-control" />
 												</div>
 											</div>
-											<div class="col-lg-4"></div>
-											<div class="col-lg-3">
+											<div class="col-lg-4">
 												<div class="form-group">
-													<h:outputText value="Status" id="status-pessoa" />
-													<h:selectOneMenu value="#{pessoaBean.pessoa.status}"
+													<h:outputText value="Sexo" />
+													<h:selectOneMenu value="#{pessoaBean.pessoa.sexo}"
 														styleClass="form-control">
-														<f:selectItem itemValue="A" itemLabel="Ativo" />
-														<f:selectItem itemValue="I" itemLabel="Inativo" />
+														<f:selectItem itemLabel="Masculino" itemValue="M" />
+														<f:selectItem itemLabel="Feminino" itemValue="F" />
 													</h:selectOneMenu>
-												</div>
-											</div>
-											<div class="col-lg-2">
-												<div class="form-group">
-													<h:outputText value="Código" id="lb-codigo" />
-													<h:inputText value="#{pessoaBean.pessoa.id}"
-														styleClass="form-control" disabled="true"
-														id="input-codigo" />
 												</div>
 											</div>
 										</div>
-										<h:panelGroup id="pg-pessoa-fisica"
-											rendered="#{pessoaBean.renderFisica}">
-											<div class="row">
-												<div class="col-lg-8">
-													<div class="form-group">
-														<h:outputText value="Nome Completo" id="lb-nome-completo" />
-														<h:inputText id="input-nome-completo"
-															converter="formatConverter"
-															value="#{pessoaBean.pessoa.nomeFantasia}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-4">
-													<div class="form-group">
-														<h:outputText value="Sexo" />
-														<h:selectOneMenu value="#{pessoaBean.pessoa.sexo}"
-															styleClass="form-control">
-															<f:selectItem itemLabel="Masculino" itemValue="M" />
-															<f:selectItem itemLabel="Feminino" itemValue="F" />
-														</h:selectOneMenu>
-													</div>
+										<div class="row">
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="CPF" id="lb-cpf" />
+													<h:inputText id="input-cpf"
+														value="#{pessoaBean.pessoa.cpfCnpj}"
+														styleClass="form-control" />
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-lg-3">
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="RG" id="lb-rg" />
+													<h:inputText id="input-rg"
+														value="#{pessoaBean.pessoa.rgIe}"
+														styleClass="form-control" />
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
+													<h:inputText id="data-nascimento"
+														value="#{pessoaBean.pessoa.dataNascimento}"
+														styleClass="form-control data">
+														<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+													</h:inputText>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="Estado Civil" />
+													<h:selectOneMenu value="#{pessoaBean.pessoa.estadoCivil}"
+														styleClass="form-control">
+														<f:selectItem itemLabel="Solteiro" itemValue="S" />
+														<f:selectItem itemLabel="Casado" itemValue="C" />
+													</h:selectOneMenu>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-4">
+												<div class="form-group">
+													<h:outputText value="Naturalidade" id="lb-naturalidade" />
+													<h:inputText id="input-naturalidade"
+														value="#{pessoaBean.pessoa.naturalidade}"
+														styleClass="form-control" />
+												</div>
+											</div>
+											<div class="col-lg-5">
+												<div class="form-group">
+													<h:outputText value="Cônjuge" />
+													<h:inputText value="#{pessoaBean.pessoa.nomeConjuge}"
+														styleClass="form-control" />
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="CPF Cônjuge" />
+													<h:inputText id="input-cpf-conjuge"
+														value="#{pessoaBean.pessoa.cpfConjuge}"
+														styleClass="form-control" />
+												</div>
+											</div>
+										</div>
+									</h:panelGroup>
+									<h:panelGroup id="pg-pessoa-juridica"
+										rendered="#{pessoaBean.renderJuridica}">
+										<div class="row">
+											<div class="col-lg-8">
+												<div class="form-group">
+													<h:outputText value="Razão Social" id="lb-razao-social" />
+													<h:inputText id="input-razao-social"
+														value="#{pessoaBean.pessoa.nomeFantasia}"
+														styleClass="form-control" />
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
 													<div class="form-group">
-														<h:outputText value="CPF" id="lb-cpf" />
-														<h:inputText id="input-cpf" converter="formatConverter"
+														<h:outputText value="CNPJ" id="lb-cnpj" />
+														<h:inputText id="input-cnpj"
 															value="#{pessoaBean.pessoa.cpfCnpj}"
 															styleClass="form-control" />
 													</div>
 												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="form-group">
+													<h:outputText value="Nome Fantasia" id="lb-nome-fantasia" />
+													<h:inputText id="input-nome-fantasia"
+														value="#{pessoaBean.pessoa.nomeFantasia}"
+														styleClass="form-control" />
+												</div>
+											</div>
+
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="Inscrição Estadual" id="lb-ie" />
+													<h:inputText id="input-ie"
+														value="#{pessoaBean.pessoa.rgIe}"
+														styleClass="form-control" />
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="form-group">
+													<h:outputText value="Isento de IE" />
+													<h:selectOneMenu value="#{pessoaBean.pessoa.estadoCivil}"
+														styleClass="form-control">
+														<f:selectItem itemLabel="Sim" itemValue="C" />
+														<f:selectItem itemLabel="Não" itemValue="C" />
+													</h:selectOneMenu>
+												</div>
+											</div>
+										</div>
+									</h:panelGroup>
+								</div>
+							</div>
+							<div class="panel with-nav-tabs panel-info">
+								<div class="panel-heading">
+									<ul class="nav nav-tabs remove-border-tabs">
+										<li class="active"><a data-toggle="tab" href="#endereco">Endereço</a></li>
+										<li><a data-toggle="tab" href="#contato">Contato</a></li>
+										<li><a data-toggle="tab" href="#imoveis" id="dt-imoveis">Imóveis</a></li>
+									</ul>
+								</div>
+
+
+								<script type="text/javascript">
+								$(document).ready(function() {
+									  $(".divEmpty").each(function() {
+									  if ($(this).text().length == 0) {
+									      $('#dt-imoveis').closest('li').hide();
+									    }
+									  });
+
+									});
+
+								</script>
+								<div class="panel-body">
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="endereco">
+											<div class="row">
 												<div class="col-lg-3">
+													<div class="form-group input-group">
+														<h:outputText value="CEP" />
+														<h:inputText class="form-control"
+															value="#{pessoaBean.endereco.cep}" id="input-cep" />
+														<span class="input-group-btn">
+															<button class="btn btn-default" type="button"
+																style="margin-bottom: -20px">
+																<i class="fa fa-search"></i>
+															</button>
+														</span>
+													</div>
+												</div>
+												<div class="col-lg-9">
 													<div class="form-group">
-														<h:outputText value="RG" id="lb-rg" />
-														<h:inputText id="input-rg" converter="formatConverter"
-															value="#{pessoaBean.pessoa.rgIe}"
+														<h:outputText value="Rua" />
+														<h:inputText id="input-rua"
+															value="#{pessoaBean.endereco.rua}"
 															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
-														<h:inputText id="data-nascimento"
-															value="#{pessoaBean.pessoa.dataNascimento}"
-															styleClass="form-control data">
-															<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
-														</h:inputText>
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="Estado Civil" />
-														<h:selectOneMenu value="#{pessoaBean.pessoa.estadoCivil}"
-															styleClass="form-control">
-															<f:selectItem itemLabel="Solteiro" itemValue="S" />
-															<f:selectItem itemLabel="Casado" itemValue="C" />
-														</h:selectOneMenu>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-4">
+												<div class="col-lg-2">
 													<div class="form-group">
-														<h:outputText value="Naturalidade" id="lb-naturalidade" />
-														<h:inputText id="input-naturalidade"
-															value="#{pessoaBean.pessoa.naturalidade}"
+														<h:outputText value="Número" />
+														<h:inputText id="input-numero"
+															value="#{pessoaBean.endereco.numero}"
 															styleClass="form-control" />
 													</div>
 												</div>
-												<div class="col-lg-5">
+												<div class="col-lg-6">
 													<div class="form-group">
-														<h:outputText value="Cônjuge" />
-														<h:inputText value="#{pessoaBean.pessoa.nomeConjuge}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="CPF Cônjuge" />
-														<h:inputText id="input-cpf-conjuge"
-															value="#{pessoaBean.pessoa.cpfConjuge}"
-															styleClass="form-control" />
-													</div>
-												</div>
-											</div>
-										</h:panelGroup>
-										<h:panelGroup id="pg-pessoa-juridica"
-											rendered="#{pessoaBean.renderJuridica}">
-											<div class="row">
-												<div class="col-lg-8">
-													<div class="form-group">
-														<h:outputText value="Razão Social" id="lb-razao-social" />
-														<h:inputText id="input-razao-social"
-															value="#{pessoaBean.pessoa.nomeFantasia}"
+														<h:outputText value="Complemento" />
+														<h:inputText id="input-complemento"
+															value="#{pessoaBean.endereco.complemento}"
 															styleClass="form-control" />
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
-														<div class="form-group">
-															<h:outputText value="CNPJ" id="lb-cnpj" />
-															<h:inputText id="input-cnpj"
-																value="#{pessoaBean.pessoa.cpfCnpj}"
-																styleClass="form-control" />
-														</div>
+														<h:outputText value="Bairro" />
+														<h:inputText id="input-bairro"
+															value="#{pessoaBean.endereco.bairro}"
+															styleClass="form-control" />
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-lg-6">
 													<div class="form-group">
-														<h:outputText value="Nome Fantasia" id="lb-nome-fantasia" />
-														<h:inputText id="input-nome-fantasia"
-															value="#{pessoaBean.pessoa.nomeFantasia}"
+														<h:outputText value="Cidade" />
+														<h:inputText id="input-cidade"
+															value="#{pessoaBean.cidade.nome}"
 															styleClass="form-control" />
 													</div>
 												</div>
 
-												<div class="col-lg-3">
+												<div class="col-lg-2">
 													<div class="form-group">
-														<h:outputText value="Inscrição Estadual" id="lb-ie" />
-														<h:inputText id="input-ie"
-															value="#{pessoaBean.pessoa.rgIe}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="Isento de IE" />
-														<h:selectOneMenu value="#{pessoaBean.pessoa.estadoCivil}"
+														<h:outputText value="Estado" id="txtEstado" />
+														<h:selectOneMenu id="input-estado"
+															value="#{pessoaBean.cidade.estado}"
 															styleClass="form-control">
-															<f:selectItem itemLabel="Sim" itemValue="C" />
-															<f:selectItem itemLabel="Não" itemValue="C" />
+															<f:selectItem itemValue="PR" itemLabel="PR" />
 														</h:selectOneMenu>
 													</div>
 												</div>
-											</div>
-										</h:panelGroup>
-									</div>
-								</div>
-								<div class="panel with-nav-tabs panel-info">
-									<div class="panel-heading">
-										<ul class="nav nav-tabs remove-border-tabs">
-											<li class="active"><a data-toggle="tab" href="#endereco">Endereço</a></li>
-											<li><a data-toggle="tab" href="#contato">Contato</a></li>
-											<li><a data-toggle="tab" href="#imoveis">Imóveis</a></li>
-										</ul>
-									</div>
-									<div class="panel-body">
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="endereco">
-												<div class="row">
-													<div class="col-lg-3">
-														<div class="form-group input-group">
-															<h:outputText value="CEP" />
-															<h:inputText class="form-control"
-																converter="formatConverter"
-																value="#{pessoaBean.endereco.cep}" id="input-cep" />
-															<span class="input-group-btn">
-																<button class="btn btn-default" type="button"
-																	style="margin-bottom: -20px">
-																	<i class="fa fa-search"></i>
-																</button>
-															</span>
-														</div>
-													</div>
-													<div class="col-lg-9">
-														<div class="form-group">
-															<h:outputText value="Rua" />
-															<h:inputText id="input-rua"
-																value="#{pessoaBean.endereco.rua}"
-																styleClass="form-control" />
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-lg-2">
-														<div class="form-group">
-															<h:outputText value="Número" />
-															<h:inputText id="input-numero"
-																value="#{pessoaBean.endereco.numero}"
-																styleClass="form-control" />
-														</div>
-													</div>
-													<div class="col-lg-6">
-														<div class="form-group">
-															<h:outputText value="Complemento" />
-															<h:inputText id="input-complemento"
-																value="#{pessoaBean.endereco.complemento}"
-																styleClass="form-control" />
-														</div>
-													</div>
-													<div class="col-lg-4">
-														<div class="form-group">
-															<h:outputText value="Bairro" />
-															<h:inputText id="input-bairro"
-																value="#{pessoaBean.endereco.bairro}"
-																styleClass="form-control" />
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-lg-6">
-														<div class="form-group">
-															<h:outputText value="Cidade" />
-															<h:inputText id="input-cidade"
-																value="#{pessoaBean.cidade.nome}"
-																styleClass="form-control" />
-														</div>
-													</div>
 
-													<div class="col-lg-2">
-														<div class="form-group">
-															<h:outputText value="Estado" id="txtEstado" />
-															<h:selectOneMenu id="input-estado"
-																value="#{pessoaBean.cidade.estado}"
-																styleClass="form-control">
-																<f:selectItem itemValue="PR" itemLabel="PR" />
-															</h:selectOneMenu>
-														</div>
-													</div>
-
-													<div class="col-lg-4">
-														<div class="form-group">
-															<h:outputText value="País" />
-															<h:inputText id="input-pais" value="#"
-																styleClass="form-control" />
-														</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="País" />
+														<h:inputText id="input-pais" value="#"
+															styleClass="form-control" />
 													</div>
 												</div>
 											</div>
-											<!-- final tab-content-endereco -->
-											<div class="tab-pane fade" id="contato">
-												<div class="row">
-													<div class="col-lg-6">
-														<div class="form-group">
-															<h:outputText value="E-mail" />
-															<h:inputText id="input-email"
-																value="#{pessoaBean.pessoa.email}"
-																styleClass="form-control" />
-														</div>
+										</div>
+										<!-- final tab-content-endereco -->
+										<div class="tab-pane fade" id="contato">
+											<div class="row">
+												<div class="col-lg-6">
+													<div class="form-group">
+														<h:outputText value="E-mail" />
+														<h:inputText id="input-email"
+															value="#{pessoaBean.pessoa.email}"
+															styleClass="form-control" />
 													</div>
+												</div>
 
-													<div class="col-lg-3">
-														<div class="form-group">
-															<h:outputText value="Celular" />
-															<h:inputText id="input-telefone-celular"
-																converter="formatConverter"
-																value="#{pessoaBean.celular.numero}"
-																styleClass="form-control telefone" />
-														</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Celular" />
+														<h:inputText id="input-telefone-celular"
+															value="#{pessoaBean.celular.numero}"
+															styleClass="form-control telefone" />
 													</div>
+												</div>
 
-													<div class="col-lg-3">
-														<div class="form-group">
-															<h:outputText value="Residencial" />
-															<h:inputText id="input-telefone-residencial"
-																converter="formatConverter"
-																value="#{pessoaBean.residencial.numero}"
-																styleClass="form-control telefone" />
-														</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Residencial" />
+														<h:inputText id="input-telefone-residencial"
+															value="#{pessoaBean.residencial.numero}"
+															styleClass="form-control telefone" />
 													</div>
-													<div class="col-lg-3">
-														<div class="form-group">
-															<h:outputText value="Comercial" />
-															<h:inputText id="input-telefone-comercial"
-																converter="formatConverter"
-																value="#{pessoaBean.comercial.numero}"
-																styleClass="form-control telefone" />
-														</div>
+												</div>
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Comercial" />
+														<h:inputText id="input-telefone-comercial"
+															value="#{pessoaBean.comercial.numero}"
+															styleClass="form-control telefone" />
 													</div>
 												</div>
 											</div>
-											<!-- final tab-content-contato -->
-											<div class="tab-pane fade" id="imoveis">
-												<h:dataTable value="#{pessoaBean.listaPessoas}"
-													var="imoveis" rendered="#{not empty pessoaBean.pessoas}"
-													id="data-table-imoveis" styleClass="table table-striped">
-													<h:column headerClass="default">
-														<f:facet name="header">
-															<h:outputText value="Código" />
-														</f:facet>
-													</h:column>
-
-													<h:column>
-														<f:facet name="header">
-															<h:outputText value="Finalidade" />
-														</f:facet>
-
-													</h:column>
-
-													<h:column>
-														<f:facet name="header">
-															<h:outputText value="Endereço" />
-														</f:facet>
-													</h:column>
-
-													<h:column>
-														<f:facet name="header">
-															<h:outputText value="Valor" />
-														</f:facet>
-													</h:column>
-
-													<h:column>
-														<f:facet name="header">
-															<h:outputText value="Status" />
-														</f:facet>
-													</h:column>
-
-												</h:dataTable>
-											</div>
-											<!-- final tab-content-imoveis -->
 										</div>
-										<!-- final tab-content -->
+										<!-- final tab-content-contato -->
+										<div class="tab-pane fade divEmpty" id="imoveis"></div>
+										<!-- final tab-content-imoveis -->
+									</div>
+									<!-- final tab-content -->
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="form-group">
+										<h:outputText value="Observação" id="txtObservacao" />
+										<h:inputTextarea value="#{pessoaBean.pessoa.observacao}"
+											rows="4" styleClass="form-control" />
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-lg-8">
-										<div class="form-group">
-											<h:outputText value="Observação" id="txtObservacao" />
-											<h:inputTextarea value="#{pessoaBean.pessoa.observacao}"
-												rows="4" styleClass="form-control" />
-										</div>
+								<div class="col-lg-4">
+									<div class="form-group">
+										<h:outputText value="Perfil" />
 									</div>
-									<div class="col-lg-4">
-										<div class="form-group">
-											<h:outputText value="Perfil" />
-										</div>
-										<h:outputLabel styleClass="checkbox-inline">
-											<input type="checkbox" value="#" />Proprietário
+									<h:outputLabel styleClass="checkbox-inline">
+										<input type="checkbox" value="#" />Proprietário
 													</h:outputLabel>
-										<h:outputLabel styleClass="checkbox-inline">
-											<input type="checkbox" value="#" />Locador
+									<h:outputLabel styleClass="checkbox-inline">
+										<input type="checkbox" value="#" />Locador
 													</h:outputLabel>
-										<h:outputLabel styleClass="checkbox-inline">
-											<input type="checkbox" value="#" />Prestador Serv.
+									<h:outputLabel styleClass="checkbox-inline">
+										<input type="checkbox" value="#" />Prestador Serv.
 													</h:outputLabel>
-										<div class="checkbox">
-											<h:outputLabel>
-												<input type="checkbox" id="checkbox-corretor" />Corretor
+									<div class="checkbox">
+										<h:outputLabel>
+											<input type="checkbox" id="checkbox-corretor" />Corretor
 													</h:outputLabel>
-											<h:inputText value="#" pt:placeholder="CRECI"
-												id="input-creci" styleClass="form-control" />
-										</div>
+										<h:inputText value="#" pt:placeholder="CRECI" id="input-creci"
+											styleClass="form-control" />
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-lg-2">
-										<h:commandButton actionListener="#{pessoaBean.salvar}"
-											value="Gravar" styleClass="btn btn-success">
-										</h:commandButton>
-									</div>
-									<div class="col-lg-8">
-										<h:commandButton actionListener="#" value="Cancelar"
-											styleClass="btn btn-warning" />
-									</div>
-									<div class="col-lg-2"></div>
-									<div class="col-lg-2">
-										<a class="btn btn-danger" href="#"> <i
-											class="fa fa-trash-o" title="Excluir" aria-hidden="true"></i>
-											<span class="sr-only">Delete</span>
-										</a>
-									</div>
-									<h:messages showDetail="false" infoClass="alert alert-info"
-										showSummary="true" errorClass="alert alert-warning" />
+							</div>
+							<div class="row">
+								<div class="col-lg-1">
+									<h:commandButton actionListener="#{pessoaBean.salvar}"
+										value="Gravar" styleClass="btn btn-success">
+									</h:commandButton>
 								</div>
-							</h:form>
-						</f:view>
+								<div class="col-lg-8">
+									<h:commandButton actionListener="#" value="Cancelar"
+										styleClass="btn btn-warning" />
+								</div>
+								<div class="col-lg-2"></div>
+
+								<h:messages showDetail="false" infoClass="alert alert-info"
+									showSummary="true" errorClass="alert alert-warning" />
+							</div>
+						</h:form>
+						<!-- 						</f:view> -->
 						<!-- final PainelBody -->
 					</div>
 					<!-- final PainelDefault -->

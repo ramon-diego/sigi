@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Opção de imóveis</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 .col-sm-12 .col-lg-12">
+					<div class="panel-body">
+						<h:form role="form" id="form-cadastro">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-info">
+										<div class="panel-heading">Dados do imóvel</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="row">
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Status" />
+																<h:selectOneMenu value="Teste" styleClass="form-control">
+																	<f:selectItem itemValue="Ativa" itemLabel="Ativa" />
+																	<f:selectItem itemValue="Inativa" itemLabel="Inativa" />
+																	<f:selectItem itemValue="Vencendo" itemLabel="Vencendo" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														<div class="col-lg-3">
+															<h:outputText value="Data" />
+															<div class="input-daterange input-group" id="datepicker">
+
+																<input type="text" class="form-control" name="start" />
+																<span class="input-group-addon">-</span> <input
+																	type="text" class="form-control" name="end" />
+															</div>
+														</div>
+
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Código" />
+																<h:inputText id="input-codigo" styleClass="form-control" />
+															</div>
+														</div>
+
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Proprietário" />
+																<h:inputText id="input-proprietario"
+																	styleClass="form-control" />
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-8">
+													<a href="#" class="btn btn-primary btn-primary">Pesquisar<i
+														class="fa fa-search fa-fw" aria-hidden="true"></i></a>
+												</div>
+												<div class="col-lg-2" style="text-align: right"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<h:dataTable value="#{pessoaBean.pessoas}" var="imovel"
+										rendered="true" id="data-table-imoveis"
+										styleClass="table table-striped">
+										<h:column headerClass="default">
+											<f:facet name="header">
+												<h:outputText value="Código" />
+											</f:facet>
+										</h:column>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Data Início" />
+											</f:facet>
+										</h:column>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Encerramento" />
+											</f:facet>
+										</h:column>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Imóvel" />
+											</f:facet>
+										</h:column>
+
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Proprietário" />
+											</f:facet>
+										</h:column>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Status" />
+											</f:facet>
+										</h:column>
+
+									</h:dataTable>
+								</div>
+							</div>
+						</h:form>
+						<!--div panel-body-->
+					</div>
+					<!--col-xs-12 .col-sm-12 .col-lg-12"-->
+				</div>
+				<!-- fimlinha -->
+			</div>
+			<!-- div-wrapper -->
+		</div>
+	</ui:composition>
+</h:body>
+</html>

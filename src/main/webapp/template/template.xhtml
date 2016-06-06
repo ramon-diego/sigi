@@ -48,13 +48,21 @@
 	<script src="../js/jquery.mask.min.js" />
 	<script src="../js/bootstrap-datepicker.min.js" />
 	<script src="../locales/bootstrap-datepicker.pt-BR.min.js" />
-	
-	
+
+
 	<script>
 			$(document).ready(function(){
 				   $('.data').datepicker({
 	   					language: "pt-BR",
 	   				});
+
+				   $('.input-daterange').datepicker({
+					    language: "pt-BR",
+					    orientation: "bottom auto",
+					    todayHighlight:true,
+					    todayBtn: "linked",
+						autoclose:true
+					});
 	   				
 				   $('.data').mask('00/00/0000');
 				   $('#input-cpf, #input-cpf-conjuge').mask('000.000.000-00'); 
@@ -65,7 +73,7 @@
 			});
 			
 		</script>
-	
+
 
 </h:head>
 
@@ -156,7 +164,7 @@
 							<li><a href="../pessoa/cadastro.xhtml">Cadastrar</a></li>
 							<li><a href="../pessoa/pesquisar.xhtml">Pesquisar</a></li>
 
-							<li><a href="#">Corretores</a></li>
+							<li><a href="../pessoa/corretores.xhtml">Corretores</a></li>
 						</ul></li>
 
 					<li><a href="#"><i class="fa fa-list-alt fa-fw"></i>Imóveis<span
@@ -165,6 +173,7 @@
 							<li><a href="../imoveis/cadastro.xhtml">Cadastro</a></li>
 
 							<li><a href="../imoveis/pesquisar.xhtml">Pesquisar</a></li>
+							<li><a href="../imoveis/opcao.xhtml">Opção</a></li>
 
 							<li><a href="#">Vistorias<span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
@@ -173,6 +182,17 @@
 								</ul></li>
 
 						</ul></li>
+
+
+					<li><a href="#"><i class="fa fa-file-text"></i>Contratos<span
+							class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="../contrato/cadastro.xhtml">Cadastrar</a></li>
+							<li><a href="#">Pesquisar</a></li>
+
+						</ul></li>
+
+
 
 					<li><a href="#"><i class="fa fa-money fa-fw"></i>Financeiro<span
 							class="fa arrow"></span></a>
