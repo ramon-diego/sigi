@@ -5,28 +5,34 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.sigi.repositories.EntidadeBase;
 
-//@Entity
+@Entity
 @Table(name = "ENDERECO")
 public class Endereco implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
 
 	public Endereco() {
-
 	}
 
 	@Id
-	@Column(name = "id_endereco")
+	@Column(name = "endereco_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "tipo_endereco")
+	@Enumerated(EnumType.STRING)
+	TipoEndereco tipoEndereco;
 
 	@Column(length = 60)
 	private String rua;
@@ -43,10 +49,20 @@ public class Endereco implements Serializable, EntidadeBase {
 	@Column(length = 8)
 	private String cep;
 
+	public TipoEndereco getTipoEndereco() {
+		return tipoEndereco;
+	}
+
+	public void setTipoEndereco(TipoEndereco tipoEndereco) {
+		this.tipoEndereco = tipoEndereco;
+	}
+
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
 
 	@ManyToOne
+	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
 	public Pessoa getPessoa() {
@@ -114,12 +130,11 @@ public class Endereco implements Serializable, EntidadeBase {
 		this.cep = cep;
 	}
 
-	
 	@Override
 	public String toString() {
 
-		return "Endereco [id=" + id + ", rua=" + rua + ", numero=" + numero + ", bairro="
-				+ bairro + ", cep=" + cep + ", complemento=" + complemento + ", cidade=" + cidade + "]";
-		
+		return "Endereco [id=" + id + ", rua=" + rua + ", numero=" + numero + ", bairro=" + bairro + ", cep=" + cep
+				+ ", complemento=" + complemento + ", cidade=" + cidade + "]";
+
 	}
 }

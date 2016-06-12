@@ -36,19 +36,19 @@
 
 								<div class="col-lg-2">
 									<h:outputText value="ID" />
-									<h:inputText value="#"
-										styleClass="pesquisar-pessoa" pt:placeholder="Código" />
+									<h:inputText value="#" styleClass="pesquisar-pessoa"
+										pt:placeholder="Código" />
 								</div>
 
 								<div class="col-lg-2">
 									<h:commandButton value="Localizar" id="btn-localizar"
-										styleClass="btn btn-info" rendered="true"
+										styleClass="btn btn-primary btn-sm"
 										action="#{pessoaBean.pesquisarPessoas()}">
 									</h:commandButton>
 								</div>
-							</div>	
+							</div>
 						</div>
-	
+
 						<div class="row">
 							<div class="col-lg-12">
 								<h:dataTable value="#{pessoaBean.pessoas}" var="pessoas"
@@ -67,21 +67,23 @@
 											<h:outputText value="NOME" />
 										</f:facet>
 									#{pessoas.nomeFantasia}
-								</h:column>
+									</h:column>
 
 									<h:column>
 										<f:facet name="header">
 											<h:outputText value="CPF / CNPJ" />
 										</f:facet>
-									#{pessoas.cpfCnpj}
-								</h:column>
+										<h:outputText value="#{pessoas.cpfCnpj}" />
+
+									</h:column>
 
 									<h:column>
 										<f:facet name="header">
 											<h:outputText value="Editar" />
 										</f:facet>
 
-										<h:commandButton value="Editar"
+										<h:commandButton value="Selecione"
+											styleClass="btn btn-primary btn-sm"
 											action="cadastro?faces-redirect=true&amp;includeViewParams=true">
 											<f:setPropertyActionListener value="#{pessoas}"
 												target="#{pessoaBean.pessoa}" />

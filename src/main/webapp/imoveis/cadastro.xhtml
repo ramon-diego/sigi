@@ -27,7 +27,7 @@
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Status" />
-														<h:selectOneMenu value=""
+														<h:selectOneMenu value="#{imovelBean.imovel.status}"
 															styleClass="form-control">
 															<f:selectItem itemValue="A" itemLabel="Ativo" />
 															<f:selectItem itemValue="I" itemLabel="Inativo" />
@@ -37,21 +37,22 @@
 												<div class="col-lg-3">
 													<h:outputText value="Código" />
 													<h:inputText id="input-id" disabled="true"
-														styleClass="form-control" />
+														value="#{imovelBean.imovel.id}" styleClass="form-control" />
 												</div>
 
 												<div class="col-lg-12">
 													<div class="form-group">
 														<h:outputText value="Finalidade" />
-														<h:selectOneMenu value="" styleClass="form-control">
+														<h:selectOneMenu value="#{imovelBean.imovel.finalidade}"
+															styleClass="form-control">
 															<f:selectItem itemValue="vender" itemLabel="Vender" />
 															<f:selectItem itemValue="alugar" itemLabel="Alugar" />
 														</h:selectOneMenu>
 													</div>
 													<div class="form-group">
 														<h:outputText value="Tipo" />
-														<h:selectOneMenu value="" styleClass="form-control"
-															id="tipo-imoveis">
+														<h:selectOneMenu value="#{imovelBean.imovel.tipoImovel}"
+															styleClass="form-control" id="tipo-imoveis">
 															<f:selectItem itemValue="apartamento"
 																itemLabel="Apartamento" />
 															<f:selectItem itemValue="casa" itemLabel="Casa" />
@@ -63,19 +64,22 @@
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Valor" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#{imovelBean.imovel.valor}"
+															styleClass="form-control" />
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Condomínio" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#{imovelBean.imovel.valorCondominio}"
+															styleClass="form-control" />
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="IPTU" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#{imovelBean.imovel.valorIptu}"
+															styleClass="form-control" />
 													</div>
 												</div>
 											</div>
@@ -113,28 +117,30 @@
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Dormítório(s)" />
-														<h:inputText value=""
-															styleClass="form-control input-despendencias" />
+														<h:inputText
+															value="#{imovelBean.atributoImovel.dormitorio}"
+															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Sala(s)" />
-														<h:inputText value=""
+														<h:inputText value="#{imovelBean.atributoImovel.sala}"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Cozinha(s)" />
-														<h:inputText value=""
+														<h:inputText value="#{imovelBean.atributoImovel.cozinha}"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Suíte Master" />
-														<h:inputText value=""
+														<h:inputText
+															value="#{imovelBean.atributoImovel.suiteMaster}"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
@@ -143,35 +149,42 @@
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Suíte Simples" />
-														<h:inputText value=""
+														<h:inputText
+															value="#{imovelBean.atributoImovel.suiteSimples}"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="BWC Social" />
-														<h:inputText value=""
+														<h:inputText
+															value="#{imovelBean.atributoImovel.bwcSocial}"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="BWC Suíte" />
-														<h:inputText value="" id="bwc-suite"
+														<h:inputText value="#{imovelBean.atributoImovel.bwcSuite}"
+															id="bwc-suite"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Área de Serviço" />
-														<h:inputText value="" id="area-servico"
+														<h:inputText
+															value="#{imovelBean.atributoImovel.areaDeServico}"
+															id="area-servico"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Vaga(s) Garagem" />
-														<h:inputText value="" id="vagas-garagem"
+														<h:inputText
+															value="#{imovelBean.atributoImovel.vagaGaragem}"
+															id="vagas-garagem"
 															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
@@ -182,31 +195,31 @@
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Total (m²)" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#" styleClass="form-control" />
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Útil (m²)" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#" styleClass="form-control" />
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Privativa (m²)" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#" styleClass="form-control" />
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Construída (m²)" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#" styleClass="form-control" />
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Terreno (m²)" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#" styleClass="form-control" />
 													</div>
 												</div>
 											</div>
@@ -216,65 +229,72 @@
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Elevador(es)" />
-														<h:inputText value="" styleClass="form-control" />
+														<h:inputText value="#{imovelBean.atributoImovel.elevador}"
+															styleClass="form-control input-dependencias" />
 													</div>
 												</div>
 
 												<div class="col-lg-3">
 													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Monitoramento 24h
+														<label> <h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.monitoramento}" />Monitoramento
+															24h
 														</label>
 													</div>
 													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="" />Portaria 24h
+														<label> <h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.portaria}" />Portaria
+															24h
 														</label>
 													</div>
 													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="" />Portão Eletrônico
-														</label>
-													</div>
-												</div>
-
-												<div class="col-lg-3">
-													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Churrasqueira
-														</label>
-													</div>
-													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Espaço Gourmet
-														</label>
-													</div>
-													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Piscina Adulto
-														</label>
-													</div>
-													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Piscina Infantil
+														<label> <h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.portaoEletronico}" />Portão
+															Eletrônico
 														</label>
 													</div>
 												</div>
 
 												<div class="col-lg-3">
 													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Playground
+														<label><h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.churrasqueira}" />Churrasqueira
 														</label>
 													</div>
 													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Quadra Poliesportiva
+														<label> <h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.espacoGourmet}" />Espaço
+															Gourmet
 														</label>
 													</div>
 													<div class="checkbox">
-														<label> <input type="checkbox"
-															value="#{imoveisBean.numero}" />Salão de Festas
+														<label> <h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.piscinaAdulto}" />Piscina
+															Adulto
+														</label>
+													</div>
+													<div class="checkbox">
+														<label><h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.piscinaInfantil}" />Piscina
+															Infantil </label>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="checkbox">
+														<label> <h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.playground}" />Playground
+														</label>
+													</div>
+													<div class="checkbox">
+														<label><h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.quadraPoliesportiva}" />Quadra
+															Poliesportiva </label>
+													</div>
+													<div class="checkbox">
+														<label> <h:selectBooleanCheckbox
+																value="#{imovelBean.atributoImovel.salaoDeFesta}" />Salão
+															de Festas
 														</label>
 													</div>
 												</div>
@@ -293,7 +313,7 @@
 													<div class="form-group input-group">
 														<h:outputText value="CEP" />
 														<h:inputText class="form-control"
-															value="#{pessoaBean.endereco.cep}" id="input-cep" />
+															value="#{imovelBean.endereco.cep}" id="input-cep" />
 														<span class="input-group-btn">
 															<button class="btn btn-default" type="button"
 																style="margin-bottom: -20px">
@@ -306,7 +326,7 @@
 													<div class="form-group">
 														<h:outputText value="Rua" />
 														<h:inputText id="input-rua"
-															value="#{pessoaBean.endereco.rua}"
+															value="#{imovelBean.endereco.rua}"
 															styleClass="form-control" />
 													</div>
 												</div>
@@ -317,7 +337,7 @@
 													<div class="form-group">
 														<h:outputText value="Número" />
 														<h:inputText id="input-numero"
-															value="#{pessoaBean.endereco.numero}"
+															value="#{imovelBean.endereco.numero}"
 															styleClass="form-control" />
 													</div>
 												</div>
@@ -325,7 +345,7 @@
 													<div class="form-group">
 														<h:outputText value="Complemento" />
 														<h:inputText id="input-complemento"
-															value="#{pessoaBean.endereco.complemento}"
+															value="#{imovelBean.endereco.complemento}"
 															styleClass="form-control" />
 													</div>
 												</div>
@@ -333,7 +353,7 @@
 													<div class="form-group">
 														<h:outputText value="Bairro" />
 														<h:inputText id="input-bairro"
-															value="#{pessoaBean.endereco.bairro}"
+															value="#{imovelBean.endereco.bairro}"
 															styleClass="form-control" />
 													</div>
 												</div>
@@ -343,7 +363,7 @@
 													<div class="form-group">
 														<h:outputText value="Cidade" />
 														<h:inputText id="input-cidade"
-															value="#{pessoaBean.cidade.nome}"
+															value="#{imovelBean.cidade.nome}"
 															styleClass="form-control" />
 													</div>
 												</div>
@@ -351,7 +371,7 @@
 													<div class="form-group">
 														<h:outputText value="Estado" id="txtEstado" />
 														<h:selectOneMenu id="input-estado"
-															value="#{pessoaBean.cidade.estado}"
+															value="#{imovelBean.cidade.estado}"
 															styleClass="form-control">
 															<f:selectItem itemValue="PR" itemLabel="PR" />
 														</h:selectOneMenu>
@@ -378,7 +398,8 @@
 								<div class="col-lg-6">
 									<div class="form-group">
 										<h:outputText value="Observações" />
-										<h:inputTextarea value="" rows="5" styleClass="form-control" />
+										<h:inputTextarea value="#{imovelBean.imovel.observacoes}"
+											rows="5" styleClass="form-control" />
 									</div>
 								</div>
 								<div class="col-lg-6">
@@ -399,6 +420,7 @@
 															<div class="input-group">
 																<h:outputText value="Nome" />
 																<h:inputText id="input-proprietario"
+																	value="#{imovelBean.proprietario.nomeFantasia}"
 																	styleClass="form-control" />
 																<span class="input-group-btn">
 																	<button class="btn btn-primary" type="button"
@@ -430,19 +452,21 @@
 													<div class="row">
 														<div class="col-lg-4">
 															<h:outputText value="Início" />
-															<h:inputText value="" styleClass="form-control data">
+															<h:inputText value="#{imovelBean.imovel.dataCadastro}"
+																styleClass="form-control data">
 																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
 															</h:inputText>
 														</div>
 														<div class="col-lg-4">
 															<h:outputText value="Encerramento" />
-															<h:inputText value="" styleClass="form-control data">
+															<h:inputText value="#{imovelBean.imovel.dataCadastro}"
+																styleClass="form-control data">
 																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
 															</h:inputText>
 														</div>
 														<div class="col-lg-4">
 															<h:outputText value="Dias" />
-															<h:inputText value="" styleClass="form-control" />
+															<h:inputText value="#" styleClass="form-control" />
 														</div>
 													</div>
 												</div>
@@ -465,12 +489,59 @@
 											<h3>Título modal</h3>
 										</div>
 										<div class="modal-body">
-											
+											<h:inputText value="#{imovelBean.nome}"
+												styleClass="form-control" />
+											<h:inputText value="#{imovelBean.cpfCnpj}"
+												styleClass="form-control" />
+											<f:ajax render=":modalProprietario" execute="@form">
+												<h:commandButton action="#{imovelBean.pesquisarPessoas()}"
+													value="Pesquisar" id="btn-pesquisar"
+													styleClass="btn btn-default" onclick="button1Click(this)" />
+											</f:ajax>
+											<h:dataTable value="#{imovelBean.pessoas}" var="proprietario"
+												id="data-table-pessoas" styleClass="table table-bordered"
+												rendered="#{not empty imovelBean.pessoas}">
+
+												<h:column>
+													<f:facet name="header">
+														<h:outputText value="CÓDIGO" />
+													</f:facet>
+									               #{proprietario.id}
+									            </h:column>
+
+												<h:column>
+													<f:facet name="header">
+														<h:outputText value="NOME" />
+													</f:facet>
+												    #{proprietario.nomeFantasia}
+									            </h:column>
+
+												<h:column>
+													<f:facet name="header">
+														<h:outputText value="CPF / CNPJ" />
+													</f:facet>
+													<h:outputText value="#{proprietario.cpfCnpj}" />
+
+												</h:column>
+
+												<h:column>
+													<f:facet name="header">
+														<h:outputText value="Editar" />
+													</f:facet>
+
+													<h:commandButton value="Selecione"
+														styleClass="btn btn-primary btn-sm"
+														action="#{imovelBean.registraProprietario(proprietario)}">
+														<f:setPropertyActionListener value="#{pessoas}"
+															target="#{pessoaBean.pessoa}" />
+													</h:commandButton>
+												</h:column>
+											</h:dataTable>
 										</div>
 
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
+												data-dismiss="modal">Fechar</button>
 										</div>
 									</div>
 								</div>
@@ -479,8 +550,8 @@
 							<div class="row">
 
 								<div class="col-lg-12">
-									<h:commandButton action="#" value="Salvar" style="margin-right:15px"
-										styleClass="btn btn-success" />
+									<h:commandButton action="#{imovelBean.salvar()}" value="Salvar"
+										style="margin-right:15px" styleClass="btn btn-success" />
 
 									<h:commandButton action="#" value="Cancelar"
 										styleClass="btn btn-warning" />

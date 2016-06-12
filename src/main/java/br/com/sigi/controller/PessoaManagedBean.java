@@ -8,6 +8,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sigi.model.Cidade;
 import br.com.sigi.model.Endereco;
@@ -25,7 +29,6 @@ public class PessoaManagedBean implements Serializable {
 	private PessoaService pessoaService;
 
 	private Endereco endereco;
-
 	private Telefone celular;
 	private Telefone comercial;
 	private Telefone residencial;
@@ -55,9 +58,9 @@ public class PessoaManagedBean implements Serializable {
 	}
 
 	public void pesquisarPessoas() {
-//		pessoas = pessoaService.pesquisarPorNome(getNome());
-//		pessoas = pessoaService.pesquisarPessoas(getNome(), getCpfCnpj());
-		pessoas = pessoaService.findAll();
+		pessoas = pessoaService.pesquisarPessoas(getNome(), getCpfCnpj());
+		// pessoas = pessoaService.pesquisarPessoas(getNome(), getCpfCnpj());
+		// pessoas = pessoaService.findAll();
 	}
 
 	public List<Pessoa> getPessoas() {
@@ -136,9 +139,22 @@ public class PessoaManagedBean implements Serializable {
 		return nome;
 	}
 
+	@Transactional
 	public void salvar() {
-		pessoaService.save(pessoa);
+
+		try {
+			endereco.setPessoa(pessoa);
+			pessoa.getEnderecos().add(endereco);
+			endereco.setCidade(cidade);
+			pessoaService.save(pessoa);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
+	HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+	String arrivaleAirport = req.getParameter("arrivalAirport");
 
 	private boolean renderFisica = true;
 	private boolean renderJuridica = false;

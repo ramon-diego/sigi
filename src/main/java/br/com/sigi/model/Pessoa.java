@@ -1,9 +1,9 @@
 package br.com.sigi.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,23 +18,21 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.sigi.repositories.EntidadeBase;
-
-
 @Entity
 @Table(name = "PESSOA")
-public class Pessoa implements Serializable{
+public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 7453129051870425636L;
 
 	@Id
-	@Column(name = "id_pessoa")
+	@Column(name = "pessoa_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	public Pessoa() {
 
 	}
+
 	@Column(name = "nome_fantasia", length = 45)
 	private String nomeFantasia;
 
@@ -58,8 +56,9 @@ public class Pessoa implements Serializable{
 	@Column
 	private String naturalidade;
 
-//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
-//	private List<Telefone> telefones = new ArrayList<>();
+	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy =
+	// "pessoa")
+	// private List<Telefone> telefones = new ArrayList<>();
 
 	@Column
 	private String email;
@@ -88,27 +87,31 @@ public class Pessoa implements Serializable{
 
 	@Column
 	private String observacao;
+	@Column
+	private Boolean isCorretor;
+	@Column
+	private Boolean isProprietario;
+	@Column
+	private Boolean isPrestador;
+	@Column
+	private Boolean isFiador;
+	@Column
+	private Boolean isLocatario;
 
-//	private List<Endereco> enderecos = new ArrayList<>();
-//
-//	public List<Endereco> getEnderecos() {
-//		return enderecos;
-//	}
-//
-//	public void adicionarEndereco(Endereco endereco) {
-//		enderecos.add(endereco);
-//		endereco.setPessoa(this);
-//	}
-//
-//	public void removeEndereco(Endereco endereco) {
-//		enderecos.remove(endereco);
-//		endereco.setPessoa(null);
-//	}
+	@OneToMany(targetEntity = Endereco.class, mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Endereco> enderecos = new HashSet<Endereco>();
+
+	public Set<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(Set<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNomeFantasia() {
 		return nomeFantasia;
@@ -154,19 +157,19 @@ public class Pessoa implements Serializable{
 		return rgIe;
 	}
 
-//	public void adicionarTelefone(Telefone telefone) {
-//		telefones.add(telefone);
-//		telefone.setPessoa(this);
-//	}
-//
-//	public void removerTelefone(Telefone telefone) {
-//		telefones.remove(telefone);
-//		telefone.setPessoa(null);
-//	}
-//
-//	public List<Telefone> getTelefones() {
-//		return telefones;
-//	}
+	// public void adicionarTelefone(Telefone telefone) {
+	// telefones.add(telefone);
+	// telefone.setPessoa(this);
+	// }
+	//
+	// public void removerTelefone(Telefone telefone) {
+	// telefones.remove(telefone);
+	// telefone.setPessoa(null);
+	// }
+	//
+	// public List<Telefone> getTelefones() {
+	// return telefones;
+	// }
 
 	public void setRgIe(String rgIe) {
 		this.rgIe = rgIe;
@@ -242,6 +245,46 @@ public class Pessoa implements Serializable{
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public Boolean getIsCorretor() {
+		return isCorretor;
+	}
+
+	public void setIsCorretor(Boolean isCorretor) {
+		this.isCorretor = isCorretor;
+	}
+
+	public Boolean getIsProprietario() {
+		return isProprietario;
+	}
+
+	public void setIsProprietario(Boolean isProprietario) {
+		this.isProprietario = isProprietario;
+	}
+
+	public Boolean getIsPrestador() {
+		return isPrestador;
+	}
+
+	public void setIsPrestador(Boolean isPrestador) {
+		this.isPrestador = isPrestador;
+	}
+
+	public Boolean getIsFiador() {
+		return isFiador;
+	}
+
+	public void setIsFiador(Boolean isFiador) {
+		this.isFiador = isFiador;
+	}
+
+	public Boolean getIsLocatario() {
+		return isLocatario;
+	}
+
+	public void setIsLocatario(Boolean isLocatario) {
+		this.isLocatario = isLocatario;
 	}
 
 	// @Override

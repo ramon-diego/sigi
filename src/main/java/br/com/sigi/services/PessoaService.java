@@ -26,10 +26,6 @@ public class PessoaService implements Serializable {
 	}
 
 	public List<Pessoa> pesquisarPessoas(String nome, String cpfCnpj) {
-		return pessoaRepository.findByNomeFantasiaLikeOrCpfCnpjLike(nome, cpfCnpj);
-	}
-	
-	public List<Pessoa> pesquisarPorNome(String nome){
-		return pessoaRepository.findByNomeFantasiaLike(nome);
+		return pessoaRepository.findByNomeFantasiaContainingOrCpfCnpjContaining(nome, cpfCnpj);
 	}
 }

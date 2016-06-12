@@ -12,19 +12,22 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.sigi.repositories.EntidadeBase;
 
-//@Entity
+@Entity
 @Table(name = "CIDADE")
 public class Cidade implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
 
+	public Cidade() {}
+
 	@Id
-	@Column(name = "id_cidade")
+	@Column(name = "cidade_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -35,16 +38,15 @@ public class Cidade implements Serializable, EntidadeBase {
 	@Column(length = 2, nullable = false)
 	private Estado estado;
 
-	@OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL)
-	private Set<Endereco> endereco = new HashSet<Endereco>();
+	@OneToMany(targetEntity = Endereco.class, mappedBy = "cidade", cascade = CascadeType.ALL)
+	private Set<Endereco> enderecos = new HashSet<Endereco>();
 
-	public Set<Endereco> getEndereco() {
-
-		return endereco;
+	public Set<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(Set<Endereco> endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(Set<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	@Override

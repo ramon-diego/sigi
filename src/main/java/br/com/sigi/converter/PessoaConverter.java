@@ -5,8 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter("formatConvertert")
-public class formatConverter implements Converter {
+@FacesConverter("pessoaConverter")
+public class PessoaConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent component, String variavel) {

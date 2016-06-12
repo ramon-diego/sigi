@@ -85,7 +85,7 @@
 											<div class="col-lg-3">
 												<div class="form-group">
 													<h:outputText value="CPF" id="lb-cpf" />
-													<h:inputText id="input-cpf"
+													<h:inputText id="input-cpf" converter="pessoaConverter"
 														value="#{pessoaBean.pessoa.cpfCnpj}"
 														styleClass="form-control" />
 												</div>
@@ -95,7 +95,7 @@
 													<h:outputText value="RG" id="lb-rg" />
 													<h:inputText id="input-rg"
 														value="#{pessoaBean.pessoa.rgIe}"
-														styleClass="form-control" />
+														converter="pessoaConverter" styleClass="form-control" />
 												</div>
 											</div>
 											<div class="col-lg-3">
@@ -140,7 +140,7 @@
 													<h:outputText value="CPF Cônjuge" />
 													<h:inputText id="input-cpf-conjuge"
 														value="#{pessoaBean.pessoa.cpfConjuge}"
-														styleClass="form-control" />
+														converter="pessoaConverter" styleClass="form-control" />
 												</div>
 											</div>
 										</div>
@@ -224,11 +224,25 @@
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="endereco">
 											<div class="row">
+												<div class="col-lg-2">
+													<div class="form-group">
+														<h:outputText id="tipo-endereco" value="Tipo Endereço" />
+														<h:selectOneMenu styleClass="form-control"
+															value="#{pessoaBean.endereco.tipoEndereco}">
+															<f:selectItem itemLabel="Residencial" itemValue="R"
+																id="end-residencial" />
+															<f:selectItem itemLabel="Comercial" itemValue="C"
+																id="end-comercial" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+
 												<div class="col-lg-3">
 													<div class="form-group input-group">
 														<h:outputText value="CEP" />
 														<h:inputText class="form-control"
-															value="#{pessoaBean.endereco.cep}" id="input-cep" />
+															value="#{pessoaBean.endereco.cep}" id="input-cep"
+															converter="pessoaConverter" />
 														<span class="input-group-btn">
 															<button class="btn btn-default" type="button"
 																style="margin-bottom: -20px">
@@ -237,7 +251,7 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-lg-9">
+												<div class="col-lg-7">
 													<div class="form-group">
 														<h:outputText value="Rua" />
 														<h:inputText id="input-rua"
@@ -308,35 +322,51 @@
 												<div class="col-lg-6">
 													<div class="form-group">
 														<h:outputText value="E-mail" />
-														<h:inputText id="input-email"
-															value="#{pessoaBean.pessoa.email}"
-															styleClass="form-control" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-envelope fa" aria-hidden="true"></i></span>
+															<h:inputText id="input-email"
+																value="#{pessoaBean.pessoa.email}"
+																styleClass="form-control" />
+														</div>
 													</div>
 												</div>
 
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Celular" />
-														<h:inputText id="input-telefone-celular"
-															value="#{pessoaBean.celular.numero}"
-															styleClass="form-control telefone" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-phone-square"></i></span>
+															<h:inputText id="input-telefone-celular"
+																value="#{pessoaBean.celular.numero}"
+																styleClass="form-control telefone" />
+														</div>
 													</div>
 												</div>
 
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Residencial" />
-														<h:inputText id="input-telefone-residencial"
-															value="#{pessoaBean.residencial.numero}"
-															styleClass="form-control telefone" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-phone-square"></i></span>
+															<h:inputText id="input-telefone-residencial"
+																value="#{pessoaBean.residencial.numero}"
+																styleClass="form-control telefone" />
+														</div>
 													</div>
 												</div>
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Comercial" />
-														<h:inputText id="input-telefone-comercial"
-															value="#{pessoaBean.comercial.numero}"
-															styleClass="form-control telefone" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-phone-square"></i></span>
+															<h:inputText id="input-telefone-comercial"
+																value="#{pessoaBean.comercial.numero}"
+																styleClass="form-control telefone" />
+														</div>
 													</div>
 												</div>
 											</div>
@@ -361,18 +391,30 @@
 										<h:outputText value="Perfil" />
 									</div>
 									<h:outputLabel styleClass="checkbox-inline">
-										<input type="checkbox" value="#" />Proprietário
-													</h:outputLabel>
+										<h:selectBooleanCheckbox
+											value="#{pessoaBean.pessoa.isProprietario}" />Proprietário
+									</h:outputLabel>
+
 									<h:outputLabel styleClass="checkbox-inline">
-										<input type="checkbox" value="#" />Locador
-													</h:outputLabel>
+											<h:selectBooleanCheckbox
+											value="#{pessoaBean.pessoa.isLocatario}" />Locatário
+									</h:outputLabel>
+
+
 									<h:outputLabel styleClass="checkbox-inline">
-										<input type="checkbox" value="#" />Prestador Serv.
-													</h:outputLabel>
+										<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.isFiador}" />Fiador
+									</h:outputLabel>
+
+									<h:outputLabel styleClass="checkbox-inline">
+										<h:selectBooleanCheckbox
+											value="#{pessoaBean.pessoa.isPrestador}" />Prestador Serv.
+									</h:outputLabel>
+
 									<div class="checkbox">
 										<h:outputLabel>
-											<input type="checkbox" id="checkbox-corretor" />Corretor
-													</h:outputLabel>
+											<h:selectBooleanCheckbox
+												value="#{pessoaBean.pessoa.isCorretor}" />Corretor
+								      	</h:outputLabel>
 										<h:inputText value="#" pt:placeholder="CRECI" id="input-creci"
 											styleClass="form-control" />
 									</div>
