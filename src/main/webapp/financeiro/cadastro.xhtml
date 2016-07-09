@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Título Financeiro</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 .col-sm-12 .col-lg-12">
+					<div class="panel-body">
+						<h:form id="form-cadastro" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-info">
+										<div class="panel-heading">Financeiro</div>
+										<div class="panel-body">
+
+											<div class="row">
+												<div class="col-lg-2">
+													<h:outputText value="Transação" />
+													<h:selectOneMenu
+														value="#{tituloFinanceiroBean.tituloFinanceiro.transacao}"
+														styleClass="form-control">
+														<f:selectItem itemValue="R" itemLabel="Receita" />
+														<f:selectItem itemValue="D" itemLabel="Despesa" />
+
+													</h:selectOneMenu>
+												</div>
+
+												<div class="col-lg-6">
+													<div class="form-group">
+														<h:outputText value="Pessoa" />
+														<div class="input-group">
+															<span class="input-group-addon"> <i
+																class="fa fa-user" aria-hidden="true"></i>
+															</span>
+															<h:inputText required="false"
+																value="#{tituloFinanceiroBean.pessoaTitulo.nomeFantasia}"
+																styleClass="form-control" />
+															<span class="input-group-btn">
+																<button class="btn btn-primary" type="button"
+																	data-target="#modalPessoa" data-toggle="modal">
+																	<i class="fa fa-search"></i>
+																</button>
+															</span>
+
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-2">
+													<div class="form-group">
+														<h:outputText value="Origem" />
+														<h:inputText id="input-origem-titulo" disabled="true"
+															value="#{tituloFinanceiroBean.tituloFinanceiro.origemTitulo}"
+															styleClass="form-control" />
+													</div>
+												</div>
+
+												<div class="col-lg-2">
+													<div class="form-group">
+														<h:outputText value="Código" />
+														<h:inputText id="input-id" disabled="true"
+															value="#{tituloFinanceiroBean.tituloFinanceiro.id}"
+															styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Data de Emissão" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-calendar" aria-hidden="true"></i></span>
+															<h:inputText
+																value="#{tituloFinanceiroBean.tituloFinanceiro.dataEmissao}"
+																styleClass="form-control data">
+																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+															</h:inputText>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Vencimento" />
+														<div class="input-group">
+															<span class="input-group-addon"> <i
+																class="fa fa-calendar-check-o" aria-hidden="true"></i></span>
+															<h:inputText
+																value="#{tituloFinanceiroBean.tituloFinanceiro.dataVencimento}"
+																styleClass="form-control data">
+																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+															</h:inputText>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Num. Documento" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-file-text-o" aria-hidden="true"></i> </span>
+															<h:inputText
+																value="#{tituloFinanceiroBean.tituloFinanceiro.numeroDocumento}"
+																styleClass="form-control" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Nosso Número" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-barcode" aria-hidden="true"></i></span>
+															<h:inputText
+																value="#{tituloFinanceiroBean.tituloFinanceiro.nossoNumero}"
+																styleClass="form-control" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Valor" />
+														<div class="input-group">
+															<span class="input-group-addon"> <i
+																class="fa fa-usd" aria-hidden="true"></i></span>
+															<h:inputText
+																value="#{tituloFinanceiroBean.tituloFinanceiro.valorTitulo}"
+																styleClass="form-control valorMonetario">
+																<f:convertNumber pattern="#,##0.00" />
+															</h:inputText>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Tipo Documento" />
+														<h:selectOneMenu
+															value="#{tituloFinanceiroBean.tituloFinanceiro.tipoDocumento}"
+															styleClass="form-control">
+															<f:selectItem itemValue="boleto" itemLabel="BOLETO" />
+															<f:selectItem itemValue="dinheiro" itemLabel="DINHEIRO" />
+															<f:selectItem itemValue="cheque" itemLabel="CHEQUE" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputLabel styleClass="checkbox-inline">
+															<h:selectBooleanCheckbox value="#" />Parcelas
+													</h:outputLabel>
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-list-ul" aria-hidden="true"></i></span>
+															<h:inputText value="#" styleClass="form-control" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-3">
+													<div class="form-group">
+														<h:outputText value="Data de Registro" />
+														<div class="input-group">
+															<span class="input-group-addon"><i
+																class="fa fa-calendar" aria-hidden="true"></i></span>
+															<h:inputText
+																value="#{tituloFinanceiroBean.tituloFinanceiro.dataRegistro}"
+																disabled="true" styleClass="form-control data">
+																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+															</h:inputText>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-6">
+													<div class="form-group">
+														<h:outputText value="Observação" id="txtObservacao" />
+														<h:inputTextarea
+															value="#{tituloFinanceiroBean.tituloFinanceiro.observacao}"
+															rows="3" styleClass="form-control" />
+													</div>
+												</div>
+
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputText value="Plano financeiro" />
+														<h:selectOneMenu
+															value="#{tituloFinanceiroBean.planoFinanceiro}"
+															
+															styleClass="form-control">
+															<f:selectItem itemValue="" itemLabel="Selecione" />
+															<f:selectItems itemLabel="#{tituloFinanceiroBean.planoFinanceiro.nome}" 
+																itemValue="#{tituloFinanceiroBean.planosFinanceiros}" var="planoFinanceiro"  />
+
+
+														</h:selectOneMenu>
+													</div>
+												</div>
+
+											</div>
+
+											<div class="modal fade" id="modalPessoa" role="dialog">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+
+														</div>
+														<div class="modal-body">
+
+															<div class="row">
+																<div class="col-lg-8">
+																	<div class="form-group">
+																		<h:outputLabel value="Nome / Razão social"
+																			styleClass="control-label" />
+																		<h:inputText value="#{tituloFinanceiroBean.nomeInput}"
+																			styleClass="form-control" />
+																	</div>
+
+																</div>
+
+																<div class="col-lg-4">
+																	<div class="form-group">
+																		<h:outputLabel value="CPF / CNPJ"
+																			styleClass="control-label" />
+																		<h:inputText
+																			value="#{tituloFinanceiroBean.cpfCnpjInput}"
+																			styleClass="form-control" />
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group">
+																<h:commandButton
+																	action="#{tituloFinanceiroBean.pesquisarPessoas()}"
+																	value="Pesquisar" id="btn-pesquisar"
+																	styleClass="btn btn-info" />
+															</div>
+
+
+															<div class="divEmpty">
+																<h:dataTable value="#{tituloFinanceiroBean.pessoas}"
+																	var="pessoaTitulo" id="dt-pessoas-titulo"
+																	styleClass="table table-bordered"
+																	rendered="#{not empty tituloFinanceiroBean.pessoas}">
+
+																	<h:column>
+																		<f:facet name="header">
+																			<h:outputText value="CÓDIGO" />
+																		</f:facet>
+									               #{pessoaTitulo.id}
+									            </h:column>
+
+																	<h:column>
+																		<f:facet name="header">
+																			<h:outputText value="NOME" />
+																		</f:facet>
+												    #{pessoaTitulo.nomeFantasia}
+									            </h:column>
+
+																	<h:column>
+																		<f:facet name="header">
+																			<h:outputText value="CPF / CNPJ" />
+																		</f:facet>
+																		<h:outputText value="#{pessoaTitulo.cpfCnpj}" />
+
+																	</h:column>
+
+																	<h:column>
+																		<f:facet name="header">
+																			<h:outputText value="Editar" />
+																		</f:facet>
+
+																		<h:commandButton value="Selecione"
+																			styleClass="btn btn-primary btn-sm btn-registrarPessoa"
+																			action="#{tituloFinanceiroBean.registrarPessoaTitulo(pessoaTitulo)}">
+
+																		</h:commandButton>
+
+
+																	</h:column>
+																</h:dataTable>
+															</div>
+														</div>
+
+														<script type="text/javascript">
+									$(document).ready(function(){
+
+										var modalAberto = $('.divEmpty').html();
+
+										 $("#input-origem-titulo").each(function() {
+									 			if ($("#input-origem-titulo").text().trim().length == 0) {
+										 			 $("#input-origem-titulo").val("Manual");
+									   			}
+
+											if(modalAberto.trim()){
+												$("#modalPessoa").modal('show');
+																	
+										 }
+									
+									});
+									});
+
+
+									
+									
+									</script>
+
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Fechar</button>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-lg-12">
+									<h:commandButton action="#{tituloFinanceiroBean.salvar()}"
+										value="Salvar" style="margin-right:15px"
+										styleClass="btn btn-success" />
+
+									<h:commandButton action="#" value="Cancelar"
+										styleClass="btn btn-warning" />
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

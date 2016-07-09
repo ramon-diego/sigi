@@ -12,19 +12,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.sigi.repositories.EntidadeBase;
-
 @Entity
 @Table(name = "CIDADE")
-public class Cidade implements Serializable, EntidadeBase {
+public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public Cidade() {}
+	public Cidade() {
+	}
 
 	@Id
 	@Column(name = "cidade_id")
@@ -49,13 +47,12 @@ public class Cidade implements Serializable, EntidadeBase {
 		this.enderecos = enderecos;
 	}
 
-	@Override
-	public Long getId() {
-		return id;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getNome() {

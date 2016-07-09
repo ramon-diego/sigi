@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Lista títulos</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 .col-sm-12 .col-lg-12">
+					<div class="panel-body">
+						<h:form role="form" id="form-cadastro">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-info">
+										<div class="panel-heading">Dados</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="row">
+
+														<div class="col-lg-3">
+															<div class="form-group">
+																<h:outputText value="Transação" />
+																<h:selectOneMenu
+																	value="#{tituloFinanceiroBean.transacao}"
+																	styleClass="form-control">
+																	<f:selectItem itemValue="" itemLabel="Todos" />
+																	<f:selectItem itemValue="R" itemLabel="Receita" />
+																	<f:selectItem itemValue="D" itemLabel="Despesa" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+
+														<div class="col-lg-2">
+															<div class="form-group">
+																<h:outputText value="Data" />
+																<h:selectOneMenu value="#{imovelBean.tipoImovel}"
+																	styleClass="form-control">
+																	<f:selectItem itemValue="" itemLabel="Todos" />
+																	<f:selectItem itemValue="vencimento"
+																		itemLabel="Vencimento" />
+																	<f:selectItem itemValue="emissao" itemLabel="Emissão" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+
+														<div class="col-lg-3">
+															<h:outputText value="Início   /   Fim" />
+															<div class="input-daterange input-group" id="datepicker">
+
+																<h:inputText class="form-control" pt:name="start"
+																	value="#{tituloFinanceiroBean.dataVencimento}" /> <span
+																	class="input-group-addon">-</span> 
+																<h:inputText pt:type="text" value="#{tituloFinanceiroBean.dataFinal}"
+																	class="form-control" pt:name="end" />
+															</div>
+														</div>
+
+														<div class="col-lg-2">
+															<div class="form-group">
+																<h:outputText value="ID" />
+																<h:inputText id="input-codigo"
+																	value="#{tituloFinanceiroBean.idTitulo}"
+																	styleClass="form-control" />
+															</div>
+														</div>
+
+
+														<div class="col-lg-2">
+															<div class="form-group">
+																<h:outputText value="Status" />
+																<h:selectOneMenu
+																	value="#{tituloFinanceiroBean.situacaoTitulo}"
+																	styleClass="form-control">
+																	<f:selectItem itemValue="Aberto" itemLabel="Aberto" />
+																	<f:selectItem itemValue="Baixado" itemLabel="Baixado" />
+																	<f:selectItem itemValue="" itemLabel="Todos" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+
+
+													</div>
+
+													<div class="conteudo hide">
+														<div class="row">
+															<div class="col-lg-5">
+																<div class="form-group">
+																	<h:outputText value="Nome Pessoa" />
+																	<h:inputText value="#{tituloFinanceiroBean.nomePessoa}"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+															<div class="col-lg-3">
+																<div class="form-group">
+																	<h:outputText value="CPF / CNPJ" />
+																	<h:inputText id="input-bairro"
+																		value="#{tituloFinanceiroBean.cpfCnpj}"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<h:outputText value="Plano Financeiro" />
+																	<h:inputText value="#{imovelBean.cidadePesquisa}"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+														</div>
+														<div class="row">
+
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Tipo Documento" />
+																	<h:selectOneMenu
+																		value="#{tituloFinanceiroBean.tipoDocumento}"
+																		styleClass="form-control">
+																		<f:selectItem itemValue="" itemLabel="Todos" />
+																		<f:selectItem itemValue="boleto" itemLabel="Boleto" />
+																		<f:selectItem itemValue="dinheiro"
+																			itemLabel="Dinheiro" />
+																		<f:selectItem itemValue="cheque" itemLabel="Cheque" />
+																	</h:selectOneMenu>
+																</div>
+															</div>
+
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Valor Mínimo" />
+																	<h:inputText id="input-valor-minimo"
+																		valoe="#{imovelBean.valorMinimo}"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+															<div class="col-lg-2">
+																<div class="form-group">
+																	<h:outputText value="Valor Máximo" />
+																	<h:inputText id="input-valor-maximo"
+																		value="#{imovelBean.valorMaximo}"
+																		styleClass="form-control" />
+																</div>
+															</div>
+
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+											<script type="text/javascript">
+												$(document).ready(function(){
+												$(".btn-toggle").click(function(){
+											  	if($(".conteudo").hasClass('hide')){
+											    	$(".conteudo").removeClass('hide');
+											    	$("#exibe-filtros").removeClass('fa-flip-vertical');
+											    	
+											    }else{
+											    	$(".conteudo").addClass('hide');
+											     	$("#exibe-filtros").addClass('fa-flip-vertical');								 	
+											    }
+											  });					 											  
+											});
+											</script>
+
+											<div class="row">
+												<div class="col-lg-8">
+													<h:commandButton value="Pesquisar" id="btn-pesquisar"
+														action="#{tituloFinanceiroBean.pesquisarTitulo()}"
+														styleClass="btn btn-primary btn-pesquisar" />
+
+													<a href="#" class="btn btn-info btn-toggle" style=""><i
+														class="fa fa-caret-square-o-up fa-fw fa-flip-vertical"
+														id="exibe-filtros" aria-hidden="true"></i></a>
+												</div>
+												<div class="col-lg-2" style="text-align: right"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<h3 class="notificao hide" style="color: #4078c0">
+										<i class="fa fa-exclamation-circle" style="color: #f0ad4e"
+											aria-hidden="true"></i> Não há corretores cadastrados
+									</h3>
+									<div class="divEmpty">
+										<h:dataTable
+											value="#{tituloFinanceiroBean.titulosFinanceiros}"
+											var="titulo" id="data-table-titulos"
+											styleClass="table table-striped table-bordered"
+											rendered="#{not empty tituloFinanceiroBean.titulosFinanceiros}">
+											<h:column headerClass="default">
+												<f:facet name="header">
+													<h:outputText value="ID" />
+												</f:facet>
+										#{titulo.id}
+									</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Transação" />
+												</f:facet>
+									#{titulo.transacao}
+									</h:column>
+
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Pessoa" />
+												</f:facet>
+									#{titulo.pessoa.nomeFantasia}
+									</h:column>
+
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Valor" />
+												</f:facet>
+									#{titulo.valorTitulo}
+									</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Saldo" />
+												</f:facet>
+									#{titulo.saldo}
+									</h:column>
+
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Data Emissão" />
+												</f:facet>
+									#{titulo.dataEmissao}
+									</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Vencimento" />
+												</f:facet>
+										#{titulo.dataVencimento}
+									</h:column>
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Tipo Documento" />
+												</f:facet>
+										#{titulo.tipoDocumento}
+									</h:column>
+
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Situação" />
+												</f:facet>
+										#{titulo.situacaoTitulo}
+									</h:column>
+
+
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Editar" />
+												</f:facet>
+												<div class="dropdown">
+													<button class="btn btn-info btn-xs dropdown-toggle"
+														type="button" data-toggle="dropdown">
+														Ações <span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu">
+														<li><h:commandLink action="#">
+																<i class="fa fa-pencil fa-fw"></i> Alterar</h:commandLink></li>
+														<li><a href="#"><i class="fa fa-usd fa-fw"
+																aria-hidden="true"></i> Baixar</a></li>
+														<li><a href="#"><i class="fa fa-trash-o fa-fw"></i>
+																Delete</a></li>
+													</ul>
+												</div>
+											</h:column>
+										</h:dataTable>
+									</div>
+								</div>
+							</div>
+
+						</h:form>
+						<!--div panel-body-->
+					</div>
+					<!--col-xs-12 .col-sm-12 .col-lg-12"-->
+				</div>
+				<!-- fimlinha -->
+			</div>
+			<!-- div-wrapper -->
+		</div>
+	</ui:composition>
+</h:body>
+</html>

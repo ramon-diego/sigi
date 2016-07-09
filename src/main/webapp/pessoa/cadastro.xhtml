@@ -4,9 +4,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
 <h:body>
 	<ui:composition template="/template/template.xhtml">
-
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-md-12">
@@ -17,12 +17,7 @@
 			<div class="row">
 				<div class="col-xs-12 .col-sm-6 .col-lg-8">
 					<div class="panel-body">
-						<!-- 						<f:view> -->
-						<!-- 							<f:metadata> -->
-						<!-- 								<f:viewParam name="id" value="#{pessoaBean.pessoa}" /> -->
-						<!-- 							</f:metadata> -->
 						<h:form role="form" prependId="false">
-							<!-- 								<h:inputHidden value="#{pessoaBean.pessoa}" immediate="true" /> -->
 							<div class="panel panel-info">
 								<div class="panel-heading">Dados</div>
 								<div class="panel-body">
@@ -54,7 +49,7 @@
 										<div class="col-lg-2">
 											<div class="form-group">
 												<h:outputText value="Código" id="lb-codigo" />
-												<h:inputText value="#{pessoaBean.pessoa.id}"
+												<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"
 													styleClass="form-control" disabled="true" id="input-codigo" />
 											</div>
 										</div>
@@ -207,17 +202,16 @@
 										<li><a data-toggle="tab" href="#imoveis" id="dt-imoveis">Imóveis</a></li>
 									</ul>
 								</div>
-
-
 								<script type="text/javascript">
 								$(document).ready(function() {
 									  $(".divEmpty").each(function() {
 									  if ($(this).text().length == 0) {
-									      $('#dt-imoveis').closest('li').hide();
+										   $('#dt-imoveis').closest('li').hide();
 									    }
 									  });
-
 									});
+
+								document.getElementById('input-pesquisa-cidade').value = document.getElementById('input-cidade').value;
 
 								</script>
 								<div class="panel-body">
@@ -240,8 +234,8 @@
 												<div class="col-lg-3">
 													<div class="form-group input-group">
 														<h:outputText value="CEP" />
-														<h:inputText class="form-control"
-															value="#{pessoaBean.endereco.cep}" id="input-cep"
+														<h:inputText class="form-control cep mask-cep"
+															value="#{pessoaBean.endereco.cep}"
 															converter="pessoaConverter" />
 														<span class="input-group-btn">
 															<button class="btn btn-default" type="button"
@@ -251,16 +245,18 @@
 														</span>
 													</div>
 												</div>
+
 												<div class="col-lg-7">
 													<div class="form-group">
 														<h:outputText value="Rua" />
 														<h:inputText id="input-rua"
 															value="#{pessoaBean.endereco.rua}"
-															styleClass="form-control" />
+															styleClass="form-control rua" />
 													</div>
 												</div>
 											</div>
 											<div class="row">
+
 												<div class="col-lg-2">
 													<div class="form-group">
 														<h:outputText value="Número" />
@@ -269,6 +265,7 @@
 															styleClass="form-control" />
 													</div>
 												</div>
+
 												<div class="col-lg-6">
 													<div class="form-group">
 														<h:outputText value="Complemento" />
@@ -277,12 +274,13 @@
 															styleClass="form-control" />
 													</div>
 												</div>
+
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Bairro" />
 														<h:inputText id="input-bairro"
 															value="#{pessoaBean.endereco.bairro}"
-															styleClass="form-control" />
+															styleClass="form-control bairro" />
 													</div>
 												</div>
 											</div>
@@ -292,7 +290,9 @@
 														<h:outputText value="Cidade" />
 														<h:inputText id="input-cidade"
 															value="#{pessoaBean.cidade.nome}"
-															styleClass="form-control" />
+															styleClass="form-control cidade" />
+														<h:inputHidden value="#{pessoaBean.pesquisarCidade}"
+															id="input-pesquisa-cidade" />
 													</div>
 												</div>
 
@@ -301,8 +301,10 @@
 														<h:outputText value="Estado" id="txtEstado" />
 														<h:selectOneMenu id="input-estado"
 															value="#{pessoaBean.cidade.estado}"
-															styleClass="form-control">
+															styleClass="form-control uf">
+															<f:selectItem itemValue="" itemLabel="UF" />
 															<f:selectItem itemValue="PR" itemLabel="PR" />
+															<f:selectItem itemValue="BA" itemLabel="BA" />
 														</h:selectOneMenu>
 													</div>
 												</div>
@@ -357,6 +359,7 @@
 														</div>
 													</div>
 												</div>
+
 												<div class="col-lg-3">
 													<div class="form-group">
 														<h:outputText value="Comercial" />
@@ -378,6 +381,23 @@
 									<!-- final tab-content -->
 								</div>
 							</div>
+
+							<script type="text/javascript">
+						
+						    $(document).ready(function(){
+							      $('#select-corretor').click(function(){
+						              if($(this).prop("checked") == true){
+						            		if($('.conteudo').hasClass('hide') &amp;&amp; ('.conteudo').length >0){
+										    	$('.conteudo').removeClass('hide');
+										    }													              }
+						              else if($(this).prop("checked") == false){
+						            	  $(".conteudo").addClass('hide');
+						              }
+						          });			    	
+						    });
+						</script>
+
+
 							<div class="row">
 								<div class="col-lg-8">
 									<div class="form-group">
@@ -390,13 +410,14 @@
 									<div class="form-group">
 										<h:outputText value="Perfil" />
 									</div>
+
 									<h:outputLabel styleClass="checkbox-inline">
 										<h:selectBooleanCheckbox
 											value="#{pessoaBean.pessoa.isProprietario}" />Proprietário
 									</h:outputLabel>
 
 									<h:outputLabel styleClass="checkbox-inline">
-											<h:selectBooleanCheckbox
+										<h:selectBooleanCheckbox
 											value="#{pessoaBean.pessoa.isLocatario}" />Locatário
 									</h:outputLabel>
 
@@ -410,40 +431,52 @@
 											value="#{pessoaBean.pessoa.isPrestador}" />Prestador Serv.
 									</h:outputLabel>
 
-									<div class="checkbox">
-										<h:outputLabel>
-											<h:selectBooleanCheckbox
-												value="#{pessoaBean.pessoa.isCorretor}" />Corretor
-								      	</h:outputLabel>
-										<h:inputText value="#" pt:placeholder="CRECI" id="input-creci"
-											styleClass="form-control" />
+									<div class="row">
+										<div class="col-lg-3">
+											<div class="checkbox">
+												<h:outputLabel>
+													<h:selectBooleanCheckbox id="select-corretor"
+														value="#{pessoaBean.pessoa.isCorretor}" />Corretor							
+										</h:outputLabel>
+											</div>
+										</div>
+										<div class="col-lg-9">
+											<h:inputText value="#{pessoaBean.pessoa.creci}"
+												pt:placeholder="CRECI" rendered="#{not empty pessoaBean.pessoa.creci}"
+												styleClass="form-control conteudo hide" />
+										</div>
+
 									</div>
 								</div>
 							</div>
+
 							<div class="row">
+
 								<div class="col-lg-1">
 									<h:commandButton actionListener="#{pessoaBean.salvar}"
-										value="Gravar" styleClass="btn btn-success">
-									</h:commandButton>
+										value="Gravar" styleClass="btn btn-success" />
 								</div>
+
 								<div class="col-lg-8">
 									<h:commandButton actionListener="#" value="Cancelar"
 										styleClass="btn btn-warning" />
 								</div>
+
 								<div class="col-lg-2"></div>
 
 								<h:messages showDetail="false" infoClass="alert alert-info"
 									showSummary="true" errorClass="alert alert-warning" />
 							</div>
 						</h:form>
-						<!-- 						</f:view> -->
 						<!-- final PainelBody -->
 					</div>
+
 					<!-- final PainelDefault -->
 				</div>
 				<!-- fim-col-lg-12 -->
 			</div>
 			<!-- fim row -->
+
 		</div>
 		<!-- page-wrapper -->
 	</ui:composition>

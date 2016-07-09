@@ -13,10 +13,10 @@ public class EnderecoService implements Serializable {
 
 	private static final long serialVersionUID = 6293157199560784954L;
 	
-//	@Autowired
+	@Autowired
 	private EnderecoRepository enderecoRepository;
-
-	public void save(Endereco endereco) {
-		enderecoRepository.saveAndFlush(endereco);
+	
+	public Endereco pesquisarPorId(Long id){
+		return enderecoRepository.findById(id);
 	}
 }

@@ -7,7 +7,8 @@ import javax.persistence.Id;
 
 public class Email implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 2802658758535916496L;
 
 	@Id
 	@Column(name = "id_email")

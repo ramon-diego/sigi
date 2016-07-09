@@ -24,98 +24,112 @@
 											<div class="row">
 												<div class="col-lg-12">
 													<div class="row">
+														
 														<div class="col-lg-3">
 															<div class="form-group">
 																<h:outputText value="Finalidade" />
-																<h:selectOneMenu value="Teste" styleClass="form-control">
-																	<f:selectItem itemValue="Todos" itemLabel="Todos" />
-																	<f:selectItem itemValue="venda" itemLabel="Venda" />
+																<h:selectOneMenu value="#{imovelBean.finalidade}"
+																	styleClass="form-control">
+																	<f:selectItem itemValue="" itemLabel="Todos" />
+																	<f:selectItem itemValue="vender" itemLabel="Vender" />
 																	<f:selectItem itemValue="alugar" itemLabel="Alugar" />
 																</h:selectOneMenu>
 															</div>
 														</div>
+														
 														<div class="col-lg-3">
 															<div class="form-group">
 																<h:outputText value="Tipo" />
-																<h:selectOneMenu value="Teste" styleClass="form-control">
-																	<f:selectItem itemValue="Todos" itemLabel="Todos" />
+																<h:selectOneMenu value="#{imovelBean.tipoImovel}"
+																	styleClass="form-control">
+																	<f:selectItem itemValue="" itemLabel="Todos" />
 																	<f:selectItem itemValue="apartamento"
 																		itemLabel="Apartamento" />
-																	<f:selectItem itemValue="apartamento" itemLabel="Casa" />
+																	<f:selectItem itemValue="casa" itemLabel="Casa" />
 																</h:selectOneMenu>
 															</div>
 														</div>
+														
 														<div class="col-lg-3">
 															<div class="form-group">
 																<h:outputText value="Status" />
-																<h:selectOneMenu value="Teste" styleClass="form-control">
-																	<f:selectItem itemValue="inativo" itemLabel="Ativo" />
-																	<f:selectItem itemValue="inativo" itemLabel="Inativo" />
-																	<f:selectItem itemValue="todos" itemLabel="Todos" />
+																<h:selectOneMenu value="#" styleClass="form-control">
+																	<f:selectItem itemValue="A" itemLabel="Ativo" />
+																	<f:selectItem itemValue="I" itemLabel="Inativo" />
+																	<f:selectItem itemValue="" itemLabel="Todos" />
 																</h:selectOneMenu>
 															</div>
 														</div>
+														
 														<div class="col-lg-3">
 															<div class="form-group">
 																<h:outputText value="Código" />
-																<h:inputText id="input-codigo" styleClass="form-control" />
+																<h:inputText id="input-codigo" value="#{imovelBean.id}"
+																	styleClass="form-control" />
 															</div>
 														</div>
 													</div>
+													
 													<div class="conteudo hide">
 														<div class="row">
 															<div class="col-lg-6">
 																<div class="form-group">
 																	<h:outputText value="Rua" />
-																	<h:inputText id="input-rua" styleClass="form-control" />
+																	<h:inputText id="input-rua" value="#{imovelBean.ruaImovel}" styleClass="form-control" />
 																</div>
 															</div>
+															
 															<div class="col-lg-3">
 																<div class="form-group">
 																	<h:outputText value="Bairro" />
-																	<h:inputText id="input-bairro"
+																	<h:inputText id="input-bairro" value="#{imovelBean.bairroImovel}"
 																		styleClass="form-control" />
 																</div>
 															</div>
+															
 															<div class="col-lg-3">
 																<div class="form-group">
 																	<h:outputText value="Cidade" />
-																	<h:inputText id="input-cidade"
+																	<h:inputText id="input-cidade" value="#{imovelBean.cidadePesquisa}"
 																		styleClass="form-control" />
 																</div>
 															</div>
+															
 														</div>
 														<div class="row">
+															
 															<div class="col-lg-2">
 																<div class="form-group">
 																	<h:outputText value="Quartos" />
-																	<h:selectOneMenu value="Teste"
+																	<h:selectOneMenu value="#{imovelBean.qtdeDormitorio}"
 																		styleClass="form-control">
-																		<f:selectItem itemValue="todos" itemLabel="Todos" />
+																		<f:selectItem itemValue="" itemLabel="Todos" />
 																		<f:selectItem itemValue="1" itemLabel="1" />
 																		<f:selectItem itemValue="2" itemLabel="2" />
 																		<f:selectItem itemValue="3" itemLabel="3" />
 																		<f:selectItem itemValue="4" itemLabel="4" />
-																		<f:selectItem itemValue="mais" itemLabel="5 ou mais" />
+																		<f:selectItem itemValue="5" itemLabel="5 ou mais" />
 																	</h:selectOneMenu>
 																</div>
 															</div>
+															
 															<div class="col-lg-2">
 																<div class="form-group">
 																	<h:outputText value="Suítes" />
-																	<h:selectOneMenu value="Teste"
+																	<h:selectOneMenu value="#{imovelBean.suite}" 
 																		styleClass="form-control">
-																		<f:selectItem itemValue="todos" itemLabel="Todos" />
+																		<f:selectItem itemValue="" itemLabel="Todos" />
 																		<f:selectItem itemValue="1" itemLabel="1" />
 																		<f:selectItem itemValue="2" itemLabel="2" />
-																		<f:selectItem itemValue="mais" itemLabel="3 ou mais" />
+																		<f:selectItem itemValue="3" itemLabel="3 ou mais" />
 																	</h:selectOneMenu>
 																</div>
 															</div>
+															
 															<div class="col-lg-2">
 																<div class="form-group">
 																	<h:outputText value="Valor Mínimo" />
-																	<h:inputText id="input-valor-minimo"
+																	<h:inputText id="input-valor-minimo" valoe="#{imovelBean.valorMinimo}"
 																		styleClass="form-control" />
 																</div>
 															</div>
@@ -123,11 +137,10 @@
 															<div class="col-lg-2">
 																<div class="form-group">
 																	<h:outputText value="Valor Máximo" />
-																	<h:inputText id="input-valor-maximo"
+																	<h:inputText id="input-valor-maximo" value="#{imovelBean.valorMaximo}"
 																		styleClass="form-control" />
 																</div>
 															</div>
-
 
 															<div class="col-lg-2">
 																<div class="form-group">
@@ -144,12 +157,13 @@
 																		styleClass="form-control" />
 																</div>
 															</div>
+															
 														</div>
 													</div>
 												</div>
 											</div>
 											<script type="text/javascript">
-											$(document).ready(function(){
+												$(document).ready(function(){
 												$(".btn-toggle").click(function(){
 											  	if($(".conteudo").hasClass('hide')){
 											    	$(".conteudo").removeClass('hide');
@@ -159,60 +173,86 @@
 											    	$(".conteudo").addClass('hide');
 											     	$("#exibe-filtros").addClass('fa-flip-vertical');								 	
 											    }
-											  })
+											  });					 											  
 											});
 											</script>
 
 											<div class="row">
 												<div class="col-lg-8">
-													<a href="#" class="btn btn-primary btn-primary">Pesquisar<i
-														class="fa fa-search fa-fw" aria-hidden="true"></i></a>
-															<a href="#" class="btn btn-info btn-toggle"  style="te"><i
-														class="fa fa-caret-square-o-up fa-fw fa-flip-vertical" id="exibe-filtros" aria-hidden="true"></i></a>
+													<h:commandButton value="Pesquisar" id="btn-pesquisar"
+														action="#{imovelBean.teste}"
+														styleClass="btn btn-primary btn-pesquisar" />
+													<!-- 													<a href="#" class="btn btn-primary btn-primary">Pesquisar<i -->
+													<!-- 														class="fa fa-search fa-fw" aria-hidden="true"></i></a> -->
+													<a href="#" class="btn btn-info btn-toggle" style=""><i
+														class="fa fa-caret-square-o-up fa-fw fa-flip-vertical"
+														id="exibe-filtros" aria-hidden="true"></i></a>
 												</div>
-												<div class="col-lg-2" style="text-align:right">
-												
-												</div>
+												<div class="col-lg-2" style="text-align: right"></div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<h:dataTable value="#{pessoaBean.pessoas}" var="imovel" rendered="#{not empty pessoaBean.pessoas}"
-									id="data-table-imoveis" styleClass="table table-bordered">
-									<h:column headerClass="default">
-										<f:facet name="header">
-											<h:outputText value="Código" />
-										</f:facet>
+								<h3 class="notificao hide" style="color: #4078c0">
+									<i class="fa fa-exclamation-circle" style="color: #f0ad4e"
+										aria-hidden="true"></i> Não há corretores cadastrados
+								</h3>
+								<div class="divEmpty">
+									<h:dataTable value="#{imovelBean.imoveis}" var="imovel"
+										id="data-table-imoveis"
+										styleClass="table table-striped table-bordered"
+										rendered="#{not empty imovelBean.imoveis}">
+										<h:column headerClass="default">
+											<f:facet name="header">
+												<h:outputText value="Código" />
+											</f:facet>
+										#{imovel.id}
 									</h:column>
 
-									<h:column>
-										<f:facet name="header">
-											<h:outputText value="Finalidade" />
-										</f:facet>
-
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Finalidade" />
+											</f:facet>
+									#{imovel.finalidade}
 									</h:column>
 
-									<h:column>
-										<f:facet name="header">
-											<h:outputText value="Endereço" />
-										</f:facet>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Tipo" />
+											</f:facet>
+									#{imovel.tipoImovel}
 									</h:column>
 
-									<h:column>
-										<f:facet name="header">
-											<h:outputText value="Valor" />
-										</f:facet>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Rua" />
+											</f:facet>
+									#{imovel.endereco.rua}
 									</h:column>
 
-									<h:column>
-										<f:facet name="header">
-											<h:outputText value="Status" />
-										</f:facet>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Valor" />
+											</f:facet>
+										#{imovel.valor}
 									</h:column>
 
-								</h:dataTable>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Editar" />
+											</f:facet>
+											<h:commandButton value="Selecione"
+												styleClass="btn btn-default btn-sm" action="#">
+												<f:setPropertyActionListener value="#{pessoas}"
+													target="#{pessoaBean.pessoa}" />
+											</h:commandButton>
+										</h:column>
+
+									</h:dataTable>
+								</div>
 							</div>
 
 						</h:form>

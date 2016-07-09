@@ -1,5 +1,9 @@
 package br.com.sigi.repositories;
 
-public interface CidadeRepository{
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import br.com.sigi.model.Cidade;
+
+public interface CidadeRepository extends JpaRepository<Cidade, Long> {
+	Cidade findByNome(String nome);
 }

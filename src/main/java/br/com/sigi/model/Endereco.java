@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import br.com.sigi.repositories.EntidadeBase;
 
 @Entity
-@Table(name = "ENDERECO")
+@Table(name = "endereco")
 public class Endereco implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = 1L;
@@ -34,10 +34,10 @@ public class Endereco implements Serializable, EntidadeBase {
 	@Enumerated(EnumType.STRING)
 	TipoEndereco tipoEndereco;
 
-	@Column(length = 60)
+	@Column(length = 60, nullable = false)
 	private String rua;
 
-	@Column
+	@Column(nullable = false)
 	private String numero;
 
 	@Column(length = 45)
@@ -57,21 +57,9 @@ public class Endereco implements Serializable, EntidadeBase {
 		this.tipoEndereco = tipoEndereco;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
-
-	@ManyToOne
-	@JoinColumn(name = "pessoa_id")
-	private Pessoa pessoa;
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;

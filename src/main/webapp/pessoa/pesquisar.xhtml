@@ -17,83 +17,86 @@
 
 			<div class="row">
 				<div class="col-xs-12 .col-sm-12 .col-lg-12">
-					<h:form role="form" id="form-pesquisar" styleClass="form-inline">
-						<div class="panel panel-info">
-							<div class="panel-heading">Pesquisar por</div>
-							<div class="panel-body">
+					<div class="panel-body">
+						<h:form role="form" id="form-pesquisar" styleClass="form-inline">
+							<div class="panel panel-info">
+								<div class="panel-heading">Pesquisar por</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-lg-6">
+											<h:outputText value="Nome" />
+											<h:inputText value="#{pessoaBean.nome}"
+												styleClass="pesquisar-pessoa" pt:placeholder="Nome" />
+										</div>
 
-								<div class="col-lg-6">
-									<h:outputText value="Nome" />
-									<h:inputText value="#{pessoaBean.nome}"
-										styleClass="pesquisar-pessoa" pt:placeholder="Nome" />
-								</div>
-
-								<div class="col-lg-4">
-									<h:outputText value="CPF / CNPJ" />
-									<h:inputText value="#{pessoaBean.cpfCnpj}"
-										styleClass="pesquisar-pessoa" pt:placeholder="CPF ou CNPJ" />
-								</div>
-
-								<div class="col-lg-2">
-									<h:outputText value="ID" />
-									<h:inputText value="#" styleClass="pesquisar-pessoa"
-										pt:placeholder="Código" />
-								</div>
-
-								<div class="col-lg-2">
-									<h:commandButton value="Localizar" id="btn-localizar"
-										styleClass="btn btn-primary btn-sm"
-										action="#{pessoaBean.pesquisarPessoas()}">
-									</h:commandButton>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-lg-12">
-								<h:dataTable value="#{pessoaBean.pessoas}" var="pessoas"
-									id="data-table-pessoas" styleClass="table table-bordered"
-									rendered="#{not empty pessoaBean.pessoas}">
-
-									<h:column>
-										<f:facet name="header">
-											<h:outputText value="CÓDIGO" />
-										</f:facet>
-									#{pessoas.id}
-									</h:column>
-
-									<h:column>
-										<f:facet name="header">
-											<h:outputText value="NOME" />
-										</f:facet>
-									#{pessoas.nomeFantasia}
-									</h:column>
-
-									<h:column>
-										<f:facet name="header">
+										<div class="col-lg-4">
 											<h:outputText value="CPF / CNPJ" />
-										</f:facet>
-										<h:outputText value="#{pessoas.cpfCnpj}" />
+											<h:inputText value="#{pessoaBean.cpfCnpj}"
+												id="input-pesquisa" styleClass="pesquisar-pessoa"
+												pt:placeholder="CPF ou CNPJ" />
+										</div>
 
-									</h:column>
+										<div class="col-lg-2">
+											<h:outputText value="ID" />
+											<h:inputText value="#" styleClass="pesquisar-pessoa"
+												pt:placeholder="Código" />
+										</div>
 
-									<h:column>
-										<f:facet name="header">
-											<h:outputText value="Editar" />
-										</f:facet>
+										<div class="col-lg-2">
+											<h:commandButton value="Localizar" id="btn-localizar"
+												styleClass="btn btn-primary btn-sm"
+												action="#{pessoaBean.pesquisarPessoas()}">
+											</h:commandButton>
+										</div>
 
-										<h:commandButton value="Selecione"
-											styleClass="btn btn-primary btn-sm"
-											action="cadastro?faces-redirect=true&amp;includeViewParams=true">
-											<f:setPropertyActionListener value="#{pessoas}"
-												target="#{pessoaBean.pessoa}" />
-										</h:commandButton>
-									</h:column>
-								</h:dataTable>
+									</div>
+								</div>
 							</div>
-						</div>
-					</h:form>
 
+							<div class="row">
+								<div class="col-lg-12">
+									<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa"
+										id="data-table-pessoas" styleClass="table table-bordered"
+										rendered="#{not empty pessoaBean.pessoas}">
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="CÓDIGO" />
+											</f:facet>
+									#{pessoa.id}
+									</h:column>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="NOME" />
+											</f:facet>
+									#{pessoa.nomeFantasia}
+									</h:column>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="CPF / CNPJ" />
+											</f:facet>
+											<h:outputText value="#{pessoas.cpfCnpj}" />
+
+										</h:column>
+
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Editar" />
+											</f:facet>
+
+											<h:commandButton value="Selecione"
+												styleClass="btn btn-primary btn-sm" action="cadastro.xhtml">
+												<f:setPropertyActionListener value="#{pessoa.id}"
+													target="#{pessoaBean.id}" />
+											</h:commandButton>
+										</h:column>
+									</h:dataTable>
+								</div>
+							</div>
+						</h:form>
+					</div>
 				</div>
 				<!-- fimlinha -->
 			</div>

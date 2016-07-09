@@ -26,6 +26,33 @@ public class PessoaService implements Serializable {
 	}
 
 	public List<Pessoa> pesquisarPessoas(String nome, String cpfCnpj) {
-		return pessoaRepository.findByNomeFantasiaContainingOrCpfCnpjContaining(nome, cpfCnpj);
+		return pessoaRepository.pesquisarPessoas(nome, cpfCnpj);
+	}
+
+	public List<Pessoa> pesquisarProprietario(String nome, String cpfCnpj) {
+//		if (!nome.isEmpty() || !cpfCnpj.isEmpty()) {
+//		}
+//		return null;
+	return pessoaRepository.pesquisarProprietario(nome, cpfCnpj);
+	}
+	
+	public List<Pessoa> pesquisarPessoaTitulo(String nome, String cpfCnpj) {
+//		if (!nome.isEmpty() || !cpfCnpj.isEmpty()) {
+//		}
+//		return null;
+		return pessoaRepository.pesquisarPessoaTitulo(nome, cpfCnpj);
+	}
+	
+
+	public List<Pessoa> pesquisarAngariador(String nome) {
+			return pessoaRepository.pesquisarAngariador(nome);		
+	}
+	
+	public Pessoa delete(Long id){
+		return pessoaRepository.findOne(id);
+	}
+	
+	public Pessoa pesquisarPorId(Long id){
+		return pessoaRepository.findById(id);
 	}
 }

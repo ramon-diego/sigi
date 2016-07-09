@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Plano Financeiro</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 .col-sm-12 .col-lg-12">
+					<div class="panel-body">
+						<h:form id="form-cadastro" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-info">
+										<div class="panel-heading">Plano de contas</div>
+
+										<div class="panel-body">
+
+											<script type="text/javascript">
+												$(document).ready(function(){
+												$(".btn-toggle").click(function(){
+											  	if($(".conteudo").hasClass('hide')){
+											    	$(".conteudo").removeClass('hide');
+											    	$("#exibe-filtros").removeClass('fa-flip-vertical');
+											    	
+											    }else{
+											    	$(".conteudo").addClass('hide');
+											     	$("#exibe-filtros").addClass('fa-flip-vertical');								 	
+											    }
+											  });					 											  
+											});
+											</script>
+
+											<div class="row">
+
+												<div class="conteudo hide">
+													<div class="col-lg-4">
+														<h:inputText pt:placeholder="Nome do plano financeiro"
+															value="#{planoFinanceiroBean.planoFinanceiro.nome}"
+															styleClass="form-control" />
+
+													</div>
+
+													<div class="col-lg-4">
+														<h:selectOneMenu styleClass="form-control"
+															value="#{planoFinanceiroBean.planoFinanceiro.tipoTransacao}">
+															<f:selectItem itemLabel="Entrada" itemValue="R" />
+															<f:selectItem itemLabel="Saída" itemValue="D" />
+														</h:selectOneMenu>
+													</div>
+
+													<div class="col-lg-3">
+														<h:commandButton action="#{planoFinanceiroBean.salvar()}"
+															value="Incluir" style="margin-right:15px"
+															styleClass="btn btn-primary" />
+													</div>
+												</div>
+
+												<div class="col-lg-2">
+													<a href="#" class="btn btn-default btn-sm btn-toggle"><i
+														class="fa fa-caret-square-o-up fa-fw fa-flip-vertical"
+														id="exibe-filtros" aria-hidden="true"></i></a>
+												</div>
+
+											</div>
+
+											<div class="row">
+												<div class="col-lg-6">
+													<h3>
+														1.Saídas de recursos <i class="fa fa-arrow-up"
+															style="color: rgb(230, 177, 97)" aria-hidden="true"></i>
+													</h3>
+													<h:dataTable var="planoDespesa"
+														styleClass="table table-bordered"
+														value="#{planoFinanceiroBean.planosDespesa}">
+
+														<h:column>
+															<f:facet name="header">
+														#
+														</f:facet>
+																#{planoDespesa.id}					
+														</h:column>
+
+														<h:column>
+															<f:facet name="header">
+														Nome
+														</f:facet>
+																#{planoDespesa.nome}
+													</h:column>
+
+														<h:column>
+															<f:facet name="header">
+														Ações
+														</f:facet>
+															<h:commandButton action="#"
+																styleClass="btn btn-info btn-xs" value="Editar"
+																style="margin-right:5px;" />
+															<h:commandButton
+																action="#{planoFinanceiroBean.delete(planoDespesa)}"
+																onclick="if (!confirm('Confirma a exclusão do plano financeiro #{planoDespesa.nome}')) return false"
+																styleClass="
+																btn btn-default btn-xs"
+																value="Delete" />
+														</h:column>
+													</h:dataTable>
+
+												</div>
+												<div class="col-lg-4"></div>
+												<div class="col-lg-6">
+													<h3>
+														2.Entrada de recursos <i class="fa fa-arrow-down"
+															style="color: #337ab7" aria-hidden="true"></i>
+													</h3>
+
+													<h:dataTable var="planoReceita"
+														styleClass="table table-bordered"
+														value="#{planoFinanceiroBean.planosReceita}">
+
+														<h:column>
+															<f:facet name="header">
+														#
+														</f:facet>
+																#{planoReceita.id}					
+														</h:column>
+
+														<h:column>
+															<f:facet name="header">
+														Nome
+														</f:facet>
+																#{planoReceita.nome}
+													</h:column>
+
+														<h:column>
+															<f:facet name="header">
+														Ações
+														</f:facet>
+
+															<button type="button" class="btn btn-danger btn-sm"
+																jsf:action="#{planoFinanceiroBean.delete(planoReceita)}"
+																onclick="if (!confirm('Confirma a exclusão do plano financeiro #{planoReceita.nome}')) return false">
+																<i class="fa fa-trash-o" aria-hidden="true"></i>
+															</button>
+
+														</h:column>
+													</h:dataTable>
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:composition>
+</h:body>
+</html>

@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "atributo_imovel")
 public class AtributoImovel implements Serializable{
 
 	private static final long serialVersionUID = -6215917883774800615L;
@@ -21,24 +21,51 @@ public class AtributoImovel implements Serializable{
 	private Integer dormitorio;
 	private Integer sala;
 	private Integer cozinha;
+	
+	@Column(name = "suite_simples")
 	private Integer suiteSimples;
+	
+	@Column(name = "suite_master")
 	private Integer suiteMaster;
+	
+	@Column(name = "bwc_social")
 	private Integer bwcSocial;
+	
+	@Column(name = "bwc_suite")
 	private Integer bwcSuite;
 	
+	@Column(name = "area_de_servico")
 	private Integer areaDeServico;
+	
+	@Column(name = "vaga_garagem")
 	private Integer vagaGaragem;
+	
 	private Integer elevador;
 
 	private boolean monitoramento;
+	
 	private boolean portaria;
+	
+	@Column(name = "portao_eletronico")
 	private boolean portaoEletronico;
+	
 	private boolean churrasqueira;
+	
+	@Column(name = "espaco_gourmet")
 	private boolean espacoGourmet;
+	
+	@Column(name = "piscina_adulto")
 	private boolean piscinaAdulto;
+	
+	@Column(name = "piscina_infatil")
 	private boolean piscinaInfantil;
+	
 	private boolean playground;
+	
+	@Column(name = "quadra_poliesportiva")
 	private boolean quadraPoliesportiva;
+	
+	@Column(name = "salao_festa")
 	private boolean salaoDeFesta;
 
 	public AtributoImovel() {

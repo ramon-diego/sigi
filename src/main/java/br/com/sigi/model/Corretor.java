@@ -1,6 +1,8 @@
 package br.com.sigi.model;
 
-public class Corretor extends Pessoa {
+import java.io.Serializable;
+
+public class Corretor extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("unused")

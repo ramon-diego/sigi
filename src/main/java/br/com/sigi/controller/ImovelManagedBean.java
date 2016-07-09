@@ -1,6 +1,7 @@
 package br.com.sigi.controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.Part;
 
 import br.com.sigi.model.AtributoImovel;
 import br.com.sigi.model.Cidade;
@@ -24,11 +26,24 @@ public class ImovelManagedBean implements Serializable {
 	private static final long serialVersionUID = 6729233648580056599L;
 	private Imovel imovel;
 	private Pessoa proprietario;
-	private List<Pessoa> pessoas;
+	private List<Imovel> imoveis;
+	private List<Pessoa> proprietarios;
+	private List<Pessoa> angariadores;
 	private Pessoa angariador;
 	private Endereco endereco;
 	private Cidade cidade;
 	private AtributoImovel atributoImovel;
+	private Long id;
+	private Integer qtdeDormitorio;
+	private String tipoImovel;
+	private String finalidade;
+	private String ruaImovel;
+	private String bairroImovel;
+	private String cidadePesquisa;
+	private Integer suite;
+	private BigDecimal valorMinimo;
+	private BigDecimal valorMaximo;
+	private Part arquivo;
 
 	@PostConstruct
 	public void init() {
@@ -37,9 +52,19 @@ public class ImovelManagedBean implements Serializable {
 		angariador = new Pessoa();
 		endereco = new Endereco();
 		atributoImovel = new AtributoImovel();
-		pessoas = new ArrayList<>();
 		cidade = new Cidade();
+		proprietarios = new ArrayList<>();
+		angariadores = new ArrayList<>();
+	}
 
+	public String upload;
+
+	public Part getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(Part arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	@ManagedProperty("#{imovelService}")
@@ -104,12 +129,28 @@ public class ImovelManagedBean implements Serializable {
 		this.atributoImovel = atributoImovel;
 	}
 
-	public void setPessoas(List<Pessoa> pessoas) {
-		this.pessoas = pessoas;
+	public List<Pessoa> getProprietarios() {
+		return proprietarios;
 	}
 
-	public List<Pessoa> getPessoas() {
-		return pessoas;
+	public void setProprietarios(List<Pessoa> proprietarios) {
+		this.proprietarios = proprietarios;
+	}
+
+	public List<Pessoa> getAngariadores() {
+		return angariadores;
+	}
+
+	public void setAngariadores(List<Pessoa> angariadores) {
+		this.angariadores = angariadores;
+	}
+
+	public List<Imovel> getImoveis() {
+		return imoveis;
+	}
+
+	public void setImoveis(List<Imovel> imoveis) {
+		this.imoveis = imoveis;
 	}
 
 	private String nome;
@@ -131,12 +172,111 @@ public class ImovelManagedBean implements Serializable {
 		this.nome = nome;
 	}
 
-	public void pesquisarPessoas() {
-		pessoas = pessoaService.pesquisarPessoas(getNome(), getCpfCnpj());
+	public String getFinalidade() {
+		return finalidade;
+	}
+
+	public void setFinalidade(String finalidade) {
+		this.finalidade = finalidade;
+	}
+
+	public String getTipoImovel() {
+		return tipoImovel;
+	}
+
+	public void setTipoImovel(String tipoImovel) {
+		this.tipoImovel = tipoImovel;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void pesquisarProprietario() {
+		proprietarios = pessoaService.pesquisarProprietario(getNome(), getCpfCnpj());
+	}
+
+	public void pesquisarAngariador() {
+		angariadores = pessoaService.pesquisarAngariador(getNome());
+	}
+
+	public void registraAngariador(Pessoa angariador) {
+		this.angariador = angariador;
+	}
+
+	public void pesquisarImoveis() {
+
+		imoveis = imovelService.pesquisarImovel(getFinalidade(), getTipoImovel(), getId());
 	}
 
 	public void registraProprietario(Pessoa proprietario) {
 		this.proprietario = proprietario;
+	}
+
+	public void teste() {
+		imoveis = imovelService.PesquisarImoveis(getFinalidade(), getTipoImovel(), getId(), getRuaImovel(),
+				getBairroImovel(), getCidadePesquisa(), getQtdeDormitorio(), getSuite(), getValorMinimo(),
+				getValorMaximo());
+	}
+
+	public String getRuaImovel() {
+		return ruaImovel;
+	}
+
+	public void setRuaImovel(String ruaImovel) {
+		this.ruaImovel = ruaImovel;
+	}
+
+	public String getBairroImovel() {
+		return bairroImovel;
+	}
+
+	public void setBairroImovel(String bairroImovel) {
+		this.bairroImovel = bairroImovel;
+	}
+
+	public void setCidadePesquisa(String cidadePesquisa) {
+		this.cidadePesquisa = cidadePesquisa;
+	}
+
+	public String getCidadePesquisa() {
+		return cidadePesquisa;
+	}
+
+	public void setQtdeDormitorio(Integer qtdeDormitorio) {
+		this.qtdeDormitorio = qtdeDormitorio;
+	}
+
+	public Integer getQtdeDormitorio() {
+		return qtdeDormitorio;
+	}
+
+	public Integer getSuite() {
+		return suite;
+	}
+
+	public void setSuite(Integer suite) {
+		this.suite = suite;
+	}
+
+	public void setValorMinimo(BigDecimal valorMinimo) {
+		this.valorMinimo = valorMinimo;
+	}
+
+	public BigDecimal getValorMinimo() {
+		return valorMinimo;
+	}
+
+	public void setValorMaximo(BigDecimal valorMaximo) {
+		this.valorMaximo = valorMaximo;
+	}
+
+	public BigDecimal getValorMaximo() {
+		return valorMaximo;
 	}
 
 	public void salvar() {
@@ -144,6 +284,7 @@ public class ImovelManagedBean implements Serializable {
 			imovel.setAtributoImovel(atributoImovel);
 			imovel.setProprietario(proprietario);
 			imovel.setEndereco(endereco);
+			endereco.setCidade(cidade);
 			imovelService.salvar(imovel);
 		} catch (Exception e) {
 			e.printStackTrace();

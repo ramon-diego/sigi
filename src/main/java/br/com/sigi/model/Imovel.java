@@ -7,13 +7,17 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "imovel")
 public class Imovel implements Serializable {
 
 	private static final long serialVersionUID = -8713206607694202240L;
@@ -28,6 +32,7 @@ public class Imovel implements Serializable {
 	}
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Status status;
 
 	@Column(name = "data_cadastro")
@@ -75,7 +80,7 @@ public class Imovel implements Serializable {
 	@JoinColumn(name = "angariador_id")
 	private Pessoa angariador;
 
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 

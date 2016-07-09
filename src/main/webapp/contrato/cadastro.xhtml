@@ -17,156 +17,238 @@
 			<div class="row">
 				<div class="col-xs-12 .col-sm-6 .col-lg-8">
 					<div class="panel-body">
-						<f:view>
-							<f:metadata>
-								<f:viewParam name="id" value="#{pessoaBean.pessoa}" />
-							</f:metadata>
-							<h:form role="form" prependId="false">
-								<h:inputHidden value="#{pessoaBean.pessoa}" immediate="true" />
-								<div class="panel panel-info">
-									<div class="panel-heading">Dados</div>
-									<div class="panel-body">
-										<div class="row">
-											<div class="col-lg-3">
-												<div class="form-group">
-													<h:outputText id="tipo-pessoa" value="Tipo Pessoa" />
-													<h:selectOneMenu styleClass="form-control"
-														value="#{pessoaBean.pessoa.tipoPessoa}">
-														<f:selectItem itemLabel="Física" itemValue="F"
-															id="item-pessoa-fisica" />
-														<f:selectItem itemLabel="Jurídica" itemValue="J"
-															id="item-pessoa-juridica" />
-														<!-- 														<f:ajax	render="pg-pessoa-juridica" /> -->
-													</h:selectOneMenu>
-												</div>
-											</div>
-											<div class="col-lg-4"></div>
-											<div class="col-lg-3">
-												<div class="form-group">
-													<h:outputText value="Status" id="status-pessoa" />
-													<h:selectOneMenu value="#{pessoaBean.pessoa.status}"
-														styleClass="form-control">
-														<f:selectItem itemValue="A" itemLabel="Ativo" />
-														<f:selectItem itemValue="I" itemLabel="Inativo" />
-													</h:selectOneMenu>
-												</div>
-											</div>
-											<div class="col-lg-2">
-												<div class="form-group">
-													<h:outputText value="Código" id="lb-codigo" />
-													<h:inputText value="#{pessoaBean.pessoa.id}"
-														styleClass="form-control" disabled="true"
-														id="input-codigo" />
-												</div>
+
+						<h:form role="form" prependId="false">
+
+							<div class="panel panel-info">
+								<div class="panel-heading">Dados</div>
+								<div class="panel-body">
+
+									<div class="row">
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:selectOneMenu
+													value="#{contratoBean.contrato.tipoContrato}"
+													styleClass="form-control">
+													<h:outputLabel value="Tipo" />
+													<f:selectItem itemValue="L" itemLabel="Locação de imóvel" />
+													<f:selectItem itemValue="V" itemLabel="Venda de imóvel" />
+												</h:selectOneMenu>
 											</div>
 										</div>
-										<h:panelGroup id="pg-pessoa-fisica"
-											rendered="#{pessoaBean.renderFisica}">
-											<div class="row">
-												<div class="col-lg-8">
-													<div class="form-group">
-														<h:outputText value="Nome Completo" id="lb-nome-completo" />
-														<h:inputText id="input-nome-completo"
-															value="#{pessoaBean.pessoa.nomeFantasia}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-4">
-													<div class="form-group">
-														<h:outputText value="Sexo" />
-														<h:selectOneMenu value="#{pessoaBean.pessoa.sexo}"
-															styleClass="form-control">
-															<f:selectItem itemLabel="Masculino" itemValue="M" />
-															<f:selectItem itemLabel="Feminino" itemValue="F" />
-														</h:selectOneMenu>
-													</div>
-												</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Número contrato" />
+												<h:inputText value="#{contratoBean.contrato.numeroContrato}"
+													styleClass="form-control" />
 											</div>
-											<div class="row">
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="CPF" id="lb-cpf" />
-														<h:inputText id="input-cpf" converter="formatConverter"
-															value="#{pessoaBean.pessoa.cpfCnpj}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="RG" id="lb-rg" />
-														<h:inputText id="input-rg" converter="formatConverter"
-															value="#{pessoaBean.pessoa.rgIe}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="Data de Nascimento" id="lb-data-nasc" />
-														<h:inputText id="data-nascimento"
-															value="#{pessoaBean.pessoa.dataNascimento}"
-															styleClass="form-control data">
-															<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
-														</h:inputText>
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="Estado Civil" />
-														<h:selectOneMenu value="#{pessoaBean.pessoa.estadoCivil}"
-															styleClass="form-control">
-															<f:selectItem itemLabel="Solteiro" itemValue="S" />
-															<f:selectItem itemLabel="Casado" itemValue="C" />
-														</h:selectOneMenu>
-													</div>
-												</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Código" id="lb-codigo" />
+												<h:inputText value="#{contratoBean.contrato.id}"
+													styleClass="form-control" disabled="true" id="input-codigo" />
 											</div>
-											<div class="row">
-												<div class="col-lg-4">
-													<div class="form-group">
-														<h:outputText value="Naturalidade" id="lb-naturalidade" />
-														<h:inputText id="input-naturalidade"
-															value="#{pessoaBean.pessoa.naturalidade}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-5">
-													<div class="form-group">
-														<h:outputText value="Cônjuge" />
-														<h:inputText value="#{pessoaBean.pessoa.nomeConjuge}"
-															styleClass="form-control" />
-													</div>
-												</div>
-												<div class="col-lg-3">
-													<div class="form-group">
-														<h:outputText value="CPF Cônjuge" />
-														<h:inputText id="input-cpf-conjuge"
-															value="#{pessoaBean.pessoa.cpfConjuge}"
-															styleClass="form-control" />
-													</div>
-												</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Data de registro" />
+												<h:inputText value="#{contratoBean.contrato.dataRegistro}"
+													styleClass="form-control" disabled="true">
+													<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+												</h:inputText>
 											</div>
-										</h:panelGroup>
+										</div>
 
 									</div>
+
+									<div class="row">
+										<div class="col-lg-3">
+											<h:outputLabel value="Garantia" />
+											<div class="form-group">
+												<h:selectOneMenu value="#{contratoBean.contrato.garantia}"
+													styleClass="form-control">
+													<f:selectItem itemValue="fiador" itemLabel="Fiador" />
+													<f:selectItem itemValue="seguro" itemLabel="Seguro Fiança" />
+													<f:selectItem itemValue="deposito"
+														itemLabel="Depósito Caução" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+
+										<div class="col-lg-3">
+											<div class="form-group">
+												<h:outputLabel value="Base de reajuste" />
+												<h:selectOneMenu
+													value="#{contratoBean.contrato.baseReajuste}"
+													styleClass="form-control">
+													<f:selectItem itemValue="IGPM" itemLabel="IGPM" />
+													<f:selectItem itemValue="IPCA" itemLabel="IPCA" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Data de início" />
+												<h:inputText id="input-data-inicio-contrato"
+													value="#{contratoBean.contrato.dataInicioContrato}"
+													styleClass="form-control data">
+													<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+												</h:inputText>
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Data término" />
+												<h:inputText id="input-data-termino-contrato"
+													value="#{contratoBean.contrato.dataTerminoContrato}"
+													styleClass="form-control data">
+													<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+												</h:inputText>
+
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Prazo" />
+												<h:inputText id="input-prazo-contrato"
+													value="#{contratoBean.contrato.prazo}"
+													styleClass="form-control" />
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputLabel value="Locatário" />
+												<h:inputText value="#{contratoBean.locatario.nomeFantasia}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputLabel value="Proprietário" />
+												<h:inputText
+													value="#{contratoBean.proprietario.nomeFantasia}"
+													styleClass="form-control" />
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputLabel value="1º Fiador" />
+												<h:inputText value="#{contratoBean.fiador1.nomeFantasia}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputLabel value="2º Fiador" />
+												<h:inputText value="#{contratoBean.fiador2.nomeFantasia}"
+													styleClass="form-control" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputLabel value="Seguradora" />
+												<h:inputText value="#{contratoBean.seguradora.nomeFantasia}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Número apólice" />
+												<h:inputText
+													value="#{contratoBean.contrato.numeroApoliceSeguro}"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Data de ínicio" />
+												<h:inputText
+													value="#{contratoBean.contrato.dataInicioApoliceSeguro}"
+													styleClass="form-control data">
+													<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+												</h:inputText>
+
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Validade" />
+												<h:inputText
+													value="#{contratoBean.contrato.validadeApoliceSeguro}"
+													styleClass="form-control" />
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<h:outputLabel value="Imóvel" />
+												<h:inputText value="#" styleClass="form-control" />
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Valor do aluguel" />
+												<h:inputText value="#"
+													styleClass="form-control valorMonetario" />
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputLabel value="Dia de vencimento" />
+												<h:inputText value="#" style="text-align:center"
+													styleClass="form-control" />
+											</div>
+										</div>
+
+
+									</div>
+
 								</div>
+							</div>
 
-								<div class="row">
-									<div class="col-lg-1">
-										<h:commandButton actionListener="#{pessoaBean.salvar}"
-											value="Gravar" styleClass="btn btn-success">
-										</h:commandButton>
-									</div>
-									<div class="col-lg-8">
-										<h:commandButton actionListener="#" value="Cancelar"
-											styleClass="btn btn-warning" />
-									</div>
-									<div class="col-lg-2"></div>
-
-									<h:messages showDetail="false" infoClass="alert alert-info"
-										showSummary="true" errorClass="alert alert-warning" />
+							<div class="row">
+								<div class="col-lg-1">
+									<h:commandButton actionListener="#{contratoBean.salvar}"
+										value="Gravar" styleClass="btn btn-success">
+									</h:commandButton>
 								</div>
-							</h:form>
-						</f:view>
+								<div class="col-lg-8">
+									<h:commandButton actionListener="#" value="Cancelar"
+										styleClass="btn btn-warning" />
+								</div>
+								<div class="col-lg-2"></div>
+
+								<h:messages showDetail="false" infoClass="alert alert-info"
+									showSummary="true" errorClass="alert alert-warning" />
+							</div>
+						</h:form>
+
 						<!-- final PainelBody -->
 					</div>
 					<!-- final PainelDefault -->

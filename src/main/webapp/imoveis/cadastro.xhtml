@@ -15,8 +15,7 @@
 			<div class="row">
 				<div class="col-xs-12 .col-sm-12 .col-lg-12">
 					<div class="panel-body">
-						<h:form role="form" id="form-cadastro"
-							enctype="multipart/form-data">
+						<h:form id="form-cadastro" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-lg-7">
 									<div class="panel panel-info">
@@ -27,8 +26,7 @@
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Status" />
-														<h:selectOneMenu value="#{imovelBean.imovel.status}"
-															styleClass="form-control">
+														<h:selectOneMenu value="#" styleClass="form-control">
 															<f:selectItem itemValue="A" itemLabel="Ativo" />
 															<f:selectItem itemValue="I" itemLabel="Inativo" />
 														</h:selectOneMenu>
@@ -65,21 +63,28 @@
 													<div class="form-group">
 														<h:outputText value="Valor" />
 														<h:inputText value="#{imovelBean.imovel.valor}"
-															styleClass="form-control" />
+															styleClass="form-control valorMonetario">
+															<f:convertNumber pattern="#,##0.00" />
+														</h:inputText>
 													</div>
+
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="Condomínio" />
 														<h:inputText value="#{imovelBean.imovel.valorCondominio}"
-															styleClass="form-control" />
+															styleClass="form-control valorMonetario">
+															<f:convertNumber pattern="#,##0.00" />
+														</h:inputText>
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
 														<h:outputText value="IPTU" />
 														<h:inputText value="#{imovelBean.imovel.valorIptu}"
-															styleClass="form-control" />
+															styleClass="form-control valorMonetario">
+															<f:convertNumber pattern="#,##0.00" />
+														</h:inputText>
 													</div>
 												</div>
 											</div>
@@ -312,7 +317,7 @@
 												<div class="col-lg-4">
 													<div class="form-group input-group">
 														<h:outputText value="CEP" />
-														<h:inputText class="form-control"
+														<h:inputText class="form-control cep mask-cep"
 															value="#{imovelBean.endereco.cep}" id="input-cep" />
 														<span class="input-group-btn">
 															<button class="btn btn-default" type="button"
@@ -327,7 +332,7 @@
 														<h:outputText value="Rua" />
 														<h:inputText id="input-rua"
 															value="#{imovelBean.endereco.rua}"
-															styleClass="form-control" />
+															styleClass="form-control rua" />
 													</div>
 												</div>
 											</div>
@@ -354,7 +359,7 @@
 														<h:outputText value="Bairro" />
 														<h:inputText id="input-bairro"
 															value="#{imovelBean.endereco.bairro}"
-															styleClass="form-control" />
+															styleClass="form-control bairro" />
 													</div>
 												</div>
 											</div>
@@ -364,7 +369,7 @@
 														<h:outputText value="Cidade" />
 														<h:inputText id="input-cidade"
 															value="#{imovelBean.cidade.nome}"
-															styleClass="form-control" />
+															styleClass="form-control cidade" />
 													</div>
 												</div>
 												<div class="col-lg-2">
@@ -372,8 +377,10 @@
 														<h:outputText value="Estado" id="txtEstado" />
 														<h:selectOneMenu id="input-estado"
 															value="#{imovelBean.cidade.estado}"
-															styleClass="form-control">
+															styleClass="form-control uf">
+															<f:selectItem itemValue="" itemLabel="UF" />
 															<f:selectItem itemValue="PR" itemLabel="PR" />
+															<f:selectItem itemValue="BA" itemLabel="BA" />
 														</h:selectOneMenu>
 													</div>
 												</div>
@@ -407,7 +414,8 @@
 									<div class="panel with-nav-tabs panel-info">
 										<div class="panel-heading">
 											<ul class="nav nav-tabs remove-border-tabs">
-												<li><a data-toggle="tab" href="#proprietario">Proprietário</a></li>
+												<li class="active"><a data-toggle="tab"
+													href="#proprietario">Proprietário</a></li>
 												<li><a data-toggle="tab" href="#angariador">Angariador</a></li>
 												<li><a data-toggle="tab" href="#opcao">Opção</a></li>
 											</ul>
@@ -437,10 +445,11 @@
 													<div class="input-group">
 														<h:outputText value="Nome" />
 														<h:inputText id="input-angariador"
+															value="#{imovelBean.angariador.nomeFantasia}"
 															styleClass="form-control" />
 														<span class="input-group-btn">
 															<button class="btn btn-primary" type="button"
-																data-target="#modalProprietario" data-toggle="modal"
+																data-target="#modalAngariador" data-toggle="modal"
 																style="margin-bottom: -20px">
 																<i class="fa fa-search"></i>
 															</button>
@@ -477,66 +486,124 @@
 									</div>
 								</div>
 							</div>
+							<script type="text/javascript">
+								$(document).ready(function(){
+									var modalAbertoProprietario = $('.divEmpty').html();
+									var modalAbertoAngariador = $('.divEmpty').html();
+
+									$("#btn-modal-angariador").click(function(){
+										$("#modalAngariador").modal('show');
+										$("#modalProprietario").modal('hide');
+									});
+
+
+									$("#btn-modal-proprietario").click(function(){
+										$("#modalAngariador").modal('hide');
+										$("#modalProprietario").modal('show');
+									});
+									
+									
+									if(modalAberto.trim()){
+										$("#modalProprietario").modal('show');
+									 }
+								})
+							</script>
 
 							<div class="modal fade" id="modalProprietario" role="dialog">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
+
 											<button type="button" class="close" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
-											<h3>Título modal</h3>
+
 										</div>
 										<div class="modal-body">
-											<h:inputText value="#{imovelBean.nome}"
-												styleClass="form-control" />
-											<h:inputText value="#{imovelBean.cpfCnpj}"
-												styleClass="form-control" />
-											<f:ajax render=":modalProprietario" execute="@form">
-												<h:commandButton action="#{imovelBean.pesquisarPessoas()}"
-													value="Pesquisar" id="btn-pesquisar"
-													styleClass="btn btn-default" onclick="button1Click(this)" />
-											</f:ajax>
-											<h:dataTable value="#{imovelBean.pessoas}" var="proprietario"
-												id="data-table-pessoas" styleClass="table table-bordered"
-												rendered="#{not empty imovelBean.pessoas}">
+											<div class="row">
+												<div class="col-lg-8">
+													<div class="form-group">
+														<h:outputLabel value="Nome / Razão social"
+															styleClass="control-label" />
+														<h:inputText value="#{imovelBean.nome}"
+															pt:placeholder="Nome / Razão social"
+															styleClass="form-control" />
+													</div>
 
-												<h:column>
-													<f:facet name="header">
-														<h:outputText value="CÓDIGO" />
-													</f:facet>
+												</div>
+
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputLabel value="CPF / CNPJ"
+															styleClass="control-label" />
+														<h:inputText value="#{imovelBean.cpfCnpj}"
+															pt:placeholder="CPF ou CNPJ" styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-8">
+													<div class="form-group">
+														<h:commandButton
+															action="#{imovelBean.pesquisarProprietario}"
+															value="Pesquisar" id="btn-pesquisar"
+															styleClass="btn btn-info" />
+													</div>
+												</div>
+												
+												<div class="col-lg-4">
+													<div class="input-group">
+														<span class="input-group-btn">
+															<button class="btn btn-default btn-sm" type="button"
+																id="btn-modal-angariador">
+																<i class="fa fa-arrow-right" aria-hidden="true"></i>
+															</button>
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<div class="divEmpty">
+												<h:dataTable value="#{imovelBean.proprietarios}"
+													var="proprietario" id="dt-proprietarios"
+													styleClass="table table-bordered"
+													rendered="#{not empty imovelBean.proprietarios}">
+
+													<h:column>
+														<f:facet name="header">
+															<h:outputText value="CÓDIGO" />
+														</f:facet>
 									               #{proprietario.id}
 									            </h:column>
 
-												<h:column>
-													<f:facet name="header">
-														<h:outputText value="NOME" />
-													</f:facet>
+													<h:column>
+														<f:facet name="header">
+															<h:outputText value="NOME" />
+														</f:facet>
 												    #{proprietario.nomeFantasia}
 									            </h:column>
 
-												<h:column>
-													<f:facet name="header">
-														<h:outputText value="CPF / CNPJ" />
-													</f:facet>
-													<h:outputText value="#{proprietario.cpfCnpj}" />
+													<h:column>
+														<f:facet name="header">
+															<h:outputText value="CPF / CNPJ" />
+														</f:facet>
+														<h:outputText value="#{proprietario.cpfCnpj}" />
 
-												</h:column>
+													</h:column>
 
-												<h:column>
-													<f:facet name="header">
-														<h:outputText value="Editar" />
-													</f:facet>
+													<h:column>
+														<f:facet name="header">
+															<h:outputText value="Editar" />
+														</f:facet>
 
-													<h:commandButton value="Selecione"
-														styleClass="btn btn-primary btn-sm"
-														action="#{imovelBean.registraProprietario(proprietario)}">
-														<f:setPropertyActionListener value="#{pessoas}"
-															target="#{pessoaBean.pessoa}" />
-													</h:commandButton>
-												</h:column>
-											</h:dataTable>
+														<h:commandButton value="Selecione"
+															styleClass="btn btn-default btn-sm"
+															action="#{imovelBean.registraProprietario(proprietario)}" />
+
+													</h:column>
+												</h:dataTable>
+											</div>
 										</div>
 
 										<div class="modal-footer">
@@ -547,8 +614,103 @@
 								</div>
 							</div>
 
-							<div class="row">
+							<div class="modal fade" id="modalAngariador" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
 
+										</div>
+										<div class="modal-body">
+											<div class="row">
+												<div class="col-lg-8">
+													<div class="form-group">
+														<h:outputLabel value="Nome" styleClass="control-label" />
+														<h:inputText value="#{imovelBean.nome}"
+															pt:placeholder="Nome corretor" styleClass="form-control" />
+													</div>
+
+												</div>
+
+												<div class="col-lg-4">
+													<div class="form-group">
+														<h:outputLabel value="CRECI" styleClass="control-label" />
+														<h:inputText value="#{imovelBean.cpfCnpj}"
+															pt:placeholder="CRECI" styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-8">
+													<div class="form-group">
+														<h:commandButton
+															action="#{imovelBean.pesquisarAngariador}"
+															value="Pesquisar" id="btn-pesquisar-angariador"
+															styleClass="btn btn-info" />
+													</div>
+												</div>
+												
+												<div class="col-lg-4">
+													<div class="input-group">
+														<span class="input-group-btn">
+															<button class="btn btn-default btn-sm" type="button"
+																id="btn-modal-proprietario">
+																<i class="fa fa-arrow-left" aria-hidden="true"></i>
+															</button>
+														</span>
+													</div>
+												</div>
+											</div>
+											
+											
+											<div class="divEmpty">
+												<h:dataTable value="#{imovelBean.angariadores}"
+													var="angariador" id="dt-angariador"
+													styleClass="table table-bordered"
+													rendered="#{not empty imovelBean.angariadores}">
+
+													<h:column>
+														<f:facet name="header">
+															<h:outputText value="CÓDIGO" />
+														</f:facet>
+									               #{angariador.id}
+									            </h:column>
+
+													<h:column>
+														<f:facet name="header">
+															<h:outputText value="NOME" />
+														</f:facet>
+												    #{angariador.nomeFantasia}
+									            </h:column>
+
+													<h:column>
+														<f:facet name="header">
+															<h:outputText value="Editar" />
+														</f:facet>
+
+														<h:commandButton value="Selecione"
+															styleClass="btn btn-default btn-sm"
+															action="#{imovelBean.registraAngariador(angariador)}" />
+
+													</h:column>
+												</h:dataTable>
+											</div>
+										</div>
+
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Fechar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+							<div class="row">
 								<div class="col-lg-12">
 									<h:commandButton action="#{imovelBean.salvar()}" value="Salvar"
 										style="margin-right:15px" styleClass="btn btn-success" />

@@ -21,6 +21,9 @@
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 
 	<link rel="stylesheet" type="text/css"
+		href="../css/bootstrap-theme.min.css" />
+
+	<link rel="stylesheet" type="text/css"
 		href="../tema/sb-admin-2/css/timeline.css" />
 
 	<!-- cssTemaPrincipal -->
@@ -29,6 +32,8 @@
 
 	<link rel="stylesheet" type="text/css"
 		href="../tema/font-awesome/css/font-awesome.min.css" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
 
 	<link rel="stylesheet" type="text/css"
 		href="../css/bootstrap-datepicker3.min.css" />
@@ -48,12 +53,17 @@
 	<script src="../js/jquery.mask.min.js" />
 	<script src="../js/bootstrap-datepicker.min.js" />
 	<script src="../locales/bootstrap-datepicker.pt-BR.min.js" />
-
+	<script type="text/javascript" src="../js/jquery.maskMoney.min.js" />
+	<script type="text/javascript" src="../js/jquery-ui.js" />
+	<script type="text/javascript" src="../js/scripts.js" />
 
 	<script>
 			$(document).ready(function(){
 				   $('.data').datepicker({
 	   					language: "pt-BR",
+	   				    todayBtn: "linked",
+	   				    todayHighlight: true,
+	   				  	autoclose: true
 	   				});
 
 				   $('.input-daterange').datepicker({
@@ -67,10 +77,13 @@
 				   $('.data').mask('00/00/0000');
 				   $('#input-cpf, #input-cpf-conjuge').mask('000.000.000-00'); 
 				   $('#input-cnpj').mask('00.000.000/0000-00'); 
-				   $('#input-cep').mask('00000-000'); 
+				   $('.mask-cep').mask('00000-000'); 
 				   $('.telefone').mask('(00) 0000-0000');
 				   $('.input-dependencias').mask('00');
 				   $('.input-areas').mask(',00');
+
+					$(".valorMonetario").maskMoney({allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
+
 			});
 			
 		</script>
@@ -198,8 +211,13 @@
 					<li><a href="#"><i class="fa fa-money fa-fw"></i>Financeiro<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">Novo</a></li>
-							<li><a href="#">Pesquisar</a></li>
+							<li><a href="../financeiro/lista.xhtml">Títulos
+									financeiros</a>
+								<ul class="nav nav-third-level">
+									<li><a href="../financeiro/cadastro.xhtml">Novo</a></li>
+								</ul></li>
+							<li><a href="../financeiro/plano-financeiro.xhtml">Plano
+									de contas</a></li>
 						</ul></li>
 
 
@@ -219,6 +237,7 @@
 						<ul class="nav nav-second-level">
 							<li><a href="#">Novo</a></li>
 							<li><a href="#">Pesquisar</a></li>
+							<li><a href="#">Pesquisar</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.nav-second-level -->
@@ -228,7 +247,7 @@
 		<!-- /.navbar-static-side --> </nav>
 		<ui:insert>
 			<div class="row">
-				<div class="col-lg-12"></div>
+				<div class="col-lg-12">teste</div>
 			</div>
 
 		</ui:insert>
