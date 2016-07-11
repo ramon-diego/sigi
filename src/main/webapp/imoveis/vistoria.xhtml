@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-header">Vistoria</h1>
+				</div>
+			</div>
+			<!-- fimlinha -->
+			<div class="row">
+				<div class="col-xs-12 .col-sm-6 .col-lg-8">
+					<div class="panel-body">
+						<h:form role="form" prependId="false">
+							<div class="panel panel-info">
+								<div class="panel-heading">Dados</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-lg-3">
+											<div class="form-group">
+												<h:outputText id="tipo-pessoa" value="Tipo" />
+												<h:selectOneMenu styleClass="form-control"
+													value="#{vistoriaImovelBean.vistoria.tipoVistoria}">
+													<f:selectItem itemLabel="Entrada" itemValue="entrada" />
+													<f:selectItem itemLabel="Saída" itemValue="saida" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+										<div class="col-lg-2">
+											<h:outputText value="Data Vistoria" />
+											<h:inputText
+												value="#{vistoriaImovelBean.vistoria.dataVistoria}"
+												styleClass="form-control data">
+												<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+											</h:inputText>
+
+										</div>
+										<div class="col-lg-3">
+											<div class="form-group">
+												<h:outputText value="Status" />
+												<h:selectOneMenu
+													value="#{vistoriaImovelBean.vistoria.status}"
+													styleClass="form-control">
+													<f:selectItem itemValue="pendente" itemLabel="Pendente" />
+													<f:selectItem itemValue="realizada" itemLabel="Realizada" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputText value="ID" />
+												<h:inputText value="#{vistoriaImovelBean.vistoria.id}"
+													styleClass="form-control" disabled="true" />
+											</div>
+										</div>
+
+										<div class="col-lg-2">
+											<div class="form-group">
+												<h:outputText value="Data cadastro" />
+												<h:inputText
+													value="#{vistoriaImovelBean.vistoria.dataRegistro}"
+													styleClass="form-control" disabled="true">
+													<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+												</h:inputText>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="form-group">
+												<h:outputText value="Observações" />
+												<h:inputTextarea value="#{pessoaBean.pessoa.observacao}"
+													rows="4" styleClass="form-control" />
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-lg-8">
+											<div class="panel with-nav-tabs panel-info">
+												<div class="panel-heading">
+													<ul class="nav nav-tabs remove-border-tabs">
+														<li class="active"><a data-toggle="tab"
+															href="#inquilino">Inquilino</a></li>
+														<li><a data-toggle="tab" href="#vistoriador">Vistoriador</a></li>
+														<li><a data-toggle="tab" href="#imovel">Imóvel</a></li>
+													</ul>
+												</div>
+												<div class="panel-body">
+													<div class="tab-content">
+														<div class="tab-pane fade in active" id="inquilino">
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="input-group">
+																		<h:outputText value="Nome" />
+																		<h:inputText
+																			value="#{vistoriaImovelBean.vistoria.inquilino.nomeFantasia}"
+																			styleClass="form-control" />
+																		<span class="input-group-btn">
+																			<button class="btn btn-primary" type="button"
+																				data-target="#modalProprietario" data-toggle="modal"
+																				style="margin-bottom: -20px">
+																				<i class="fa fa-search"></i>
+																			</button>
+																		</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="tab-pane" id="vistoriador">
+															<div class="input-group">
+																<h:outputText value="Nome" />
+																<h:inputText
+																	value="#{vistoriaImovelBean.vistoria.vistoriador.nomeFantasia}"
+																	styleClass="form-control" />
+																<span class="input-group-btn">
+																	<button class="btn btn-default" type="button"
+																		data-target="#modalAngariador" data-toggle="modal"
+																		style="margin-bottom: -20px">
+																		<i class="fa fa-search"></i>
+																	</button>
+																</span>
+															</div>
+														</div>
+
+														<div class="tab-pane" id="imovel">
+															<div class="row">
+																<div class="col-lg-12">
+																	<div class="input-group">
+																		<h:outputText value="Endereço" />
+																		<h:inputText
+																			value="#{vistoriaImovelBean.vistoria.imovel.endereco.rua}"
+																			styleClass="form-control" />
+																		<span class="input-group-btn">
+																			<button class="btn btn-primary" type="button"
+																				data-target="#modalProprietario" data-toggle="modal"
+																				style="margin-bottom: -20px">
+																				<i class="fa fa-search"></i>
+																			</button>
+																		</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
+													<!-- final tab-content -->
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+
+							<script type="text/javascript">
+						
+						    $(document).ready(function(){
+							      $('#select-corretor').click(function(){
+						              if($(this).prop("checked") == true){
+						            		if($('.conteudo').hasClass('hide') &amp;&amp; ('.conteudo').length >0){
+										    	$('.conteudo').removeClass('hide');
+										    }													              }
+						              else if($(this).prop("checked") == false){
+						            	  $(".conteudo").addClass('hide');
+						              }
+						          });			    	
+						    });
+						</script>
+
+							<div class="row">
+
+								<div class="col-lg-1">
+									<h:commandButton
+										actionListener="#{vistoriaImovelBean.salvar()}" value="Gravar"
+										styleClass="btn btn-success" />
+								</div>
+
+								<div class="col-lg-8">
+									<h:commandButton actionListener="#" value="Cancelar"
+										styleClass="btn btn-warning" />
+								</div>
+
+								<div class="col-lg-2"></div>
+
+								<h:messages showDetail="false" infoClass="alert alert-info"
+									showSummary="true" errorClass="alert alert-warning" />
+							</div>
+						</h:form>
+						<!-- final PainelBody -->
+					</div>
+
+					<!-- final PainelDefault -->
+				</div>
+				<!-- fim-col-lg-12 -->
+			</div>
+			<!-- fim row -->
+
+		</div>
+		<!-- page-wrapper -->
+	</ui:composition>
+</h:body>
+</html>

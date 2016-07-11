@@ -15,7 +15,7 @@ import br.com.sigi.model.PlanoFinanceiro;
 import br.com.sigi.model.StatusTituloFinanceiro;
 import br.com.sigi.model.TituloFinanceiro;
 import br.com.sigi.services.PessoaService;
-//import br.com.sigi.services.PlanoFinanceiroService;
+import br.com.sigi.services.PlanoFinanceiroService;
 import br.com.sigi.services.TituloFinanceiroService;
 
 @ViewScoped
@@ -34,7 +34,7 @@ public class TituloFinanceiroManagedBean implements Serializable {
 
 	private List<PlanoFinanceiro> planosFinanceiros;
 
-	private PlanoFinanceiro planoFinanceiro;
+	private PlanoFinanceiro planoFinanceiroSelecionado;
 
 	// variáveis para pesquisa
 	private String nomeInput;
@@ -47,6 +47,7 @@ public class TituloFinanceiroManagedBean implements Serializable {
 	private String tipoDocumento;
 	private Date dataVencimento;
 	private Date dataFinal;
+	private String planoFinanceiro;
 
 	@ManagedProperty("#{tituloFinanceiroService}")
 	private TituloFinanceiroService tituloFinanceiroService;
@@ -54,16 +55,22 @@ public class TituloFinanceiroManagedBean implements Serializable {
 	@ManagedProperty("#{pessoaService}")
 	private PessoaService pessoaService;
 
-	// @ManagedProperty("#{planoFinanceiroService}")
-	// private PlanoFinanceiroService planoFinanceiroService;
+	@ManagedProperty("#{planoFinanceiroService}")
+	private PlanoFinanceiroService planoFinanceiroService;
 
 	@PostConstruct
 	public void init() {
 		pessoaTitulo = new Pessoa();
 		tituloFinanceiro = new TituloFinanceiro();
 		pessoas = new ArrayList<>();
-		planoFinanceiro = new PlanoFinanceiro();
+		planoFinanceiroSelecionado = new PlanoFinanceiro();
 		titulosFinanceiros = new ArrayList<>();
+		planosFinanceiros = new ArrayList<>();
+		getPlanosFinanceiros();
+	}
+
+	public void setPlanoFinanceiroService(PlanoFinanceiroService planoFinanceiroService) {
+		this.planoFinanceiroService = planoFinanceiroService;
 	}
 
 	public void setTituloFinanceiro(TituloFinanceiro tituloFinanceiro) {
@@ -77,13 +84,9 @@ public class TituloFinanceiroManagedBean implements Serializable {
 	public void setPlanosFinanceiros(List<PlanoFinanceiro> planosFinanceiros) {
 		this.planosFinanceiros = planosFinanceiros;
 	}
-	//
-	// public List<PlanoFinanceiro> getPlanosFinanceiros() {
-	// return planosFinanceiros = planoFinanceiroService.findAll();
-	// }
 
 	public List<PlanoFinanceiro> getPlanosFinanceiros() {
-		return planosFinanceiros;
+		return planosFinanceiros = planoFinanceiroService.findAll();
 	}
 
 	public Pessoa getPessoaTitulo() {
@@ -102,12 +105,12 @@ public class TituloFinanceiroManagedBean implements Serializable {
 		this.pessoas = pessoas;
 	}
 
-	public void setPlanoFinanceiro(PlanoFinanceiro planoFinanceiro) {
-		this.planoFinanceiro = planoFinanceiro;
+	public void setPlanoFinanceiroSelecionado(PlanoFinanceiro planoFinanceiroSelecionado) {
+		this.planoFinanceiroSelecionado = planoFinanceiroSelecionado;
 	}
 
-	public PlanoFinanceiro getPlanoFinanceiro() {
-		return planoFinanceiro;
+	public PlanoFinanceiro getPlanoFinanceiroSelecionado() {
+		return planoFinanceiroSelecionado;
 	}
 
 	public void setTitulosFinanceiros(List<TituloFinanceiro> titulosFinanceiros) {
@@ -118,18 +121,13 @@ public class TituloFinanceiroManagedBean implements Serializable {
 		return titulosFinanceiros;
 	}
 
-	// public List<PlanoFinanceiro> findAll() {
-	// return planosFinanceiros = planoFinanceiroService.findAll();
-	// }
+	public List<PlanoFinanceiro> findAll() {
+		return planosFinanceiros = planoFinanceiroService.findAll();
+	}
 
 	public void setTituloFinanceiroService(TituloFinanceiroService tituloFinanceiroService) {
 		this.tituloFinanceiroService = tituloFinanceiroService;
 	}
-
-	// public void setPlanoFinanceiroService(PlanoFinanceiroService
-	// planoFinanceiroService) {
-	// this.planoFinanceiroService = planoFinanceiroService;
-	// }
 
 	public void setPessoaService(PessoaService pessoaService) {
 		this.pessoaService = pessoaService;
@@ -145,7 +143,7 @@ public class TituloFinanceiroManagedBean implements Serializable {
 
 	public void pesquisarTitulo() {
 		titulosFinanceiros = tituloFinanceiroService.pesquisarTitulo(getTransacao(), getIdTitulo(), getSituacaoTitulo(),
-				getNomePessoa(), getCpfCnpj(), getTipoDocumento(), getDataVencimento(), getDataFinal());
+				getNomePessoa(), getCpfCnpj(), getPlanoFinanceiro(), getTipoDocumento(), getDataVencimento(), getDataFinal());
 	}
 
 	public void validarTitulo() {
@@ -169,7 +167,7 @@ public class TituloFinanceiroManagedBean implements Serializable {
 	public void salvar() {
 		validarTitulo();
 		tituloFinanceiro.setPessoa(pessoaTitulo);
-		// tituloFinanceiro.setPlanoFinanceiro(planoFinanceiroSelecionado);
+		tituloFinanceiro.setPlanoFinanceiro(planoFinanceiroSelecionado);
 		tituloFinanceiroService.salvar(tituloFinanceiro);
 	}
 
@@ -252,4 +250,13 @@ public class TituloFinanceiroManagedBean implements Serializable {
 	public Date getDataFinal() {
 		return dataFinal;
 	}
+
+	public void setPlanoFinanceiro(String planoFinanceiro) {
+		this.planoFinanceiro = planoFinanceiro;
+	}
+
+	public String getPlanoFinanceiro() {
+		return planoFinanceiro;
+	}
+
 }

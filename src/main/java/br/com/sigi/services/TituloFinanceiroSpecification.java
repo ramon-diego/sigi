@@ -17,7 +17,7 @@ import br.com.sigi.model.TituloFinanceiro;
 public final class TituloFinanceiroSpecification {
 
 	public static Specification<TituloFinanceiro> pesquisarTitulo(String transacao, Long idTitulo, String situacao,
-			String nomePessoa, String cpfCnpj, String tipoDocumento, Date dataInicial, Date dataFinal) {
+			String nomePessoa, String cpfCnpj, String planoFinanceiro, String tipoDocumento, Date dataInicial, Date dataFinal) {
 		return new Specification<TituloFinanceiro>() {
 
 			@Override
@@ -52,14 +52,20 @@ public final class TituloFinanceiroSpecification {
 					predicates.add(cpfCnpjPredicate);
 				}
 
+				if (!StringUtils.isEmpty(planoFinanceiro)) {
+					final Predicate planoFinanceiroPredicate = cb.like(root.join("planoFinanceiro").get("nome"),
+							"%" + planoFinanceiro.trim() + "%");
+					predicates.add(planoFinanceiroPredicate);
+				}
+
 				if (!StringUtils.isEmpty(tipoDocumento)) {
 					final Predicate tipoDocumentoPredicate = cb.equal(root.get("tipoDocumento"), tipoDocumento);
 					predicates.add(tipoDocumentoPredicate);
 				}
 
 				if (dataInicial != null) {
-				
-					final Predicate dataVencimentoPredicate = cb.between(root.<Date>get("dataVencimento"), dataInicial, dataInicial);
+					final Predicate dataVencimentoPredicate = cb.between(root.<Date> get("dataVencimento"), dataInicial,
+							dataInicial);
 					predicates.add(dataVencimentoPredicate);
 				}
 

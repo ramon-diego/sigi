@@ -24,10 +24,11 @@ public class TituloFinanceiroService implements Serializable {
 	}
 
 	public List<TituloFinanceiro> pesquisarTitulo(String transacao, Long idTitulo, String situacaoTitulo,
-			String nomePessoa, String cpfCnpj, String tipoDocumento, Date dataInicial, Date dataFinal) {
+			String nomePessoa, String cpfCnpj, String planoFinanceiro, String tipoDocumento, Date dataInicial,
+			Date dataFinal) {
 
 		Specification<TituloFinanceiro> specification = TituloFinanceiroSpecification.pesquisarTitulo(transacao,
-				idTitulo, situacaoTitulo, nomePessoa, cpfCnpj, tipoDocumento, dataInicial, dataFinal);
+				idTitulo, situacaoTitulo, nomePessoa, cpfCnpj, planoFinanceiro, tipoDocumento, dataInicial, dataFinal);
 		return tituloFinanceiroRepository.findAll(specification);
 
 	}

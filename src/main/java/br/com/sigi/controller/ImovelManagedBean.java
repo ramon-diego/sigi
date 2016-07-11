@@ -14,8 +14,10 @@ import javax.servlet.http.Part;
 import br.com.sigi.model.AtributoImovel;
 import br.com.sigi.model.Cidade;
 import br.com.sigi.model.Endereco;
+import br.com.sigi.model.ExclusividadeImovel;
 import br.com.sigi.model.Imovel;
 import br.com.sigi.model.Pessoa;
+import br.com.sigi.services.ExclusividadeImovelService;
 import br.com.sigi.services.ImovelService;
 import br.com.sigi.services.PessoaService;
 
@@ -33,6 +35,9 @@ public class ImovelManagedBean implements Serializable {
 	private Endereco endereco;
 	private Cidade cidade;
 	private AtributoImovel atributoImovel;
+	private ExclusividadeImovel exclusividadeImovel;
+
+	// variaveis para pesquisa
 	private Long id;
 	private Integer qtdeDormitorio;
 	private String tipoImovel;
@@ -43,6 +48,9 @@ public class ImovelManagedBean implements Serializable {
 	private Integer suite;
 	private BigDecimal valorMinimo;
 	private BigDecimal valorMaximo;
+	private String nome;
+	private String cpfCnpj;
+
 	private Part arquivo;
 
 	@PostConstruct
@@ -55,6 +63,7 @@ public class ImovelManagedBean implements Serializable {
 		cidade = new Cidade();
 		proprietarios = new ArrayList<>();
 		angariadores = new ArrayList<>();
+		exclusividadeImovel = new ExclusividadeImovel();
 	}
 
 	public String upload;
@@ -72,6 +81,9 @@ public class ImovelManagedBean implements Serializable {
 
 	@ManagedProperty("#{pessoaService}")
 	private PessoaService pessoaService;
+
+	@ManagedProperty("#{exclusividadeImovelService}")
+	private ExclusividadeImovelService exclusividadeImovelService;
 
 	public Imovel getImovel() {
 		return imovel;
@@ -113,6 +125,14 @@ public class ImovelManagedBean implements Serializable {
 		this.cidade = cidade;
 	}
 
+	public void setExclusividadeImovel(ExclusividadeImovel exclusividadeImovel) {
+		this.exclusividadeImovel = exclusividadeImovel;
+	}
+
+	public ExclusividadeImovel getExclusividadeImovel() {
+		return exclusividadeImovel;
+	}
+
 	public void setImovelService(ImovelService imovelService) {
 		this.imovelService = imovelService;
 	}
@@ -123,6 +143,10 @@ public class ImovelManagedBean implements Serializable {
 
 	public void setPessoaService(PessoaService pessoaService) {
 		this.pessoaService = pessoaService;
+	}
+
+	public void setExclusividadeImovelService(ExclusividadeImovelService exclusividadeImovelService) {
+		this.exclusividadeImovelService = exclusividadeImovelService;
 	}
 
 	public void setAtributoImovel(AtributoImovel atributoImovel) {
@@ -152,9 +176,6 @@ public class ImovelManagedBean implements Serializable {
 	public void setImoveis(List<Imovel> imoveis) {
 		this.imoveis = imoveis;
 	}
-
-	private String nome;
-	private String cpfCnpj;
 
 	public String getCpfCnpj() {
 		return cpfCnpj;
@@ -283,9 +304,12 @@ public class ImovelManagedBean implements Serializable {
 		try {
 			imovel.setAtributoImovel(atributoImovel);
 			imovel.setProprietario(proprietario);
-			imovel.setEndereco(endereco);
 			endereco.setCidade(cidade);
+			imovel.setEndereco(endereco);
+			exclusividadeImovel.setImovel(imovel);
 			imovelService.salvar(imovel);
+//			exclusividadeImovelService.salvar(exclusividadeImovel);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

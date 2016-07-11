@@ -57,9 +57,10 @@
 															<div class="input-daterange input-group" id="datepicker">
 
 																<h:inputText class="form-control" pt:name="start"
-																	value="#{tituloFinanceiroBean.dataVencimento}" /> <span
-																	class="input-group-addon">-</span> 
-																<h:inputText pt:type="text" value="#{tituloFinanceiroBean.dataFinal}"
+																	value="#{tituloFinanceiroBean.dataVencimento}" />
+																<span class="input-group-addon">-</span>
+																<h:inputText pt:type="text"
+																	value="#{tituloFinanceiroBean.dataFinal}"
 																	class="form-control" pt:name="end" />
 															</div>
 														</div>
@@ -112,12 +113,13 @@
 															<div class="col-lg-4">
 																<div class="form-group">
 																	<h:outputText value="Plano Financeiro" />
-																	<h:inputText value="#{imovelBean.cidadePesquisa}"
+																	<h:inputText
+																		value="#{tituloFinanceiroBean.planoFinanceiro}"
 																		styleClass="form-control" />
 																</div>
 															</div>
-
 														</div>
+													
 														<div class="row">
 
 															<div class="col-lg-2">
@@ -152,9 +154,7 @@
 																		styleClass="form-control" />
 																</div>
 															</div>
-
-
-
+															
 														</div>
 													</div>
 												</div>
@@ -202,92 +202,108 @@
 											var="titulo" id="data-table-titulos"
 											styleClass="table table-striped table-bordered"
 											rendered="#{not empty tituloFinanceiroBean.titulosFinanceiros}">
-											<h:column headerClass="default">
+
+											<h:column>
 												<f:facet name="header">
 													<h:outputText value="ID" />
 												</f:facet>
-										#{titulo.id}
-									</h:column>
+												<h:outputText value="#{titulo.id}" />
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Transação" />
 												</f:facet>
-									#{titulo.transacao}
-									</h:column>
-
+												<h:outputText value="#{titulo.transacao}" />
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Pessoa" />
 												</f:facet>
-									#{titulo.pessoa.nomeFantasia}
-									</h:column>
-
+												<h:outputText value="#{titulo.pessoa.nomeFantasia}" />
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Valor" />
 												</f:facet>
-									#{titulo.valorTitulo}
-									</h:column>
+
+												<h:outputText value="#{titulo.valorTitulo}">
+													<f:convertNumber pattern="#,##0.00" />
+												</h:outputText>
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Saldo" />
 												</f:facet>
-									#{titulo.saldo}
-									</h:column>
 
+												<h:outputText value="#{titulo.saldo}">
+													<f:convertNumber pattern="#,##0.00" />
+												</h:outputText>
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Data Emissão" />
 												</f:facet>
-									#{titulo.dataEmissao}
-									</h:column>
+
+												<h:outputText value="#{titulo.dataEmissao}">
+													<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+												</h:outputText>
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Vencimento" />
 												</f:facet>
-										#{titulo.dataVencimento}
-									</h:column>
+
+												<h:outputText value="#{titulo.dataVencimento}">
+													<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+												</h:outputText>
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
-													<h:outputText value="Tipo Documento" />
+													<h:outputText value="Tipo" />
 												</f:facet>
-										#{titulo.tipoDocumento}
-									</h:column>
-
+												<h:outputText value="#{titulo.tipoDocumento}" />
+											</h:column>
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Situação" />
 												</f:facet>
-										#{titulo.situacaoTitulo}
-									</h:column>
+												<h:outputText value="#{titulo.situacaoTitulo}" />
+											</h:column>
 
 
 											<h:column>
 												<f:facet name="header">
 													<h:outputText value="Editar" />
 												</f:facet>
+
 												<div class="dropdown">
 													<button class="btn btn-info btn-xs dropdown-toggle"
 														type="button" data-toggle="dropdown">
 														Ações <span class="caret"></span>
 													</button>
 													<ul class="dropdown-menu">
-														<li><h:commandLink action="#">
-																<i class="fa fa-pencil fa-fw"></i> Alterar</h:commandLink></li>
+														<li><h:commandLink action="cadastro">
+																<i class="fa fa-pencil fa-fw"></i> Alterar
+																
+													<f:setPropertyActionListener value="#{titulo}"
+																	target="#{tituloFinanceiroBean.tituloFinanceiro}" />
+
+															</h:commandLink></li>
 														<li><a href="#"><i class="fa fa-usd fa-fw"
 																aria-hidden="true"></i> Baixar</a></li>
 														<li><a href="#"><i class="fa fa-trash-o fa-fw"></i>
 																Delete</a></li>
 													</ul>
 												</div>
+
 											</h:column>
 										</h:dataTable>
 									</div>

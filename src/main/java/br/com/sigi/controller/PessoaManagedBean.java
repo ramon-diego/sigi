@@ -63,6 +63,8 @@ public class PessoaManagedBean implements Serializable {
 		endereco = new Endereco();
 		cidade = new Cidade();
 	}
+	
+
 
 	public void pesquisarPessoas() {
 		pessoas = pessoaService.pesquisarPessoas(getNome(), getCpfCnpj());
@@ -127,7 +129,6 @@ public class PessoaManagedBean implements Serializable {
 	}
 
 	public PessoaManagedBean() {
-
 	}
 
 	public void setCpfCnpj(String cpfCnpj) {

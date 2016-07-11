@@ -13,12 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.sigi.util.BaseEntity;
+
 @Entity(name = "titulo_financeiro")
-public class TituloFinanceiro implements Serializable {
+public class TituloFinanceiro implements Serializable, BaseEntity {
 
 	private static final long serialVersionUID = -2199232518449759696L;
 
@@ -69,7 +72,7 @@ public class TituloFinanceiro implements Serializable {
 	@Column(name = "saldo")
 	private BigDecimal saldo;
 
-	@Column(name = "tipo_documento")
+	@Column(name = "tipo_documento",  length = 8, nullable = false)
 	private String tipoDocumento;
 
 	private String observacao;
@@ -89,6 +92,10 @@ public class TituloFinanceiro implements Serializable {
 
 	@Column(name = "situacao", length = 7, nullable = false)
 	private String situacaoTitulo;
+
+	@ManyToOne
+	@JoinColumn(name = "plano_id")
+	private PlanoFinanceiro planoFinanceiro;
 
 	public Long getId() {
 		return id;
@@ -242,4 +249,11 @@ public class TituloFinanceiro implements Serializable {
 		return situacaoTitulo;
 	}
 
+	public void setPlanoFinanceiro(PlanoFinanceiro planoFinanceiro) {
+		this.planoFinanceiro = planoFinanceiro;
+	}
+
+	public PlanoFinanceiro getPlanoFinanceiro() {
+		return planoFinanceiro;
+	}
 }

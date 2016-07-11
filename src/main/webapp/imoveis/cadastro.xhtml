@@ -461,21 +461,25 @@
 													<div class="row">
 														<div class="col-lg-4">
 															<h:outputText value="Início" />
-															<h:inputText value="#{imovelBean.imovel.dataCadastro}"
+															<h:inputText
+																value="#{imovelBean.exclusividadeImovel.dataInicio}"
 																styleClass="form-control data">
 																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
 															</h:inputText>
 														</div>
 														<div class="col-lg-4">
 															<h:outputText value="Encerramento" />
-															<h:inputText value="#{imovelBean.imovel.dataCadastro}"
+															<h:inputText
+																value="#{imovelBean.exclusividadeImovel.dataRegistro}"
 																styleClass="form-control data">
 																<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
 															</h:inputText>
 														</div>
 														<div class="col-lg-4">
 															<h:outputText value="Dias" />
-															<h:inputText value="#" styleClass="form-control" />
+															<h:inputText
+																value="#{imovelBean.exclusividadeImovel.periodo}"
+																styleClass="form-control" />
 														</div>
 													</div>
 												</div>
@@ -551,7 +555,7 @@
 															styleClass="btn btn-info" />
 													</div>
 												</div>
-												
+
 												<div class="col-lg-4">
 													<div class="input-group">
 														<span class="input-group-btn">
@@ -652,7 +656,7 @@
 															styleClass="btn btn-info" />
 													</div>
 												</div>
-												
+
 												<div class="col-lg-4">
 													<div class="input-group">
 														<span class="input-group-btn">
@@ -664,8 +668,8 @@
 													</div>
 												</div>
 											</div>
-											
-											
+
+
 											<div class="divEmpty">
 												<h:dataTable value="#{imovelBean.angariadores}"
 													var="angariador" id="dt-angariador"
@@ -719,6 +723,7 @@
 										styleClass="btn btn-warning" />
 								</div>
 							</div>
+							<h:messages errorClass="alert alert-warning" infoClass="alert alert-success" />
 						</h:form>
 					</div>
 				</div>

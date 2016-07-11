@@ -10,7 +10,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="page-header">Pesquisar</h1>
+					<h1 class="page-header">Pesquisar Pessoas</h1>
 				</div>
 			</div>
 			<!-- fimlinha -->
@@ -23,6 +23,7 @@
 								<div class="panel-heading">Pesquisar por</div>
 								<div class="panel-body">
 									<div class="row">
+										
 										<div class="col-lg-6">
 											<h:outputText value="Nome" />
 											<h:inputText value="#{pessoaBean.nome}"
@@ -88,8 +89,8 @@
 
 											<h:commandButton value="Selecione"
 												styleClass="btn btn-primary btn-sm" action="cadastro.xhtml">
-												<f:setPropertyActionListener value="#{pessoa.id}"
-													target="#{pessoaBean.id}" />
+												<f:setPropertyActionListener value="#{pessoa}"
+													target="#{pessoaBean.pessoa}" />
 											</h:commandButton>
 										</h:column>
 									</h:dataTable>

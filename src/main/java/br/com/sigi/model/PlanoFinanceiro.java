@@ -11,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.sigi.util.BaseEntity;
+
 @Entity
 @Table(name = "plano_financeiro")
-public class PlanoFinanceiro implements Serializable {
+public class PlanoFinanceiro implements Serializable,  BaseEntity{
 
 	private static final long serialVersionUID = -8242139124371410891L;
 
@@ -61,5 +63,41 @@ public class PlanoFinanceiro implements Serializable {
 	public String toString() {
 		return nome;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((tipoTransacao == null) ? 0 : tipoTransacao.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PlanoFinanceiro other = (PlanoFinanceiro) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (tipoTransacao != other.tipoTransacao)
+			return false;
+		return true;
+	}
+	
+	
 
 }

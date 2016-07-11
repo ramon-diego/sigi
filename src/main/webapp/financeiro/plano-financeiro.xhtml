@@ -84,7 +84,7 @@
 
 														<h:column>
 															<f:facet name="header">
-														#
+														ID
 														</f:facet>
 																#{planoDespesa.id}					
 														</h:column>
@@ -100,15 +100,18 @@
 															<f:facet name="header">
 														Ações
 														</f:facet>
-															<h:commandButton action="#"
-																styleClass="btn btn-info btn-xs" value="Editar"
-																style="margin-right:5px;" />
-															<h:commandButton
+															<h:commandLink styleClass="btn btn-info btn-sm"
+																style="margin-right:8px"
 																action="#{planoFinanceiroBean.delete(planoDespesa)}"
-																onclick="if (!confirm('Confirma a exclusão do plano financeiro #{planoDespesa.nome}')) return false"
-																styleClass="
-																btn btn-default btn-xs"
-																value="Delete" />
+																onclick="if (!confirm('Confirma a exclusão do plano financeiro #{planoDespesa.nome}')) return false">
+																<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+															</h:commandLink>
+
+															<h:commandLink styleClass="btn btn-danger btn-sm"
+																action="#{planoFinanceiroBean.delete(planoDespesa)}"
+																onclick="if (!confirm('Confirma a exclusão do plano financeiro #{planoDespesa.nome}')) return false">
+																<i class="fa fa-trash-o" aria-hidden="true"></i>
+															</h:commandLink>
 														</h:column>
 													</h:dataTable>
 
@@ -126,7 +129,7 @@
 
 														<h:column>
 															<f:facet name="header">
-														#
+														ID
 														</f:facet>
 																#{planoReceita.id}					
 														</h:column>
@@ -143,11 +146,19 @@
 														Ações
 														</f:facet>
 
-															<button type="button" class="btn btn-danger btn-sm"
-																jsf:action="#{planoFinanceiroBean.delete(planoReceita)}"
+															<h:commandLink styleClass="btn btn-info btn-sm"
+																style="margin-right:8px"
+																action="#{planoFinanceiroBean.delete(planoDespesa)}"
+																onclick="if (!confirm('Confirma a exclusão do plano financeiro #{planoDespesa.nome}')) return false">
+																<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+															</h:commandLink>
+
+															<h:commandLink styleClass="btn btn-danger btn-sm"
+																action="#{planoFinanceiroBean.delete(planoReceita)}"
 																onclick="if (!confirm('Confirma a exclusão do plano financeiro #{planoReceita.nome}')) return false">
 																<i class="fa fa-trash-o" aria-hidden="true"></i>
-															</button>
+															</h:commandLink>
+
 
 														</h:column>
 													</h:dataTable>
